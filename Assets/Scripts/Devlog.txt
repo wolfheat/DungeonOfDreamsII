@@ -1,0 +1,595 @@
+Dungeon Crawler Jam 2024
+
+DEVLOG FOR Dungeon Crawler 2024
+Feb-Mar 2024
+
+* IDEAS
+- Make a simle fun dungeon scrawler for game jam, maybe minecraft inspired?!? Gold digging?.
+
+
+22/2	* Created specific start menu for the jam, adding some general functionality
+		* Tweaked start menu, changed colors font and borders etc
+23/2	* Updated Credits page with font and adjusted colors
+		* Made basic movement system for grid based game
+		* Added hammer animator and animation
+24/2	* Changed FOV to 96
+		* Added pick up items that animate
+		* Added UI that show whats pickable and updates it accordingly
+		* Particle effect system added
+		* Changed camera view slightly backed (FOV 80)
+		* Added Pick Up notices for items
+		* Player Collides with walls by checking overlapBox in movingbireaction with layermask for walls
+		* Player picks up item when stepping on it -
+		* Player can hit walls and destroy them
+		* Added footsteps sound
+		* Attack Animation keeps going when mouse is held -
+25/2	* Destroyed walls now spawn items that drop into place
+		* Moving away from wall makes miss sound but only if fully moved when hit happens, collider is allmost entire square 
+		* Made Movement better, turning is now prioritized and after destroying wall player walks if motion is pressed.
+26/2	* Fixed movement finally, can sidestep and hold buttons
+		* Added alternative movement and action buttons
+			* WASD-QE-Click = Main
+			* IJKL-UO-Space = ALT 1
+			* ArrowKeys-CTRL-NumKey0 (Delete-PgDn) SPACE = ALT 2 lefthanders
+		* Added pause to game -
+		* Tried to fix stuttering by fixing lerp end points
+		* Added cracks to walls (walls have additional materials supplied from crackmaster class)
+27/2	* Modified cracks
+		* Minerals are pooled
+28/2	* Made held mouse start action when reaching tile
+		* Made block shock when hit -
+		* Made resource data as scriptable objects
+		* Changed so only mineral typ is displayed as name when picking up
+29/2	* Moved Wall LayerMask
+		* Adjusted shake -
+		* Fixed player position adjustment repositioning when moving
+		* PowerUps can now be picked up like minerals
+		* Added ability to set sound and particle effect in PowerUps data
+		* BUILD  113Mb zipped (43MB) V 0.0.1
+		* Added sprites for UI pickups -
+1/3		* Added images for walls and items in UI
+		* Fixed so list is sent with all Interactables and all ItemData not dependant of type -
+		* Added help text bar at bottom to explain key bindings
+		* Made the pickeup list move up and down depending on the help bar being active or not -
+2/3		* Updated Help Text instructions -
+		* Added boost panel, implemented boosts for mining speed -
+3/3		* Adjusted UI positions and sizes		
+		* Added Enemies with basic idle animation -
+4/3		* Added explosion enaimation for enemy, and sound + particle effect
+		* Added Generic Pool for pooling objects as well as particle effects -
+		* Made explosion in area around bomber.
+		* Explosions damages and destroys walls and ignites other enemies and send damage to player-
+5/3		* Player can now kill enemy by injuring it 10hp
+6/3		* Added icon and mockup itch page
+8/3		* Added grid for level
+		* Added gizmos showing enemies seing player and what tiles are occupied
+9/3		* Made A* solution for enemy to reach player
+10/3	* Enemies can now reach the player after stepping through the path
+		* Player can hit enemy when it has moved using the path
+11/3	* Made Beveled Blender Cube for softer looking blocks
+		* Moved cracks to separate object cause Blender Bevel Cube messed up materials applied to cube-
+		* Beveled Cube smaller edges and correct wrapping -
+12/3	* Moved all data for minerals int SO, so just a base mineral prefab is needed to create every type
+		* Created low poly 3D mineral in blender -
+		* Added particle effect around floating item to make it more visably enchanting
+13/3	* Rewrote enemy AI, Enemy responds to player moving to new position
+		* Enemy able to revert from ewxploding caused issues, now it explodes if explosion started -
+		* Some basic rotation implemented for enemy -
+14/3	* Made rotations correct for bomb enemy
+		* Enemy now starts to explode if player hits them -
+		* Added hissing sound for enemy bomb preparing to blow up
+		* Renewed images for stone, coal, silver with low poly mesh
+		* Fixed issue where pickupCollider updated not centered on a square making it recieve adjecent walls -
+		* Fixed M Mute issue in game, caused by it waiting for a load from file that is not implemented yet
+		* Updated Pause screen fonts-
+		* Fixed order of Pause Menu
+15/3	* Bedrock set without data => not mineable, fix of bedrock material-
+19/3	* Added low poly pebbles tested changing colors of the walls
+		* Updated Materials for wall types and updated 2D versions of items
+		* Fixed lights on tools, it now has its own lightsource -
+20/3	* Added skeleton, 
+		* Bomb enemy is nolonger shown as duplicate (was mock item)-
+		* Skeleton can walk and attack towards player -
+		* Added Skeleton death animation
+		* Fixed enemy keep moving on path when player is far away.-
+22/3	* Rewrote ItemData system
+		* Added continious update of colliders-
+		* Add separate enemy sound when getting hit
+		* Added sound for crushing a wall
+23/3	* Updated Credits screen
+		* Added transition screen
+		* Moved player health to stats-
+		* Player can be killed and revived at start location
+		* Made music stop when killed and resume when revived
+		* Added sound for player getting hit and groun -
+		* Bedrock can no longer break from damage/explosions -
+24/3	* Added Heart for player health 
+		* Added Heart PickUp that increases players max health upt to 10
+		* Changed Death screen continue to revive -
+		* Hearts are now picked up if colliding with them
+		* Made hearts beat in sync -
+25/3	* Made 3D model of heart with texture -
+		* Available pictures scale correctly
+		* Changed Pickup particles for health (still not fancy)-
+		* Adjusted pickups and Heart to have separate circles colors around them-
+		* Made player rotate to face killing enemy -
+		* Added Skeleton build up sound -
+26/3	* Player Reset to Cardinal north when revive
+		* Added a compass -
+		* Fixed objects oscillating to wide if update slow at startup?
+		* Added Bombs UI
+		* Added Physical bomb that is placable
+		* Placable bomb explodes and updates stats -
+27/3	* Readded MockUp to occupy tiles when enemy moves
+		* Fixed issues with mockup not activating and updating correctly
+		* Player can no longer occupy same spot as enemy, same for enemies -
+		* Made sure player can't place bombs if not owning any
+		* Changed so bombs can be placed on anything but walls -
+		* Made bombs not placable on other bombs -
+		* Added Male voice to player
+		* Added drop sound for placing bombs
+		* Added warning to player if to close to bomb
+		* Fixed oscillations error, it is now a combined solution -
+		* M and N Now works to mute music or all audio -
+28/3	* Added player Mock, seems to fix issue with occupying same square.
+		* Changed all Mocks to be on same Layer
+		* Fixed double occupation issue by adding a mock item
+		* Sledgehammer glows when boosted
+		* Separated Bloom effect for sledgehammer
+		* Adjusted ligthts reflection in sand and red wall
+		* Created start Room
+		* Added assets from Wills Room
+		* Made Room have separate PostProcessing
+		* Made player spotlight activate when stepping out from room-
+		* Added posters (temporary)
+		* Added more speech
+		* Fixed issue with double speech when cant place and last one -
+		* Issue with missplaced sledgehammer fixed -
+		* BUILD 29/3 - zipped size 127Mb 
+29/3	READY TO POLISH DAY ?
+		* Fixed issue with mining animation not whowing correctly
+		* Added compass poster and sledgehammer as usables -
+		* Speech is not queued
+		* Music starts outside room
+		* Added roots, mushrooms
+		* Added End area altar room -
+		* Added UI for minerals that lit up when player has the mineral -
+		* Pillars now accept items -
+30/3	* Added VFX effects for pillars and Gloria
+		* Added backwards animation for Gloria when completed and interracted with
+		* Added Gloria speech before moving backwards and disappearing
+		* Audio from VFX is now limited around the pillars distance 4 -
+		* Fixed issue with minerals not respawning correctly from pool (final 4 were incorrect set up)
+		* Added ExitPortal as bed
+		* Added Post Game Credits screen that scrolls and takes player to Start Menu -
+		* Changed some speech
+		* Added respawn speech
+		* Added fast scroll for credits when mouse is held -
+		* Added speech
+		* Made 4 sections for minitemple enemies and walls -
+		* Limited gonablow to just appear once
+		* Opened up roof for altar room -
+		* Added map as carpet -
+		* BUILD 31/3 - zipped size 131Mb	
+		* Bugfixes
+		* Roof fixed, sound
+		* Made better voice for completion Gloria
+		* Gloria now heals player
+		* Updated start menu credits -
+		* Added glow to special minerals
+
+		- POST JAM -
+
+9/4		* Added objectivs speech for Gloria
+		* Added dont have crystal for this pillar speech
+		* Made player able to attack mockups
+10/4	* Think I fixed the enemy Mock attacked when not around
+		* Enemies can now be hit at mock and step through earlier
+		* Made power up have more damage to walls, but not hit as fast
+		* Made shorter detonation for bombs placed 1.2 speed atm -		
+		* Resource bar added that fills up and enables waypoint to crystal after 100?
+		* Fixed light flickering -
+		* Removed all Duplicate Walls
+		* Removed all Duplicate Enemies -
+		* Made counter stop counting when no more crystal can be unlocked
+		* Counter bar grey out when no longer of use -
+13/4	* Made crystals picked up when walked upon
+		* Fixed hearts artifacts
+		* Fixed walls misalignements
+		* Added drawer and vents in room
+		* Posters framed in room -
+		* Skeleton attack is better but not good
+		* Added skeleton take hit animation
+		* Made bombs placable when moving
+		* Added speech for trying to get out without sledgehammer
+		* Adjusted roof lamp -
+		* Made pillar particle effects play when owning correct crystal -
+15/4	* Decorated Altar Room
+		* Added fire torches in altar room -
+16/4	* Added moss blocks -
+		* Added flesh blocks -
+		* Added different sounds for hitting different blocks
+		* Added black backdrop for vents -
+		* Painted Terrain biomes -
+17/4	* Added separate step sounds depending on surface
+		* Added altar sound -
+		* Updated sounds for sand and moss steps and hits
+		* Added Cat enemy -
+18/4 	* Implemented cat movement and attack animation
+		* Added wildfire to cat -
+		* Fixed Pooling for particle effects
+		* Fixed Cat collider issue -
+		* Fixed explosion issue for bombs
+		* Wildfire now ignites bombs and kills skelletons
+		* Enemy now targets player from afar if on same X or Z coordinate
+		* Wildfire spell is no longer interupted once started
+		* Damage is taken from wildfire
+		* Limited cat from fire towards player if to far or not visible
+		* Fixed bombs locking up sometimes, hopefully -
+		* Added different death sound for fire
+		* Updated Credits page -
+		* Made Cat able to die from bombs
+		* Skeleton colliders disappear directly when they die again
+		* Bombs die and dont explode when bombed, fixed, also lit when wildfired -
+21/4	* Fixed alignement issue for player when moving
+		* Cat now attackes again if player is in fron of him after attack completes -
+		* Player died and kept attacking after death, make it unable to - MAYBE FIXED
+24/4	* Added fire take damage by setting on fire
+		* Fire lasts some time player takes damage every second for 5 seconds
+		* Issue with player on fire not displaying correctly when moving around fixed by separate camera.
+		* Cat nolonger gets stuck in walk animation (added player alive check) -
+26/4	* Refactored the state machine for enemies		
+		* Remade SE -	
+		* Make cat part of map SE be more open so fire reaches longer -
+		* Released 0.0.3 Version (149MB zipped) -
+27/4	* Refix of AI pathfinding movement - release updated -
+1/5		* Added Leaves blocks instead of moss -
+		
+
+
+		// Things to fix later
+		* Fix enemies get stuck in walk animation	
+		* Skeletons dont attack again sometimes even when player is in front of it
+		* Cats sstart to walk towards player instead of fire attack when in line
+		* Maybe remake the pathfinding and movement system so it uses the same method - refactoring it
+
+		// Visuals
+		* Game runs slow
+		* Game stutters, check profiler for optimizations
+		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk
+		* Sledgehammer still got funky animation 
+		* Black smoke for pickups blocks view when stepping into the and elevated
+
+		// Content
+		* Add dino?
+		* Add Flesh enemy
+		* Have result screen showing players score - NO NEED
+
+
+		// MAYBE
+		* Maybe have picked minerals animate up to the UI bar?
+		* Fix saving system?
+		* Add wobble effect for returning to life again? Or Vignette?
+		* Make skeleton take damage and attacking animation better
+		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
+		* Have player not gain control during the beginning speech, player stuck in bed - After Jam?
+		
+		// SOLVED ?
+		* Still some issue with player stabbing walls after attacking enemies - FIX
+						
+		JAM FEEDBACK
+
+		* Better objectives
+		* To repetitive, shorter game loop, smaller game size, better waypoints
+		* Better enemy combat
+
+
+		SPEECH NEEDED
+
+		MAYBE
+		* Add health refill object like food etc
+
+		MAYBE - LAST CALLS
+		* Placing bombs sound may be better
+		* Adjust skeleton Build Up sound
+		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
+		* Add sound effects for boosts running out?
+		* Make different meshes for different minerals
+		* Have jingle play when player has a powerup?
+		
+		GENNY AI - MATHEW VOICE -
+
+
+***	GAME JAM ***
+
+31/3 17:00 SUBMISSION DUE
+		
+
+		// Game Name ??
+		* Dig down Crawl Up 
+		* Down To Earth
+
+		// Walls
+		* Make blocks have variarity in hitpoints / tools needed?
+		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
+
+		// Scenes
+		* Have end transition for completing game or dying that feels epic?
+
+		// System
+		* Extend sound data to include a list of sound clips - DONT DO FOR JAM
+		* Extend sound data to include a list pitches? - DONT DO FOR JAM
+		* Allow scalable game window - DONT DO FOR JAM
+
+		// Bugs
+		* Maybe issue with wrong block being hit, might be because the stack of walls in front of player is not updated when reaching new spot? - ALLOW FOR JAM
+
+
+
+- - - - - -  SUNO MUSIC - - - - - - 
+[Start]
+[Intro]
+[Verse]
+[Chorus]
+[Verse]
+[Chorus]
+(record scratching) Like a DJ, Guitar solo, Drum Solo
+
+
+You got a Dream
+
+[Start]
+	
+[Verse]
+You got a dream, you've got a vision
+Don't you agree? Complete this mission
+Deep down inside, the answer has grown
+Dig deep and find, what you already know
+
+[Chorus]
+My game is great, game is fantastic,
+I'm not the same, maybe I'm drastic
+World passes by, and I got no clue
+The game must complete, you have no clue
+My game is great, game is fantastic,
+I'm not the same, maybe I'm drastic
+World passes by, and I got no clue
+The game must complete, its all up to you
+
+[Verse]
+Early morning to the late of night
+You keep on pushing through,
+You see a glow throughout your fight
+That shine comes from within you
+
+[Chorus]
+My game is great,(great) game is fantastic,
+I'm not the same,(same) maybe I'm drastic
+World passes by,(by by) I got no clue
+The game must complete, it is up to you
+My game is great,(great) game is fantastic,
+I'm not the same,(same) maybe I'm drastic
+World passes by,(by by) I got no clue
+The game must complete, it is up to you
+
+
+Female Pop Energetic Ballad
+[Piano]
+[Verse]
+You got a dream, you've got a vision
+Don't lose your steam, complete the mission
+Gather your strength, alone or on a team
+You will succeed, fulfill your dream (fulfill your dream)
+
+[Chorus]
+Your game is great, Your game is massive
+Your not the same, Your turning passive
+As The World pass by, You got no clue
+To Complete that Game, You keep pushing through
+	
+[Verse]
+Early morning to the late of night
+You strive and you won't budge,
+There is no one there to stop your fight
+But you are your hardest judge
+So stand up straight, head held high and shout (you shout)
+
+[Chorus]
+My game is great, My game is massive
+I'm not the same, I'm turning passive
+As The World pass by, I got no clue
+To Complete that Game, I will keep pushing through
+	
+[End]
+
+
+
+
+		-------------------
+		* Julian feedback
+		* BUG - Moving slider on Spinner or any Crafting station does not update the amount created text
+		* BUG - Agency blob info is text is bugged but should also tell player how agency is gained somehow
+		* BUG - Harvesting a stone, saving and reloading game, keeps stone as allready harvested but without red indicator
+		* CHANGE - player get already harvested notification for mining the kiln
+		* CHANGE - player is able to move after initiating a tool and before the mini game starts	
+		* CHANGE - Spinner seems to queue up objects created, but player cant see this queue
+		* SUGGESTION - Spinner should prob have a header showing the name of the station
+		* SUGGESTION - the research station should state that the items needed to research wont get comsumed
+		* SUGGESTION - would be nice to be able to TAB out of crafting stations
+
+		// These bugs seems to happen after the game already broke some
+		* BUG - Game not allowing tools to be dropped? Maybe this should be allowed. If inventory is full player cant pick up anything.
+		* BUG - Placing the kiln leaves the icon in the inventory as well as placing it in world, it also gets placed before releasing mouse button, prob as soon as it hits a valid spot?
+		* BUG - Stone axe recipes filling up workstations recipe list - photo
+		* BUG - equipping a tool when already having a tool equipped but no free space in inventory destroyes/"player lose" the removed tool
+		* BUG - After a few seconds in the workstation the output changes to show the players inventory instead		
+		* BUG - Time seems to have stopped at 12:40 on day 7	
+			
+		* Completing ballpeople task before activating the ballperson wont make it possible to complete the task?
+		* small spelling error in the notice after exiting the fissure he -> the
+		* player is able to jump when gathering sticks etc
+		* No Translation found for seed - picture
+
+		* BUG - Still an issue - Stone axe recipes filling up workstations recipe list - photo Still an issue
+			OUTPUT shown below crafting station at this point, saving at this point ruins/removes the save file from showing up in load (the aliv files exists in file system)
+		* Going back to main menu unsets the sound settings briefly like half a second or so.
+		* Going back to main menu and restarting a new game starts with old name filled in in the input box
+
+		// Picking up stone right before using it for reconstruction messes up the popup amount -Video https://gemoo.com/tools/upload-video/share/625434510884421632?codeId=PYabol9J9lb4B&card=625434507273125888
+		* SUGGESTION -  maybe have agency as an item in the compendium that describes more what it is and how to aquire it 
+
+
+		* having bowl equipped and unequipping it still shows player holding it
+		* Unable to save game - video
+		* Setting audio for animals to 0 still allowes high volume for birds
+
+		* Interacting with stations does not respond to E if its held or slowly pressed, only reacts to fast type E
+
+		* NOT SURE - using wrong tool on harvested resource shows already harvested, should it be wrong tool notice?
+
+
+		* SUGGESTION - Could have a light slider in settings, it gets a bit to dark in the night
+		* Holding shift and starting to move should start as running, If it supposed to be a toggle for run then it should only switch off if player presses shift again
+		* Settings store the sliders in volume at correct position but does not start audiosources at correct volume
+		* Stuck in spyglass forever
+		-------------------
+		
+
+
+
+
+		* SUGGESTION - Speed up boost -> destroys walls in one hit for 10 seconds
+
+		* Implement level saving to file
+		* Implement load save or restart
+
+		* Game to fast? - MAYBE
+		* Have player auto change tool for what needs to be used
+		* Make pickaxe tool instead of sledge hammer
+		* Have upgradable tools - MAYBE
+
+		* If something is placed in game that looks like a promise, make sure it has a reward and is not just a mockup
+
+		* // Make sures //
+			Fluent Gameplay, Good Controls
+			Correct view aspect FOV etc
+			Fun - Appeal - Scope
+			Replayability	- Have timer? Make player go "I want to beat my score"
+							- Secrets have player know how many secrets they found
+
+			Fun -> Not frustrating nor boring -> Player wants to feel Accomplishment - Meaning - Empowerment - UNpredictabillity - Avoidance - Ownership
+			Appeal -> Presentation - Fantasy - Readability
+			Scope -> 
+
+		* Add animation for picking up items into inventory
+		* Add animation for destroying walls
+
+		* Adding functionality to actually pick up the items
+
+		- SETTINGS
+		* Gray Out bar when muted - MAYBE
+		* Make cleared menu, maybe have darker background area around text and buttons
+
+		 - MECHANICS
+		* Make support for left handers
+
+
+		// CREDITS
+
+<b>Credits
+</b>
+
+A game by wolfheat
+
+
+A variety of assets were used to create this game.
+
+
+<b>Graphics
+</b>
+
+3D
+Leartes Studios - Will's Room Environment
+RRFreelance - Tools Pack 1
+Polygon  - Farm Pack
+Pure Poly - Ultimate Low Poly Mining
+Siuniaev - Gambler Cat
+João Baltieri - Mini Simple Characters | Skeleton
+
+2D
+Vector Dividers Collection
+upklyak (freepik) - Ground cracks on land isolated
+GarryKillian (freepik) - Wallpaper
+masadepan (freepik) - Vector Compass
+Zooperdan - Some logos
+
+VFX
+Unity Technologies - Particle Pack
+Vefects - Item Pickup VFX
+
+
+<b>Audio
+</b>
+
+Freesound - Various Sounds
+Pixabay - Various Sounds
+Uppbeat - Music
+Tao & Sound - Medieval Fantasy 2 SFX Pack
+
+Vasyl Sakal - Celestial Lullaby 
+Brock Hewitt - In The Silence
+
+Monument Music - Love Story
+
+<b>Fonts
+</b>
+
+Prida01 - gluk
+
+
+<b>AI Tools
+</b>
+
+Genny - Voices - Cloe, Matthew
+
+Playground AI - 2D art
+
+
+<b>Other Tools Used
+</b>
+
+Audacity
+
+Gimp
+
+Blender
+
+Unity
+
+
+<b>Game Jam
+</b>
+
+This game was created for the
+Dungeon Crawler Game Jam 2024
+
+
+Thank you for playing!
+
+
+		
+		
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
+		* USED IN PROJECT
+
+		CHECKLIST FOR BETTER PLAYER EXPERIENCE
+
+		* BUGS, CRASHES, SLOW PERFORMANCE
+		* MISLEADING MARKETING
+		* NOT ENGAGING WITH COMMUNITY
+		* CONFIGURABLE CONTROLS,
+		* TEXT TO SMALL,
+		* CONTRAST,
+		* MISSING FEATURE
+
+------ ------- ------
