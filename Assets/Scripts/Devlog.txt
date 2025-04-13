@@ -8,7 +8,7 @@ Apr 2025
 
 
 10/4	* Started working on the project
-
+12/4	* not much done. Tried other floor and roof and boxtiles.
 
 
 		// Things to fix later
@@ -357,3 +357,57 @@ Thank you for playing!
 		* MISSING FEATURE
 
 ------ ------- ------
+
+
+[Intro]
+
+[Verse]
+The skeleton and crawlers, keep haunting hour lands
+With our towns collective force, we came up with some forceful plans
+From the tavern in our town, you could hear this gentle roar
+We have had enough, it is enough, we won't take this no more (won't take this no more)
+
+[Chorus]
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+in our glorious return,
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+in our glorious return
+
+[Verse 2]
+We fought into the darkness, but hour strength was not enough
+All our efforts was in vain, as this fight was all too tough
+Many men we lost in battle, as we fought for hour lives
+Just a few of us remaining, when we returned to hour wives. (Returned to our wives)
+
+[Chorus]
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+in our glorious return,
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+in our glorious return
+
+[Verse 3]
+All hour wiman held a meeting, how to deal with this ordeal
+We must all fight this together, doesn't matter what we feel
+So we gathered our last strength, we will fight or we will die
+And then back into the darkness, for a final battle cry. (Final battle cry)
+
+[Build Up]
+[Chorus]
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+in our glorious return,
+We are heading to the dungeon,
+We are slaying all the beasts,
+We are bringing back the Peace,
+and no one heard from us again...
+
+[Short Dramatic Ending]
