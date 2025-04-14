@@ -6,6 +6,8 @@ public class PlayerColliderController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
 
+    public static bool IsPlayerInRegainArea = false;
+
     LayerMask itemsLayerMask;
 
     private void Start()
@@ -23,9 +25,17 @@ public class PlayerColliderController : MonoBehaviour
         takeFireDamage.StartFireTimer();
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out HealingArea healingArea)) {
+
+            Debug.Log("Exiting Healing Area");
+            IsPlayerInRegainArea = false;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Colliding with "+other.name);
+        Debug.Log("Colliding with "+other.name);
         
         if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
         {
@@ -42,5 +52,11 @@ public class PlayerColliderController : MonoBehaviour
             //Debug.Log("Exit portal collission "+portal);
             UIController.Instance.ShowWinScreen();
         }
+        else if (other.TryGetComponent(out HealingArea healingArea)) {
+
+            Debug.Log("Entering Healing Area");
+            IsPlayerInRegainArea = true;
+        }
     }
+
 }

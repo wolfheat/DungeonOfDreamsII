@@ -9,6 +9,9 @@ Apr 2025
 
 10/4	* Started working on the project
 12/4	* not much done. Tried other floor and roof and boxtiles.
+13/4	* Added Oxygen bar and regeneration area
+
+
 
 
 		// Things to fix later

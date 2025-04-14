@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 using static UnityEngine.InputSystem.InputAction;
@@ -474,6 +475,9 @@ public class PlayerController : MonoBehaviour
             SoundMaster.Instance.PlayGetHitSound();
         }
     }
+
+    
+
 
     public void Reset()
     {

@@ -3,7 +3,6 @@ using System.Diagnostics;
 using UnityEngine;
 using Wolfheat.StartMenu;
 using Debug = UnityEngine.Debug;
-
 public class Stats : MonoBehaviour
 {
     [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
@@ -28,6 +27,8 @@ public class Stats : MonoBehaviour
     public int Health { get; private set; } = 3;
     public int Bombs { get; private set; } = 0;
 
+    public bool IsInRegainArea { get; set; } = false;
+
     public bool IsDead { get; set; } = false;
 
     public static Stats Instance { get; private set; }
@@ -47,7 +48,7 @@ public class Stats : MonoBehaviour
     public static Action MineralsAmountUpdate;
     public static Action NoMoreMineralsReached;
 
-	private void Awake()
+    private void Awake()
 	{
 		if (Instance != null)
 		{
