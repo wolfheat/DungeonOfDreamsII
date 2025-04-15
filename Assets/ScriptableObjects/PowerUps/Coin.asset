@@ -18,5 +18,5 @@ MonoBehaviour:
   material: {fileID: 0}
   mesh: {fileID: 0}
   particleType: 2
-  soundName: 22
-  powerUpType: 0
+  soundName: 56
+  powerUpType: 3

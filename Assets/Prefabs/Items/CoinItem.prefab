@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 1844676881317438294}
   - component: {fileID: 9157562809953407234}
   - component: {fileID: 8155027393205922273}
-  - component: {fileID: 1799618271006789101}
+  - component: {fileID: 9052172521848195401}
   m_Layer: 7
   m_Name: CoinItem
   m_TagString: Untagged
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dcef770388b5d64aa122eaf3a777f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationVertical: 1
   animationVelocity: 0.005
   equilibriumTarget: -0.3
 --- !u!65 &8155027393205922273
@@ -345,7 +346,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1799618271006789101
+--- !u!114 &9052172521848195401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,11 +355,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5899475673895682454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dccc04116f0453c4999d53e96d799d68, type: 3}
+  m_Script: {fileID: 11500000, guid: 67aa10d0e310fb54690c0b12b0b1e368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   usePool: 1
-  Data: {fileID: 11400000, guid: e3641365463090f45b21c0c1570dab53, type: 2}
+  Data: {fileID: 11400000, guid: 984c4c89921acba469e84370efa4adf6, type: 2}
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}
 --- !u!1001 &6290701018668172097

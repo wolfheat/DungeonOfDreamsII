@@ -220,6 +220,7 @@ public class Stats : MonoBehaviour
         if(mineralData.mineralType == MineralType.Coin) {
             Inventory.Instance.AddCoins(1);
             Debug.Log("Adding Coin");
+            return;
         }
         else if(mineralData.mineralType == MineralType.Gold)
             MineralsOwned[0] = true;
@@ -235,7 +236,7 @@ public class Stats : MonoBehaviour
             return;
         }
 
-
+        /*
         if (AllMinerals())
             SoundMaster.Instance.PlaySound(SoundName.IGotAllPieces);         
         else
@@ -243,6 +244,7 @@ public class Stats : MonoBehaviour
 
         if (!HaveCrystalsToActivate())
             NoMoreMineralsReached?.Invoke();
+        */
 
         MineralsUpdate?.Invoke();
     }

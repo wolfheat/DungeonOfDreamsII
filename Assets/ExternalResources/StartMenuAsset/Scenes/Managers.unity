@@ -640,6 +640,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9866ad98a3ffc3745b8dbf8a5bdf7466, type: 3}
   - {fileID: 8300000, guid: 3853aff575867f14bab0b0144ad6829c, type: 3}
   - {fileID: 8300000, guid: 62884cdbc148fed49b75d53f8ef6a473, type: 3}
+  coins:
+  - {fileID: 8300000, guid: 758523b325ffe964fa71917304e19a96, type: 3}
+  - {fileID: 8300000, guid: dd5b1c887dd5d6044919d098a7e0d37a, type: 3}
+  - {fileID: 8300000, guid: 43ef9cd957d06814e9159f1863867fc8, type: 3}
+  - {fileID: 8300000, guid: 6ce7aaf06446e4646bc4796fb59fb6d4, type: 3}
   getHit:
   - {fileID: 8300000, guid: ca8bc29180616d04d9c146917b03ef6c, type: 3}
   pickAxeHitStone:

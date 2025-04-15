@@ -57,7 +57,8 @@ namespace Wolfheat.StartMenu
         ThereYouGo,
         Nice,
         ISeeAMissingPieceThroughTheWalls,
-        ICantBreakThisWithMyBareHands
+        ICantBreakThisWithMyBareHands,
+        Coin
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}
@@ -116,6 +117,7 @@ namespace Wolfheat.StartMenu
         [SerializeField] private Music[] musics;
 
         [SerializeField]private AudioClip[] swosh;
+        [SerializeField]private AudioClip[] coins;
         [SerializeField]private AudioClip[] getHit;
         [SerializeField]private AudioClip[] pickAxeHitStone;
         [SerializeField]private AudioClip[] pickAxeHitMoss;
@@ -455,6 +457,16 @@ namespace Wolfheat.StartMenu
             PlayMusic(activeMusic);
         }
 
+        public void PlayCoinSound(bool buying = false)
+        {
+            Debug.Log("Playing coin sound");
+            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
+            if(buying)
+                stepSource.PlayOneShot(coins[0]);
+            else
+                stepSource.PlayOneShot(coins[Random.Range(1, coins.Length)]);
+
+        }
         public void PlaySwoshSound()
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;

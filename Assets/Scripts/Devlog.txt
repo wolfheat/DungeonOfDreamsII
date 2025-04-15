@@ -13,6 +13,9 @@ Apr 2025
 14/4	* Player now dies when out of oxygen
 		* Added Coins that player can pick up
 		* Added Respawn point with shop and regain area
+15/4	* Added coins sound when picking up coins or buying stuff
+		* Added animated coins ingame and expanded the inventory UI
+
 
 
 		// Add darkening effects when out of oxygen - also have timer showing remaining life? No prob not

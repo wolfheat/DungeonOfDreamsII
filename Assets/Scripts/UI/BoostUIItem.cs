@@ -7,7 +7,9 @@ public class BoostUIItem : InteractableUIItem
     private Coroutine boostCoroutine;
     public void AddBoost(PowerUpData data)
     {
-        
+        if (data.powerUpType == PowerUpType.Coin)
+            return;
+
         Debug.Log("Starting boost with value "+data.value);
         boostTimer += data.value;
         if (boostCoroutine != null) return;

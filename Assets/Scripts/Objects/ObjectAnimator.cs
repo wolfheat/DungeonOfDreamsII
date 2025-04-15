@@ -5,6 +5,8 @@ public class ObjectAnimator : MonoBehaviour
 {
     const float RotationSpeed = 90f;
 
+    [SerializeField] bool animationVertical = true;
+
     [SerializeField] float animationVelocity = 0.005f;
     float animationAccelerationDrop = 3f;
     float animationAccelerationStill = 0.1f;
@@ -46,6 +48,8 @@ public class ObjectAnimator : MonoBehaviour
     {
         transform.RotateAround(transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
         transform.Rotate(0, RotationSpeed * Time.deltaTime, 0);
+        if (!animationVertical) return;
+
         if(!firstDone)
             VelocityHover();
         else
