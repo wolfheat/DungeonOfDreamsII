@@ -37,6 +37,7 @@ public class Stats : MonoBehaviour
 
     private bool[] MineralsSeeThroughActivated = new bool[4];
 
+    public Vector3 SavedStartPosition { get; private set; } = new Vector3(); 
 
     private Stopwatch stopwatch = new();
 
@@ -111,15 +112,20 @@ public class Stats : MonoBehaviour
 
     }
 
+    public void OxygenHealthRemoval() => Health = 0;
+
     public bool TakeDamage(int amt)
     {
         Health -= amt;
         Health = Math.Max(Health, 0);
-        
+        Debug.Log("Player lose health "+Health);
+
         HealthUpdate?.Invoke(Health);
 
         if (Health <= 0)
         {
+            Debug.Log("Player is dead");
+
             IsDead = true;
             return true;
         }
@@ -129,6 +135,7 @@ public class Stats : MonoBehaviour
     internal void Revive()
     {
         Health = CurrentMaxHealth;
+        OxygenController.Instance.ResetOxygen();
         HealthUpdate?.Invoke(Health);
         IsDead = false;
         SoundMaster.Instance.AddRestartSpeech();
@@ -210,7 +217,11 @@ public class Stats : MonoBehaviour
     internal void AddMineral(MineralData mineralData)
     {
         Debug.Log("Adding Mineral "+mineralData.itemName);
-        if(mineralData.mineralType == MineralType.Gold)
+        if(mineralData.mineralType == MineralType.Coin) {
+            Inventory.Instance.AddCoins(1);
+            Debug.Log("Adding Coin");
+        }
+        else if(mineralData.mineralType == MineralType.Gold)
             MineralsOwned[0] = true;
         else if (mineralData.mineralType == MineralType.Silver)
             MineralsOwned[1] = true;
@@ -259,5 +270,10 @@ public class Stats : MonoBehaviour
     internal void ActivateCompass()
     {
         UIController.Instance.ActivateCompass();
+    }
+
+    internal void SetNewRespawnPoint(Vector3 point)
+    {
+        SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0 ,Mathf.RoundToInt(point.z));
     }
 }

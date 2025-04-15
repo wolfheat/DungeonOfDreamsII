@@ -10,6 +10,32 @@ Apr 2025
 10/4	* Started working on the project
 12/4	* not much done. Tried other floor and roof and boxtiles.
 13/4	* Added Oxygen bar and regeneration area
+14/4	* Player now dies when out of oxygen
+		* Added Coins that player can pick up
+		* Added Respawn point with shop and regain area
+
+
+		// Add darkening effects when out of oxygen - also have timer showing remaining life? No prob not
+
+		
+		// Make player die when out of oxygen. Items held dropped to the ground and player respawns at last safe area (Or start Area)
+		
+		// Implement coins system and physical coins
+
+
+		// Player can get coins in the dungeon and use them to buy usable items
+		// Items
+		// * Keys
+		// * Oxygen Tank
+		// * Health
+		// * Weapon?
+		// * Map
+		// * Compass?
+
+		// Goal for player is to get out of the dungeon . might end up meeting a final boss there?
+
+
+
 
 
 

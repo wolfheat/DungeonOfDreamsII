@@ -12,6 +12,7 @@ public class BarController : MonoBehaviour
     private void OnEnable()
     {
         Barwidth = GetComponent<RectTransform>().rect.size.x;
+        Debug.Log("StartWidth BAr = "+Barwidth);
     }
 
     private void Start()
@@ -22,7 +23,11 @@ public class BarController : MonoBehaviour
 
     public void SetBar(float value, float MaxValue)
     {
-        text.text = value.ToString();
-        bar.sizeDelta = new Vector2(-Barwidth * (1 - value), 0);
+        float percent = value / MaxValue;
+
+        text.text = ((int)value).ToString();
+        bar.sizeDelta = new Vector2(-Barwidth * (1 - percent), 0);
+        //bar.sizeDelta = new Vector2(-Barwidth * (1 - value), 0);
+        //Debug.Log("Bar = "+bar.sizeDelta.x);
     }
 }

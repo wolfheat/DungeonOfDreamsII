@@ -10,6 +10,7 @@ public class DeathScreenController : MonoBehaviour
     {
         panel.SetActive(true);
         UIController.Pause(true);
+        UIController.HideDarkening();
         Debug.Log("Death screen Active Pause game");
     }
 

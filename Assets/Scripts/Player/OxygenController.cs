@@ -9,9 +9,9 @@ public class OxygenController : MonoBehaviour
     private const float delay = 0.1f;
     private WaitForSeconds coroutineDelay = new WaitForSeconds(delay);
 
-    private float oxygen = 11;
-    private int maxOxygen = 20;
-    private bool IsDead { get; set; } = false;
+    private float oxygen = 3;
+    private int maxOxygen = 10;
+    //private bool IsDead { get; set; } = false;
 
     private const int StartOxygen = 10;
     private const int OxygenUsage = 1;
@@ -26,7 +26,23 @@ public class OxygenController : MonoBehaviour
     public Action<float, float> OxygenUpdated;
     public Action<float, int> HealthUpdated;
 
-    public Action PlayerDied;
+    public static OxygenController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+
+    public void ResetOxygen()
+    {
+        oxygen = 1f;
+        noOxygenSurvival = NoOxygenSurvivalMax;
+    }
 
     private void Start()
     {
@@ -41,8 +57,8 @@ public class OxygenController : MonoBehaviour
         while (true) {
             //Debug.Log("Oxygen Coroutine runs.");
             // This routines effect is "paused" when dead
-            while (IsDead) {
-                Debug.Log("Player is dead.");
+            while (Stats.Instance.IsDead) {
+                //Debug.Log("Player is dead.");
                 yield return coroutineDelay;
             }
             yield return coroutineDelay;
@@ -54,7 +70,7 @@ public class OxygenController : MonoBehaviour
                     bool aboveWarningBeforeDecrease = oxygen >= OxygenWarningLevel;
                     bool aboveSecondWarningBeforeDecrease = oxygen >= SecondOxygenWarningLevel;
                     oxygen -= OxygenUsage * delay;
-                    Debug.Log("Oxygen is now "+oxygen);
+                    //Debug.Log("Oxygen is now "+oxygen);
 
                     // Give warning of low oxygen
                     //
@@ -75,11 +91,9 @@ public class OxygenController : MonoBehaviour
                         noOxygenSurvival -= delay;
                     else {
                         // Kill player if not allready dead
-                        if (!IsDead) {
+                        if (!Stats.Instance.IsDead) {
                             Debug.Log("PlayerDIED");
-                            IsDead = true;
-                            PlayerDied?.Invoke();
-                            //uiController.ShowDeathScreen();
+                            PlayerController.Instance.OxygenDeath();                            
                         }
                     }
                 }
@@ -106,7 +120,9 @@ public class OxygenController : MonoBehaviour
 
             // Set distortioneffect and darkening from noOxygenSurvival value
             //
-            //uiController.UpdateScreenDarkening(1 - noOxygenSurvival / NoOxygenSurvivalMax);
+
+            if(!Stats.Instance.IsDead)
+                UIController.Instance.UpdateScreenDarkening(1 - noOxygenSurvival / NoOxygenSurvivalMax);
             //uiController.SetOxygen(oxygen, maxOxygen);
 
             // Check if the current oxygen is the same as we started with i.e no uptdates event dispatch needed

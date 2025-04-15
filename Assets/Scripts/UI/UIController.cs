@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 
@@ -81,13 +83,19 @@ public class UIController : MonoBehaviour
 	{
 		interactableUI.AddPickedUp(data);
 	}
+
+    public void ShowDeathScreenInstant()
+    {
+        HideDarkening();
+        deathScreen.Show();
+    }
+
     public void ShowDeathScreen()
 	{
-
         // Transition to Dark
-        transitionScreen.Darken();
         open = UIActions.DeathScreen;
-	}
+        transitionScreen.Darken();
+    }
     
     public void ShowWinScreen()
 	{
@@ -153,5 +161,24 @@ public class UIController : MonoBehaviour
 
         SceneManager.UnloadSceneAsync("Dungeon");
         SceneChanger.Instance.ChangeScene("StartMenu");
+    }
+
+    // Screen darkening image
+    [SerializeField] Image image;
+
+    // Post processing volume for darkening effect
+    [SerializeField] Volume volume;
+
+    internal void UpdateScreenDarkening(float percent)
+    {
+        // Setting darkening effect to specific percent
+        image.color = new Color() { a = percent };
+        volume.weight = percent;
+        //Debug.Log("Updating screen darkening");
+    }
+
+    internal void HideDarkening()
+    {
+        image.color = new Color() { a = 0f };
     }
 }

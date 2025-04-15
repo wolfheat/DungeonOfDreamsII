@@ -32,6 +32,11 @@ public class PlayerColliderController : MonoBehaviour
             Debug.Log("Exiting Healing Area");
             IsPlayerInRegainArea = false;
         }
+        else if (other.TryGetComponent(out ShopItem shop)) {
+
+            Debug.Log("Exiting Shop");
+            Shop.Instance.HidePanel();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -42,8 +47,9 @@ public class PlayerColliderController : MonoBehaviour
             //Debug.Log("Colliding with layer in mask");
             if (other.GetComponent<Bomb>() != null)
                 return;
-            else if (other.TryGetComponent(out Mineral mineral))
-                    Stats.Instance.AddMineral(mineral.Data);            
+            else if (other.TryGetComponent(out Mineral mineral)) {                
+                Stats.Instance.AddMineral(mineral.Data);
+            }
             other.gameObject.GetComponent<Interactable>()?.InteractWith();
 
         }
@@ -56,6 +62,14 @@ public class PlayerColliderController : MonoBehaviour
 
             Debug.Log("Entering Healing Area");
             IsPlayerInRegainArea = true;
+        }else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
+            Debug.Log("Entering Respawn Point - set this as respawn point");
+            Stats.Instance.SetNewRespawnPoint(respawnPoint.transform.position);
+        }
+        else if (other.TryGetComponent(out ShopItem shop)) {
+            // ShopItem is also considered Respawn point
+            Debug.Log("Entering Shop");
+            Shop.Instance.ShowPanel();
         }
     }
 

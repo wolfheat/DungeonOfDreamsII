@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 using static UnityEngine.InputSystem.InputAction;
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("PLACE NEW BOMB");
-        if (Stats.Instance.Bombs <= 0)
+        if (Inventory.Instance.BombsHeld <= 0)
         {
             Debug.Log("You Got No Bombs");
             SoundMaster.Instance.PlaySound(SoundName.NoBombs);
@@ -118,8 +117,9 @@ public class PlayerController : MonoBehaviour
             
             SoundMaster.Instance.PlaySound(SoundName.DropItem);
             ItemSpawner.Instance.PlaceBomb(target);
-            Stats.Instance.RemoveBombs(1);
-            if (Stats.Instance.Bombs == 0)
+            bool hadBomb = Inventory.Instance.RemoveBombs();
+            
+            if (Inventory.Instance.BombsHeld == 0)
             {
                 SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
                 Debug.Log("LAST ONE");
@@ -232,11 +232,15 @@ public class PlayerController : MonoBehaviour
         {
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
+
                 Vector3 target = EndPositionForMotion(savedAction);
+
+                //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
+
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     lastAction = savedAction;
-                    //Debug.Log("No Walls or Enemies ahead");
+                    //Debug.Log("Storing saved Movement as Last movement and start new movement");
                     StartCoroutine(Move(target));
                 }
                 else
@@ -299,12 +303,19 @@ public class PlayerController : MonoBehaviour
         return true;
     }
     
+
     private bool Step()
     {
+        //Debug.Log(" Player position " + transform.position);
+
         if (GameState.state == GameStates.Paused || Stats.Instance.IsDead) return false; // No input while paused
+
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
+        
+        //Debug.Log("Adding step movement = " + movement);
+
         if (movement == 0) return false;
 
         // Write or overwrite next action
@@ -417,6 +428,8 @@ public class PlayerController : MonoBehaviour
     
     public void UpdatePlayerInput()
     {
+        if (Stats.Instance.IsDead) return;
+
         // Check to align player
         if (savedAction != null && savedAction.moveType != lastAction.moveType)
             CenterPlayerPosition();
@@ -467,7 +480,6 @@ public class PlayerController : MonoBehaviour
             // Show death screen
             UIController.Instance.ShowDeathScreen();
             SoundMaster.Instance.PlaySound(bombDamage?SoundName.BoomPlayerDies:SoundName.DieByFire);
-            SoundMaster.Instance.StopMusic();
         }
         else
         {
@@ -476,19 +488,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+
+    public void OxygenDeath()
+    {
+        Stats.Instance.IsDead = true;
+
+        Stats.Instance.OxygenHealthRemoval();
+            
+            
+        SoundMaster.Instance.StopMusic();
+
+        // Set player back to idle 
+        playerAnimationController.SetState(PlayerState.Idle);
+
+        // Show death screen
+        UIController.Instance.ShowDeathScreenInstant();
+        //SoundMaster.Instance.PlaySound(bombDamage?SoundName.BoomPlayerDies:SoundName.DieByFire);
+        SoundMaster.Instance.StopMusic();
+
+        StopAllCoroutines();
+        DoingAction = false;
+    }   
 
 
     public void Reset()
     {
         Debug.Log("Reset Player");
-        transform.position = Vector3.zero;
+        // Setting PLayer to init position with forward rotation
+        transform.position = Stats.Instance.SavedStartPosition;
+
         transform.rotation = Quaternion.identity;   
+
+        Debug.Log(" Player position "+transform.position);
+
         savedAction = null;
+        lastAction = null;
+
         takeFireDamage.StopFire();
         Stats.Instance.Revive();
         PlaceMock(transform.position);
-
     }
 
     private void PlaceMock(Vector3 position)

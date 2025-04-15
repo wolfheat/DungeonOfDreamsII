@@ -4,9 +4,9 @@ using UnityEngine;
 using Wolfheat.Pool;
 using Random = UnityEngine.Random;
 
-public enum MineralType{Gold,Silver,Copper, Flesh, DarkSoil, Stone, Chess, Coal, Sand, Moss}
+public enum MineralType{Gold,Silver,Copper, Flesh, DarkSoil, Stone, Chess, Coal, Sand, Moss,Coin}
 public enum UsableType {Bomb,SledgeHammer,Compass,Other}
-public enum PowerUpType { Speed,Damage,Health}
+public enum PowerUpType { Speed,Damage,Health,Coin}
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] EnemyController[] enemyPrefabs;

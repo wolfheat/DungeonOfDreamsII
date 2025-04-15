@@ -54,6 +54,13 @@ public class InteractableUI : MonoBehaviour
                 Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
                 SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
                 return;
+            }else if (((PowerUpData)data).powerUpType == PowerUpType.Coin)
+            {
+                Debug.Log("Adding coin " + data.value);
+                Inventory.Instance.AddCoins(data.value);
+                //Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
+                //SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
+                return;
             }
 
             // Check If boost is allready active and if so updat the timer
@@ -80,7 +87,8 @@ public class InteractableUI : MonoBehaviour
             if (((UsableData)data).usableType == UsableType.Bomb)
             {
                 Debug.Log("Adding bomb to inventory " + data.value);
-                Stats.Instance.AddBomb(data.value);
+                //Stats.Instance.AddBomb(data.value);
+                Inventory.Instance.AddBombs();
             }else if (((UsableData)data).usableType == UsableType.SledgeHammer)
             {
                 Debug.Log("Adding sledgehammer " + data.value);
