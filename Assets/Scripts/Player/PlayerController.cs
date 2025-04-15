@@ -247,6 +247,20 @@ public class PlayerController : MonoBehaviour
                 {
                     CenterPlayerPosition();
                     Debug.Log("Walls or Enemies ahead");
+
+                    Door door = LevelCreator.Instance.TargetHasDoor(target);
+                    // If door is ahead unlock it if player has correct key
+                    if (door != null) {
+                        bool playerCanUnlock = Inventory.Instance.KeysHeld > 0;
+                        Debug.Log("DOOR AHEAD keys: "+Inventory.Instance.KeysHeld);
+
+                        if (playerCanUnlock) {
+                            Debug.Log("Unlocked");
+                            door.OpenDoor();
+
+                            Inventory.Instance.RemoveKey();
+                        }
+                    }
                 }
 
             }

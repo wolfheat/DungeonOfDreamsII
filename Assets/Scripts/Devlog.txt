@@ -15,15 +15,12 @@ Apr 2025
 		* Added Respawn point with shop and regain area
 15/4	* Added coins sound when picking up coins or buying stuff
 		* Added animated coins ingame and expanded the inventory UI
+		* Doors implemented, player can unlock doors with keys
 
 
 
-		// Add darkening effects when out of oxygen - also have timer showing remaining life? No prob not
+		// Implement door system that unlocks with keys
 
-		
-		// Make player die when out of oxygen. Items held dropped to the ground and player respawns at last safe area (Or start Area)
-		
-		// Implement coins system and physical coins
 
 
 		// Player can get coins in the dungeon and use them to buy usable items
