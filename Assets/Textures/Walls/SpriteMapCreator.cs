@@ -10,14 +10,43 @@ public class SpriteMapCreator : MonoBehaviour
 
     [SerializeField] private GameObject wallHolder;
 
+    [SerializeField] private GameObject playerArrow;
+
+    [SerializeField] private RectTransform rectTransform;
+
     int mapWidth = 128;
     int mapHeight = 128;
     int tileSize = 128;
+
+    Vector2 offset = Vector2.zero;
+
+    private void Update()
+    {
+        CenterOnPlayer();
+    }
+
+    public void CenterOnPlayer()
+    {
+        //Vector2 playerPos = PlayerController.Instance.transform.position;
+        Vector2 playerPos = new Vector2(PlayerController.Instance.transform.position.x, PlayerController.Instance.transform.position.z);
+
+        // Set new position of map
+        //transform.localPosition = offset;
+        transform.localPosition = -(playerPos * tileSize)+offset;
+        playerArrow.transform.rotation = Quaternion.Euler(0,0,-PlayerController.Instance.transform.rotation.eulerAngles.y);  
+    }
+
+    private void Start()
+    {
+        CreateMapFromTiles();
+    }
 
     [ContextMenu("Create Tiles")]
     public void CreateMapFromTiles()
     {
         Debug.Log("Creating Sprite");
+
+        tileSize = 32;
 
         Resources.UnloadUnusedAssets();
         Texture2D texture2D = FillTexture();
@@ -28,6 +57,8 @@ public class SpriteMapCreator : MonoBehaviour
         newMapSprite.name = "Generated Map Sprite";
         Debug.Log("Craeting a new sprite with size "+texture2D.width+" "+texture2D.height);
         image.sprite = newMapSprite;
+
+        rectTransform.sizeDelta = new Vector2(mapWidth,mapHeight);
     }
 
     internal Wall[] GetWalls() => wallHolder.GetComponentsInChildren<Wall>();
@@ -62,6 +93,9 @@ public class SpriteMapCreator : MonoBehaviour
 
         mapWidth = width * tileSize;
         mapHeight = height * tileSize;
+
+        offset = new Vector2((float)mapWidth/2+minCorner.x*tileSize-tileSize/2, (float)mapHeight/2 + minCorner.y * tileSize - tileSize / 2);
+
         Debug.Log("GameSize ["+mapWidth+","+mapHeight+"] ["+width+","+height+"] ");
 
         // We now know the full size of the map

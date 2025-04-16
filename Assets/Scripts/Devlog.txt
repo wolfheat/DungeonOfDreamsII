@@ -17,7 +17,7 @@ Apr 2025
 		* Added animated coins ingame and expanded the inventory UI
 		* Doors implemented, player can unlock doors with keys
 		* Added minimap from walls
-
+		* Map now follows player and player arrow rotates with player
 
 
 		// Make cracked wall that is bombable
