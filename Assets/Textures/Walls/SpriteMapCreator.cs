@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class SpriteMapCreator : MonoBehaviour
 {
+
+    [SerializeField] private FogOfWar FOV;
+
     [SerializeField] private Sprite[] sprites;
 
     [SerializeField] private Image image;
@@ -18,7 +20,21 @@ public class SpriteMapCreator : MonoBehaviour
     int mapHeight = 128;
     int tileSize = 128;
 
-    Vector2 offset = Vector2.zero;
+    public Vector2 offset = Vector2.zero;
+    public Vector2Int origoOffset = Vector2Int.zero;
+
+
+    public static SpriteMapCreator Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
 
     private void Update()
     {
@@ -58,7 +74,10 @@ public class SpriteMapCreator : MonoBehaviour
         Debug.Log("Craeting a new sprite with size "+texture2D.width+" "+texture2D.height);
         image.sprite = newMapSprite;
 
+
         rectTransform.sizeDelta = new Vector2(mapWidth,mapHeight);
+
+        FOV.CreateImage(mapWidth,mapHeight);
     }
 
     internal Wall[] GetWalls() => wallHolder.GetComponentsInChildren<Wall>();
@@ -89,6 +108,8 @@ public class SpriteMapCreator : MonoBehaviour
         int Xdisplace = minCorner.x;
         int Ydisplace = minCorner.y;
 
+        origoOffset = new Vector2Int(Xdisplace, Ydisplace);
+
         Debug.Log("Displacements ["+Xdisplace+","+Ydisplace+"]");
 
         mapWidth = width * tileSize;
@@ -101,18 +122,19 @@ public class SpriteMapCreator : MonoBehaviour
         // We now know the full size of the map
         Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight);
 
+        fullMapTexture.filterMode = FilterMode.Point;
         // Fill each tile in the texture
 
 
-        Color[] colors = sprites[0].texture.GetPixels(0);
+            Color[] colors = sprites[0].texture.GetPixels(0);
 
-        foreach (Wall wall in walls) {
-            int xPos = Mathf.RoundToInt(wall.transform.position.x)-Xdisplace;
-            int yPos = Mathf.RoundToInt(wall.transform.position.z)-Ydisplace;
-            Debug.Log("Setting pixel for map at ["+xPos+","+yPos+"]");
-            fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, colors);
-        }
-        fullMapTexture.Apply();
+            foreach (Wall wall in walls) {
+                int xPos = Mathf.RoundToInt(wall.transform.position.x)-Xdisplace;
+                int yPos = Mathf.RoundToInt(wall.transform.position.z)-Ydisplace;
+                //Debug.Log("Setting pixel for map at ["+xPos+","+yPos+"]");
+                fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, colors);
+            }
+            fullMapTexture.Apply();
         return fullMapTexture;
     }
 }

@@ -18,12 +18,11 @@ Apr 2025
 		* Doors implemented, player can unlock doors with keys
 		* Added minimap from walls
 		* Map now follows player and player arrow rotates with player
+		* Map now have Fog of War that revealse as player explores
 
 
-		// Make cracked wall that is bombable
+		// Maps show doors, regain area and cracked walls - maybe
 
-
-		// Implement door sounds
 
 		// Player can get coins in the dungeon and use them to buy usable items
 		// Items
