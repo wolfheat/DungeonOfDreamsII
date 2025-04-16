@@ -24,6 +24,7 @@ public class LevelCreator : MonoBehaviour
 
     GridSpot[] gridSpots;
 
+
     [SerializeField] private LayerMask gridDetectionLayerMask;
     [SerializeField] private LayerMask itemsLayerMask;
     private LayerMask wallLayerMask;
@@ -446,6 +447,7 @@ public class LevelCreator : MonoBehaviour
         Debug.Log("Colliders with Bomb = "+colliders.Length);
         return colliders.Length>0;
     }
+
 }
 
 public class APoint

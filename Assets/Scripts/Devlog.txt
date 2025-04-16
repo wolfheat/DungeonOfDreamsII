@@ -16,12 +16,14 @@ Apr 2025
 15/4	* Added coins sound when picking up coins or buying stuff
 		* Added animated coins ingame and expanded the inventory UI
 		* Doors implemented, player can unlock doors with keys
+		* Added minimap from walls
 
 
 
-		// Implement door system that unlocks with keys
+		// Make cracked wall that is bombable
 
 
+		// Implement door sounds
 
 		// Player can get coins in the dungeon and use them to buy usable items
 		// Items

@@ -104,7 +104,8 @@ public class PickUpController : MonoBehaviour
         Debug.DrawLine(c, d, Color.green,3f);
         */
 
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).Where(x => x!=null).ToList());
+        // This shows whats ahead of the player, not needed
+        //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).Where(x => x!=null).ToList());
 
         if (colliders.Length == 0)
             Wall = null;
@@ -152,9 +153,12 @@ public class PickUpController : MonoBehaviour
             Debug.Log("Interact with Wall without Data = Bedrock");
             return false;
         }
-        //Debug.Log("Interacting with wall");
-        if(Wall.Damage(Stats.Instance.Damage))
-            UpdateColliders();
+        
+        // Lets player hit and destroy walls
+
+        //if(Wall.Damage(Stats.Instance.Damage))
+        //    UpdateColliders();
+
         return true;
     }
     public void InteractWithActiveItem()

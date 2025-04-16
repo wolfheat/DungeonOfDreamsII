@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class Door : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Door : MonoBehaviour
         Debug.Log("Animate opening door");
 
         GetComponent<Collider>().enabled = false;
+        SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
 
         doorPart.transform.Rotate(0, -90, 0);
     }

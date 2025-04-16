@@ -14,7 +14,9 @@ public class Wall : Interactable
     {
         // If Bedrock dont damage
         if (WallData == null) return false;
-        //  Debug.Log("Damage Wall");
+        
+        Debug.Log("Damage Wall");
+
         health-=damage;
 
         if (health <= 0)
