@@ -17,6 +17,8 @@ public class UIController : MonoBehaviour
     [SerializeField] DeathScreenController deathScreen;
     [SerializeField] WinScreenScroll winScreen;
     [SerializeField] GameObject helpScreen;
+    [SerializeField] OxygenController oxygenPanel;
+    [SerializeField] GameObject map;
 
 	public static UIController Instance { get; private set; }
 
@@ -159,7 +161,14 @@ public class UIController : MonoBehaviour
         Debug.Log("Go to Main menu, unload Dungeon, load start menu");
         SoundMaster.Instance.ResetMusic();
 
-        SceneManager.UnloadSceneAsync("Dungeon");
+        //SceneManager.UnloadSceneAsync("Dungeon");
+        //SceneManager.UnloadSceneAsync("DreamsDungeon2");
+        if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid()) {
+            SceneManager.UnloadSceneAsync("DreamsDungeon2");
+            //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("DreamsDungeon2"));
+            Debug.Log("Unloaded Scene DreamsDungeon2");
+        }
+
         SceneChanger.Instance.ChangeScene("StartMenu");
     }
 
@@ -181,4 +190,16 @@ public class UIController : MonoBehaviour
     {
         image.color = new Color() { a = 0f };
     }
+
+    internal void HideOxygen()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void ShowOxygen()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void ActivateMap(bool activate = true) => map.SetActive(activate);
 }

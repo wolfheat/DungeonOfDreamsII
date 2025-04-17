@@ -53,6 +53,11 @@ public class PlayerColliderController : MonoBehaviour
             other.gameObject.GetComponent<Interactable>()?.InteractWith();
 
         }
+        else if(other.TryGetComponent(out ExitPoint exitPoint))
+        {
+            Debug.Log("Exit point for level.");
+            PlayerController.Instance.GotoNextStartPosition();
+        }
         else if(other.TryGetComponent(out ExitPortal portal))
         {
             //Debug.Log("Exit portal collission "+portal);

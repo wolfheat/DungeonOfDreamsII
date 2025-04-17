@@ -52,7 +52,7 @@ public class InteractableUI : MonoBehaviour
             {
                 Debug.Log("Adding health with heart " + data.value);
                 Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
-                SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
+                //SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
                 return;
             }else if (((PowerUpData)data).powerUpType == PowerUpType.Coin)
             {
@@ -81,7 +81,7 @@ public class InteractableUI : MonoBehaviour
             boostItem.AddBoost(data as PowerUpData);
 
 
-            SoundMaster.Instance.PlaySound(SoundName.Energize);
+            //SoundMaster.Instance.PlaySound(SoundName.Energize);
             return;
         }
         else if (data is UsableData)
@@ -103,6 +103,12 @@ public class InteractableUI : MonoBehaviour
                 Debug.Log("Adding compass " + data.value);
                 SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
                 Stats.Instance.ActivateCompass();
+                //Stats.Instance.AddBomb(data.value);
+            }else if (((UsableData)data).usableType == UsableType.Map)
+            {
+                Debug.Log("Adding map " + data.value);
+                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                Stats.Instance.ActivateMap();
                 //Stats.Instance.AddBomb(data.value);
             }
         }

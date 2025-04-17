@@ -12,6 +12,7 @@ public class FogOfWar : MonoBehaviour
     [SerializeField] private RectTransform rectTransform;
 
     private Color[] colors;
+    private Color32[] clearColors;
     private Color transparent = new Color(0,0,0,0);
 
     private int revealSize = 96;
@@ -26,19 +27,27 @@ public class FogOfWar : MonoBehaviour
         colors = new Color[revealSize*revealSize];
         for (int i = 0; i < revealSize*revealSize; i++) {
             colors[i] = transparent;
-        }   
+        }
+        // Create a square of fully transparent pixels
+        clearColors = new Color32[revealSize * revealSize];
+        for (int i = 0; i < clearColors.Length; i++) {
+            clearColors[i] = new Color32(0, 0, 0, 0); // Transparent
+        }
+
+        PlayerController.Instance.MovedToNewSquare += Reveal;
     }
 
     private void Update()
     {
-        StartCoroutine(RevealCO());
+        //StartCoroutine(RevealCO());
     }
 
     Vector2 offset = Vector2.zero;
     private IEnumerator RevealCO()
     {
         while (true) {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.25f);
+            Resources.UnloadUnusedAssets();
             //Reveal(new Vector2Int((int)transform.parent.localPosition.x, (int)transform.parent.localPosition.y));
             Reveal(new Vector2Int((int)PlayerController.Instance.transform.position.x*tileSize, (int)PlayerController.Instance.transform.position.z*tileSize));
         }
@@ -48,21 +57,25 @@ public class FogOfWar : MonoBehaviour
 
     public void Reveal(Vector2Int pos)
     {
-        //Debug.Log("Reveal around position " + pos);
+        pos *= tileSize;
+
+        Debug.Log("Checking to Reveal around position " + pos);
+
         string posAsString = pos.x + "_"+pos.y;
 
         if (usedReveals.Contains(posAsString))
             return;
 
+        // Make it local pos in the sprite
+        
+        Debug.Log("Revealing map position " + pos);
+
         usedReveals.Add(posAsString);
+        
 
         Texture2D tex = FOV_Image.sprite.texture;
 
-        // Create a square of fully transparent pixels
-        Color32[] clearColors = new Color32[revealSize * revealSize];
-        for (int i = 0; i < clearColors.Length; i++) {
-            clearColors[i] = new Color32(0, 0, 0, 0); // Transparent
-        }
+
         pos -= SpriteMapCreator.Instance.origoOffset*tileSize;
         int tileAdjustAmount = (revealSize-tileSize)/2;
         pos -= new Vector2Int(tileAdjustAmount, tileAdjustAmount);

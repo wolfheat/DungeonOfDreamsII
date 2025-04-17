@@ -36,6 +36,7 @@ public class WinScreenScroll : MonoBehaviour
             rect.anchoredPosition = pos;
         }
         Debug.Log("Animation of End Credits complete");
+        Hide();
         UIController.Instance.ToMainMenu();
     }
 

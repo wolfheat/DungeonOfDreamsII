@@ -116,7 +116,7 @@ public class StartMenuController : MonoBehaviour
     {
         Debug.Log("Start Game Pressed");
         SceneManager.UnloadSceneAsync("StartMenu");
-        SceneChanger.Instance.ChangeScene("Dungeon");
+        SceneChanger.Instance.ChangeScene("DreamsDungeon2");
     }
 
     private void ShowSettings()

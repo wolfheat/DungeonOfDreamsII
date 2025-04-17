@@ -15,6 +15,7 @@ public class LevelCreator : MonoBehaviour
 {
     // Keep track of level and all items, enemy use this grid to evaluate movement 
 
+
     [SerializeField] GameObject duplicateWallsListParent;
 
     [SerializeField] Camera gizmoCamera;
@@ -72,7 +73,7 @@ public class LevelCreator : MonoBehaviour
         List<UnityEngine.Object> duplicates = new();
         List<Vector2Int> allWalls = new();
 
-        foreach (EnemyController wall in duplicateWallsListParent.GetComponentsInChildren<EnemyController>())
+        foreach (Wall wall in duplicateWallsListParent.GetComponentsInChildren<Wall>())
         {
             Vector2Int pos = Convert.V3ToV2Int(wall.transform.position);
             if (allWalls.Contains(pos))

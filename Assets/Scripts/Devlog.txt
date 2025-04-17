@@ -19,7 +19,13 @@ Apr 2025
 		* Added minimap from walls
 		* Map now follows player and player arrow rotates with player
 		* Map now have Fog of War that revealse as player explores
+17/4	* Map is now an item that can be picked up
+		* Game is divided into several parts that player can reach the end at
 
+
+
+
+		// Joined jam 16/2 - 2025 17:45, with 4 days left on jam.
 
 		// Maps show doors, regain area and cracked walls - maybe
 

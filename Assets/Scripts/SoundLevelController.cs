@@ -5,6 +5,8 @@ public class SoundLevelController : MonoBehaviour
 {
     void Start()
     {
-        SoundMaster.Instance.PlayMusic(MusicName.IndoorMusic);
+        //SoundMaster.Instance.PlayMusic(MusicName.IndoorMusic);
+
+        SoundMaster.Instance.PlayMusic(MusicName.OutDoorMusic);
     }
 }

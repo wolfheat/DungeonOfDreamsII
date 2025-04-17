@@ -26,6 +26,8 @@ public class OxygenController : MonoBehaviour
     public Action<float, float> OxygenUpdated;
     public Action<float, int> HealthUpdated;
 
+    [SerializeField] private bool oxygenEnabled = true;
+
     public static OxygenController Instance { get; private set; }
 
     private void Awake()
@@ -47,7 +49,13 @@ public class OxygenController : MonoBehaviour
     private void Start()
     {
         Debug.Log("Oxygen Coroutine started.");
-        StartCoroutine(UseOxygen());
+        if (oxygenEnabled) {
+            StartCoroutine(UseOxygen());
+        }
+        else {
+            // Enable UI visibles
+            this.gameObject.SetActive(false);
+        }
     }
 
     // Oxygen Usage

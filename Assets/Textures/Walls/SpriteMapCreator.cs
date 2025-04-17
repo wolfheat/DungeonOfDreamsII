@@ -81,11 +81,13 @@ public class SpriteMapCreator : MonoBehaviour
     }
 
     internal Wall[] GetWalls() => wallHolder.GetComponentsInChildren<Wall>();
+    internal Door[] GetDoors() => wallHolder.GetComponentsInChildren<Door>();
 
     private Texture2D FillTexture()
     {
         // Get list of all walls
         Wall[] walls = GetWalls();
+        Door[] doors = GetDoors();
 
         Vector2Int minCorner = new Vector2Int(Mathf.RoundToInt(walls[0].transform.position.x), Mathf.RoundToInt(walls[0].transform.position.z));
         Vector2Int maxCorner = new Vector2Int(Mathf.RoundToInt(walls[0].transform.position.x), Mathf.RoundToInt(walls[0].transform.position.z));
@@ -125,16 +127,25 @@ public class SpriteMapCreator : MonoBehaviour
         fullMapTexture.filterMode = FilterMode.Point;
         // Fill each tile in the texture
 
+                Color[] colors = sprites[0].texture.GetPixels(0);
+                Color[] doorColors = sprites[1].texture.GetPixels(0);
 
-            Color[] colors = sprites[0].texture.GetPixels(0);
-
-            foreach (Wall wall in walls) {
-                int xPos = Mathf.RoundToInt(wall.transform.position.x)-Xdisplace;
-                int yPos = Mathf.RoundToInt(wall.transform.position.z)-Ydisplace;
-                //Debug.Log("Setting pixel for map at ["+xPos+","+yPos+"]");
+        foreach (Wall wall in walls) {
+            int xPos = Mathf.RoundToInt(wall.transform.position.x)-Xdisplace;
+            int yPos = Mathf.RoundToInt(wall.transform.position.z)-Ydisplace;
+                
+            if(wall.GetComponent<Door>() != null)
+                fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, doorColors);
+            else
                 fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, colors);
-            }
-            fullMapTexture.Apply();
+        }
+        foreach (Door door in doors) {
+            int xPos = Mathf.RoundToInt(door.transform.position.x)-Xdisplace;
+            int yPos = Mathf.RoundToInt(door.transform.position.z)-Ydisplace;
+            
+            fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, doorColors);
+        }
+        fullMapTexture.Apply();
         return fullMapTexture;
     }
 }

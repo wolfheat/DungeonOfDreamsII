@@ -60,6 +60,8 @@ public class Stats : MonoBehaviour
 
 		miningSpeed = MiningSpeedDefault;
 		damage = DamageDefault;
+
+        Stats.Instance.DeActivateMap();
     }
     private void Start()
     {
@@ -70,6 +72,20 @@ public class Stats : MonoBehaviour
         stopwatch.Start();
     }
 
+    [SerializeField] Transform[] levelStartPositions;
+    private int activeLevelStartPosition = 0;
+
+    public bool GetNextStartPosition()
+    {
+        activeLevelStartPosition++;
+        if (activeLevelStartPosition >= levelStartPositions.Length) {
+            // Scene Completed
+            Debug.Log("Scene Completed");
+            return true;
+        }
+        SavedStartPosition = levelStartPositions[activeLevelStartPosition].position;
+        return false;
+    }
 
     public string GetElapsedTime(){
         
@@ -278,4 +294,7 @@ public class Stats : MonoBehaviour
     {
         SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0 ,Mathf.RoundToInt(point.z));
     }
+
+    internal void DeActivateMap() => UIController.Instance.ActivateMap(false);
+    internal void ActivateMap() => UIController.Instance.ActivateMap();
 }

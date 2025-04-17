@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private const float MoveTime = 0.2f;
 
     public Action PlayerReachedNewTile;
+    public Action<Vector2Int> MovedToNewSquare;
     public static PlayerController Instance { get; private set; }
     public bool IsDead { get { return Stats.Instance.IsDead; } }
 
@@ -121,7 +122,7 @@ public class PlayerController : MonoBehaviour
             
             if (Inventory.Instance.BombsHeld == 0)
             {
-                SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
+                //SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
                 Debug.Log("LAST ONE");
             }
         }
@@ -129,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             // Something is in the way
             Debug.Log("CANT DO THAT");
-            SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
+            //SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
         }
     }
 
@@ -469,6 +470,7 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log("Motion completed, has stored action: "+savedAction);
         PlayerReachedNewTile?.Invoke();
+        MovedToNewSquare?.Invoke(Convert.V3ToV2Int(transform.position));
         UpdatePlayerInput();
     }
 
@@ -525,22 +527,47 @@ public class PlayerController : MonoBehaviour
     }   
 
 
+    public void GotoNextStartPosition()
+    {
+        Debug.Log("NEXT POSITIOON");
+        if (Stats.Instance.GetNextStartPosition()) {
+            UIController.Instance.ShowWinScreen();
+        }
+        else {
+            ResetPlayerPosition();
+            Stats.Instance.DeActivateMap();
+        }
+    }
+
     public void Reset()
     {
         Debug.Log("Reset Player");
+
+        ResetPlayerPosition(); 
+        
+        Stats.Instance.Revive();
+        PlaceMock(transform.position);
+    }
+
+    private void ResetPlayerPosition()
+    {
         // Setting PLayer to init position with forward rotation
+
+        // Make sure the coroutines are stopped
+        StopAllCoroutines();
+
         transform.position = Stats.Instance.SavedStartPosition;
+        Debug.Log("Player moved to "+transform.position);
 
-        transform.rotation = Quaternion.identity;   
+        transform.rotation = Quaternion.identity;
 
-        Debug.Log(" Player position "+transform.position);
+        Debug.Log(" Player position " + transform.position);
 
         savedAction = null;
         lastAction = null;
+        DoingAction = false;
 
         takeFireDamage.StopFire();
-        Stats.Instance.Revive();
-        PlaceMock(transform.position);
     }
 
     private void PlaceMock(Vector3 position)

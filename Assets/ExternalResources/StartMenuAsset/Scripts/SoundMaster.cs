@@ -259,7 +259,7 @@ namespace Wolfheat.StartMenu
         {
             if (haveNotSaidExplode)
             {
-                PlaySound(SoundName.ItsGonaBlow);
+                //PlaySound(SoundName.ItsGonaBlow);
                 haveNotSaidExplode= false;
             }
             PlaySound(SoundName.Hissing);
@@ -271,13 +271,14 @@ namespace Wolfheat.StartMenu
         public IEnumerator AddRestartSpeechCO()
         {
             yield return new WaitForSeconds(1.5f);
-            PlaySpeech(SoundName.MyHeadHurts);
+            //PlaySpeech(SoundName.MyHeadHurts);
             yield return new WaitForSeconds(1.5f);
-            PlaySpeech(SoundName.INeedToBeMoreCareful);
+            //PlaySpeech(SoundName.INeedToBeMoreCareful);
         }
 
         public void PlayMusic(MusicName name)
         {
+            Debug.Log("PLAY MUSIC "+name);
             activeMusic = name; // Leave this here so the correct music that should be played is still updated if music is reenabled
 
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseMusic || !SavingUtility.HasLoaded) return;
@@ -313,6 +314,8 @@ namespace Wolfheat.StartMenu
         private List<AudioSource> speechQueue = new List<AudioSource>();
         public AudioSource PlaySpeech(SoundName name,bool clearAll = false)
         {
+            if(!useSpeech) return null;
+
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return null;
 
             if (!soundsDictionary.ContainsKey(name)) return null; // no such speech
@@ -589,7 +592,10 @@ namespace Wolfheat.StartMenu
         {
             musicSource.Stop();
         }
+
         bool playerBeenOutside = false;
+        [SerializeField] private bool useSpeech = true;
+
         internal void PlayerExitingStartRoom()
         {
             if (playerBeenOutside) return;
