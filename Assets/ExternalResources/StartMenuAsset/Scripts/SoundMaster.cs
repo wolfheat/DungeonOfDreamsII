@@ -59,7 +59,11 @@ namespace Wolfheat.StartMenu
         ISeeAMissingPieceThroughTheWalls,
         ICantBreakThisWithMyBareHands,
         Coin,
-        OpenDoor
+        OpenDoor,
+        LockedDoor,
+        None,
+        PickUpMap,
+        PickUpKey
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}

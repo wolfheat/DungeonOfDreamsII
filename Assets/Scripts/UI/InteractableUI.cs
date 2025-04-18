@@ -110,6 +110,12 @@ public class InteractableUI : MonoBehaviour
                 //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
                 Stats.Instance.ActivateMap();
                 //Stats.Instance.AddBomb(data.value);
+            }else if (((UsableData)data).usableType == UsableType.Key)
+            {
+                Debug.Log("Adding key ");
+                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                Inventory.Instance.AddKey();
+                //Stats.Instance.AddBomb(data.value);
             }
         }
 

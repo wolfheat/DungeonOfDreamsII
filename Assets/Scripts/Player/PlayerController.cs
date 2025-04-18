@@ -261,6 +261,9 @@ public class PlayerController : MonoBehaviour
 
                             Inventory.Instance.RemoveKey();
                         }
+                        else {
+                            SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
+                        }
                     }
                 }
 

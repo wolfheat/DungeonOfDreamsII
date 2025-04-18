@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] PauseController pauseScreen;
 
-    private void Start()
+    private void Awake()
 	{
 		if (Instance != null)
 		{
@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
 			return;
 		}
 		Instance = this;
+        Debug.Log("UI CONTROLLER INSTANCE SET");
 
     }
     public void OnEnable()
@@ -202,4 +203,5 @@ public class UIController : MonoBehaviour
     }
 
     internal void ActivateMap(bool activate = true) => map.SetActive(activate);
+    internal bool MapIsActive() => map.activeSelf;
 }

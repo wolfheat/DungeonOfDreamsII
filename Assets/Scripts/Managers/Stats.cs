@@ -61,12 +61,13 @@ public class Stats : MonoBehaviour
 		miningSpeed = MiningSpeedDefault;
 		damage = DamageDefault;
 
-        Stats.Instance.DeActivateMap();
     }
     private void Start()
     {
         if(MineralsOwned.Length != ActivationMinerals.Length)
             Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need "+MineralsOwned.Length);
+
+        Stats.Instance.DeActivateMap();
 
         // Start Timer
         stopwatch.Start();
@@ -295,6 +296,12 @@ public class Stats : MonoBehaviour
         SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0 ,Mathf.RoundToInt(point.z));
     }
 
-    internal void DeActivateMap() => UIController.Instance.ActivateMap(false);
+    internal void DeActivateMap()
+    {
+        Debug.Log("UI Instance = "+UIController.Instance);
+        
+        UIController.Instance.ActivateMap(false);
+    }
+
     internal void ActivateMap() => UIController.Instance.ActivateMap();
 }

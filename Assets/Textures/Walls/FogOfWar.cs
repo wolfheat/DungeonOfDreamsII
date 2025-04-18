@@ -57,9 +57,11 @@ public class FogOfWar : MonoBehaviour
 
     public void Reveal(Vector2Int pos)
     {
+        if (!UIController.Instance.MapIsActive())
+            return;
         pos *= tileSize;
 
-        Debug.Log("Checking to Reveal around position " + pos);
+        //Debug.Log("Checking to Reveal around position " + pos);
 
         string posAsString = pos.x + "_"+pos.y;
 
@@ -68,13 +70,11 @@ public class FogOfWar : MonoBehaviour
 
         // Make it local pos in the sprite
         
-        Debug.Log("Revealing map position " + pos);
+        //Debug.Log("Revealing map position " + pos);
 
         usedReveals.Add(posAsString);
         
-
         Texture2D tex = FOV_Image.sprite.texture;
-
 
         pos -= SpriteMapCreator.Instance.origoOffset*tileSize;
         int tileAdjustAmount = (revealSize-tileSize)/2;
@@ -87,21 +87,7 @@ public class FogOfWar : MonoBehaviour
         tex.SetPixels32(clampedX, clampedY, revealSize, revealSize, clearColors);
         tex.Apply();
     }
-    /*
-    public void Reveal(Vector2Int pos)
-    {
-        Debug.Log("Reveal around position "+pos);
 
-        Texture2D fullMapTexture = FOV_Image.sprite.texture;
-
-        Rect rect = new Rect(0, 0, fullMapTexture.width, fullMapTexture.height);
-        fullMapTexture.SetPixels(pos.x, pos.y, revealSize, revealSize, colors);
-
-        fullMapTexture.Apply();
-
-        Sprite newMapSprite = Sprite.Create(fullMapTexture, rect, new Vector2(0.5f, 0.5f), 100.0f);
-        SetSprite(newMapSprite);
-    }*/
     public void CreateImage(int mapWidth, int mapHeight)
     {
         // We now know the full size of the map

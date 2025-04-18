@@ -21,7 +21,7 @@ Apr 2025
 		* Map now have Fog of War that revealse as player explores
 17/4	* Map is now an item that can be picked up
 		* Game is divided into several parts that player can reach the end at
-
+		* Keys added with sounds
 
 
 
