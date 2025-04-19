@@ -72,8 +72,9 @@ public class StartMenuController : MonoBehaviour
     }
 
 
-        public void ShowMenu(MenuOption menu)
+    public void ShowMenu(MenuOption menu)
     {
+            Debug.Log("Showing Menu "+menu);
         switch (menu)
         {
             case MenuOption.MainMenu:

@@ -30,7 +30,7 @@ public class Wall : Interactable
         return health == 0;
     }
     
-    private void Shrink()
+    public void Shrink()
     {
         GetComponent<BoxCollider>().enabled = false;
         //SoundMaster.Instance.PlaySound(SoundName.StoneShatter);
@@ -53,7 +53,7 @@ public class Wall : Interactable
         }
         transform.localScale = Vector3.one*endSize;
 
-        if(WallData.mineralStored != null)
+        if(WallData != null && WallData.mineralStored != null)
             CreateItem(WallData.mineralStored);
 
         gameObject.SetActive(false);

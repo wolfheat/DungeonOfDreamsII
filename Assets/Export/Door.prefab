@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorPart: {fileID: 5479994282095543823}
   doorCollider: {fileID: 4584178830906552994}
+  bossDoor: 0
 --- !u!1001 &6890172400557572198
 PrefabInstance:
   m_ObjectHideFlags: 0

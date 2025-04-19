@@ -1,11 +1,12 @@
+using System;
 using UnityEngine;
 using Wolfheat.StartMenu;
-
 public class Door : MonoBehaviour
 {
     [SerializeField] GameObject doorPart;
     [SerializeField] BoxCollider doorCollider;
-
+    protected bool bossDoor = false;
+    public virtual bool IsBossDoor => false;
 
     public void OpenDoor()
     {

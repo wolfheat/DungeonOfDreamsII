@@ -7,6 +7,7 @@ using Wolfheat.StartMenu;
 
 public class EnemyController : Interactable
 {
+    public bool IsBoss = false;// { get; set; }
     public EnemyData EnemyData;// { get; set; }
 
     [SerializeField] Collider enemyCollider;
@@ -592,7 +593,14 @@ public class EnemyController : Interactable
             //Debug.Log("Enemy cat dies");
             Dead = true;
             enemyStateController.ChangeState(EnemyState.Dying);
+            
+            Debug.Log("Boss Win, Cat dies ");
+
             DisableColliders();
+            if (IsBoss) {
+                Debug.Log("Boss Win Remove Walls");
+                BossWinController.Instance.WinRemoveWalls();
+            }
             return true;
         }
         return false;

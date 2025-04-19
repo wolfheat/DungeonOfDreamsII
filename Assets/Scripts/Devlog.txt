@@ -23,6 +23,29 @@ Apr 2025
 		* Game is divided into several parts that player can reach the end at
 		* Keys added with sounds
 18/4	* Made levels Serial added final boss room, added gems
+		* Gems now unlocks boss room
+19/4	* Added a 6th gem, added boss which opens end portal when defeted
+	
+
+
+
+
+		// MUSTS
+
+		// Exits needs portal
+		// Chicken?
+
+		// Add Boss and boss fight
+
+		// rewrite text in end credits
+
+
+		// WANTS
+
+		// Make better postprocessing
+		// Make new Start Menu graphics
+		// Credits in start menubreaks game, remove?
+
 
 
 		// Joined jam 16/2 - 2025 17:45, with 4 days left on jam.

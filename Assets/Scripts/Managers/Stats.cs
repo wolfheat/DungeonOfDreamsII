@@ -76,6 +76,12 @@ public class Stats : MonoBehaviour
     [SerializeField] Transform[] levelStartPositions;
     private int activeLevelStartPosition = 0;
 
+    public void SetSpecificPosition(int newStartPosition)
+    {
+        activeLevelStartPosition = newStartPosition;
+        SavedStartPosition = levelStartPositions[activeLevelStartPosition].position;
+    }
+
     public bool GetNextStartPosition()
     {
         activeLevelStartPosition++;

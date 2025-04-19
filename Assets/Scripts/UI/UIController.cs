@@ -165,7 +165,7 @@ public class UIController : MonoBehaviour
         //SceneManager.UnloadSceneAsync("Dungeon");
         //SceneManager.UnloadSceneAsync("DreamsDungeon2");
         if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid()) {
-            SceneManager.UnloadSceneAsync("DreamsDungeon2");
+            SceneChanger.Instance.UnloadScene("DreamsDungeon2");
             //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("DreamsDungeon2"));
             Debug.Log("Unloaded Scene DreamsDungeon2");
         }

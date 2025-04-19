@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 public class Inventory : MonoBehaviour
@@ -17,6 +18,7 @@ public static Inventory Instance { get; private set; }
     public int BombsHeld { get; private set; } = 0;
     public int OthersHeld { get; private set;} = 0;
     public int CoinsHeld { get; private set;} = 0;
+    public bool[] HeldGems => gemInventory.HeldGems;
 
     private void Start()
     {
@@ -103,6 +105,6 @@ public static Inventory Instance { get; private set; }
     internal void Gem(int gemtype)
     {
         Debug.Log("Adding Gem "+gemtype+" to player Inventory");
-        gemInventory.ActiveateGem(gemtype);
+        gemInventory.ActivateGem(gemtype);
     }
 }

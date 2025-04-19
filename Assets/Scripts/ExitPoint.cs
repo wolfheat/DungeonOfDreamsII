@@ -2,15 +2,7 @@ using UnityEngine;
 
 public class ExitPoint : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int gotoSpecific = -1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int LeadsTo => gotoSpecific;
 }

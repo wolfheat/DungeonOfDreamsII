@@ -60,7 +60,7 @@ namespace UnityEngine.InputSystem
                     ""name"": ""M"",
                     ""type"": ""Button"",
                     ""id"": ""c35b0270-312a-47c1-a392-d98b8d73ae53"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -142,6 +142,15 @@ namespace UnityEngine.InputSystem
                     ""type"": ""Button"",
                     ""id"": ""d39494bd-bd5c-4457-b459-cc18603ce404"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""T"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d50012a-4174-49c8-b051-f6bc1e02828a"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -906,6 +915,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Y"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dff4c05e-a8bb-4e29-b044-11b40b8bd769"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""T"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1524,6 +1544,7 @@ namespace UnityEngine.InputSystem
             m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
             m_Player_Tilde = m_Player.FindAction("Tilde", throwIfNotFound: true);
             m_Player_Y = m_Player.FindAction("Y", throwIfNotFound: true);
+            m_Player_T = m_Player.FindAction("T", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1617,6 +1638,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Esc;
         private readonly InputAction m_Player_Tilde;
         private readonly InputAction m_Player_Y;
+        private readonly InputAction m_Player_T;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -1634,6 +1656,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Esc => m_Wrapper.m_Player_Esc;
             public InputAction @Tilde => m_Wrapper.m_Player_Tilde;
             public InputAction @Y => m_Wrapper.m_Player_Y;
+            public InputAction @T => m_Wrapper.m_Player_T;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1682,6 +1705,9 @@ namespace UnityEngine.InputSystem
                 @Y.started += instance.OnY;
                 @Y.performed += instance.OnY;
                 @Y.canceled += instance.OnY;
+                @T.started += instance.OnT;
+                @T.performed += instance.OnT;
+                @T.canceled += instance.OnT;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1725,6 +1751,9 @@ namespace UnityEngine.InputSystem
                 @Y.started -= instance.OnY;
                 @Y.performed -= instance.OnY;
                 @Y.canceled -= instance.OnY;
+                @T.started -= instance.OnT;
+                @T.performed -= instance.OnT;
+                @T.canceled -= instance.OnT;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1928,6 +1957,7 @@ namespace UnityEngine.InputSystem
             void OnEsc(InputAction.CallbackContext context);
             void OnTilde(InputAction.CallbackContext context);
             void OnY(InputAction.CallbackContext context);
+            void OnT(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

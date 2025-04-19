@@ -252,17 +252,34 @@ public class PlayerController : MonoBehaviour
                     Door door = LevelCreator.Instance.TargetHasDoor(target);
                     // If door is ahead unlock it if player has correct key
                     if (door != null) {
-                        bool playerCanUnlock = Inventory.Instance.KeysHeld > 0;
-                        Debug.Log("DOOR AHEAD keys: "+Inventory.Instance.KeysHeld);
 
-                        if (playerCanUnlock) {
-                            Debug.Log("Unlocked");
-                            door.OpenDoor();
+                        if (door.IsBossDoor) {
+                            Debug.Log("Boss Door place gems");
 
-                            Inventory.Instance.RemoveKey();
+
+                            if (door.TryGetComponent<BossDoor>(out BossDoor bossDoor)) {
+                                if (bossDoor.IsUnlocked) {
+                                    Debug.Log("Opening Boss Door");
+                                    door.OpenDoor();
+                                }
+                                if (bossDoor.PlaceGems()) {
+                                    Debug.Log("Player Placed all his gems. Unlocked:");
+                                }
+                            }
                         }
                         else {
-                            SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
+                            bool playerCanUnlock = Inventory.Instance.KeysHeld > 0;
+                            Debug.Log("DOOR AHEAD keys: "+Inventory.Instance.KeysHeld);
+
+                            if (playerCanUnlock) {
+                                Debug.Log("Unlocked");
+                                door.OpenDoor();
+
+                                Inventory.Instance.RemoveKey();
+                            }
+                            else {
+                                SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
+                            }
                         }
                     }
                 }
@@ -577,5 +594,13 @@ public class PlayerController : MonoBehaviour
     {
         playerMock.pos = Convert.V3ToV2Int(position);        
         playerMock.transform.position = position;
+    }
+
+    internal void GotoStartPosition(int leadsTo)
+    {
+        Debug.Log("Specific position");
+        Stats.Instance.SetSpecificPosition(leadsTo);
+        ResetPlayerPosition();
+        Stats.Instance.DeActivateMap();
     }
 }

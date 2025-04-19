@@ -4996,6 +4996,7 @@ GameObject:
   - component: {fileID: 722754412}
   - component: {fileID: 722754414}
   - component: {fileID: 722754413}
+  - component: {fileID: 722754415}
   m_Layer: 5
   m_Name: AllMenuBackground (1)
   m_TagString: Untagged
@@ -5042,7 +5043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e091ef8702a1f64699b41f2f20eb471, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 74fc633cbd0d14a41a695befdf15ffa7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5060,6 +5061,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722754411}
   m_CullTransparentMesh: 1
+--- !u!114 &722754415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722754411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6023dedea07c3354a8641a6b2ce179ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &755886957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8155,7 +8168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 307, y: 189}
+  m_AnchoredPosition: {x: 177, y: 62}
   m_SizeDelta: {x: 111.36694, y: 35.371}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1001953976
@@ -8178,7 +8191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v. 0.0.31
+  m_text: v. 0.0.01
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 135524a97dba997478f08bc39f678e6c, type: 2}
   m_sharedMaterial: {fileID: 4133476558208385166, guid: 135524a97dba997478f08bc39f678e6c, type: 2}
@@ -8205,8 +8218,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15120,7 +15133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1846579591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15233,7 +15246,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 9bc8d9ba00b72064c8255aeb0af7aa29, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 08b8626ac80f66142be1fe09b3eb37e7, type: 2}
 --- !u!1 &1911145752
 GameObject:
   m_ObjectHideFlags: 0
@@ -18501,7 +18514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7500922885606102284
 RectTransform:
   m_ObjectHideFlags: 0
