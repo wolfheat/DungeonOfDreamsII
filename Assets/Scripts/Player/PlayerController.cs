@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
         // Make sure the coroutines are stopped
         StopAllCoroutines();
 
-        transform.position = Stats.Instance.SavedStartPosition;
+        transform.position = new Vector3(Stats.Instance.SavedStartPosition.x, 0 ,Stats.Instance.SavedStartPosition.z);
         Debug.Log("Player moved to "+transform.position);
 
         transform.rotation = Quaternion.identity;

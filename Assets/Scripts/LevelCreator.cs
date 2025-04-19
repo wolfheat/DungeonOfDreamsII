@@ -17,6 +17,7 @@ public class LevelCreator : MonoBehaviour
 
 
     [SerializeField] GameObject duplicateWallsListParent;
+    [SerializeField] GameObject items;
 
     [SerializeField] Camera gizmoCamera;
 
@@ -74,6 +75,27 @@ public class LevelCreator : MonoBehaviour
         List<Vector2Int> allWalls = new();
 
         foreach (Wall wall in duplicateWallsListParent.GetComponentsInChildren<Wall>())
+        {
+            Vector2Int pos = Convert.V3ToV2Int(wall.transform.position);
+            if (allWalls.Contains(pos))
+            {
+                duplicates.Add(wall.gameObject as UnityEngine.Object);
+            }else
+                allWalls.Add(pos);
+        }
+        Debug.Log("Amount of duplicates "+duplicates.Count);
+
+        Selection.objects = duplicates.ToArray();
+
+    }
+    
+    [ContextMenu("Select Duplicates Objects")]
+    private void SelectDuplicatesObjects()
+    {
+        List<UnityEngine.Object> duplicates = new();
+        List<Vector2Int> allWalls = new();
+
+        foreach (ObjectAnimator wall in items.GetComponentsInChildren<ObjectAnimator>())
         {
             Vector2Int pos = Convert.V3ToV2Int(wall.transform.position);
             if (allWalls.Contains(pos))

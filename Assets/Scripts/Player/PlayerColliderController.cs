@@ -40,7 +40,9 @@ public class PlayerColliderController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colliding with "+other.name);
+        Debug.Log("Colliding with "+other.name+" ID:"+other.gameObject.GetInstanceID()+" player ID: "+this.gameObject.GetInstanceID());
+        Debug.Log("GameObject Player ",this.gameObject);
+
         
         if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
         {

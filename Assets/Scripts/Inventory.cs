@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-
 public class Inventory : MonoBehaviour
 {
 
@@ -10,6 +9,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI others;
 
     [SerializeField] private TextMeshProUGUI coins;
+
+    [SerializeField] private GemInventory gemInventory;
 
 public static Inventory Instance { get; private set; }
     public int KeysHeld { get; private set; } = 0;
@@ -99,4 +100,9 @@ public static Inventory Instance { get; private set; }
         coins.text = CoinsHeld.ToString();
     }
 
+    internal void Gem(int gemtype)
+    {
+        Debug.Log("Adding Gem "+gemtype+" to player Inventory");
+        gemInventory.ActiveateGem(gemtype);
+    }
 }

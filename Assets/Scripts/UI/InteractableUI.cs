@@ -116,6 +116,14 @@ public class InteractableUI : MonoBehaviour
                 //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
                 Inventory.Instance.AddKey();
                 //Stats.Instance.AddBomb(data.value);
+            }else if (((UsableData)data).usableType == UsableType.Gem)
+            {
+                int gemtype = ((UsableData)data).value;
+                Debug.Log("Adding gem "+gemtype);
+
+                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                Inventory.Instance.Gem(gemtype);
+                //Stats.Instance.AddBomb(data.value);
             }
         }
 
