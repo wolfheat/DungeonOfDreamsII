@@ -6,7 +6,8 @@ using Wolfheat.StartMenu;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
-
+    [SerializeField] private GameObject specificPanel;
+    [SerializeField] private GameObject[] ShopItemsSpecific;
 
     [SerializeField] private TextMeshProUGUI bombCostText; 
     [SerializeField] private TextMeshProUGUI keyCostText; 
@@ -14,8 +15,22 @@ public class Shop : MonoBehaviour
 
     private int bombCost = 1; 
     private int keyCost = 3; 
-    private int otherCost = 5; 
-    public void ShowPanel() => panel.SetActive(true);
+    private int otherCost = 5;
+    public void ShowPanel()
+    {
+        panel.SetActive(true);
+        specificPanel.SetActive(false);
+    }
+
+    public void ShowPanel(int specificID)
+    {
+        panel.SetActive(false);
+        specificPanel.SetActive(true);
+        // Show specific menu for one item
+        for (int i = 0; i < ShopItemsSpecific.Length; i++) {
+            ShopItemsSpecific[i].SetActive(i == specificID);
+        }
+    }
 
     internal void HidePanel() => panel.SetActive(false);
 
@@ -41,6 +56,44 @@ public class Shop : MonoBehaviour
         HidePanel();
     }
 
+    public void BuyBananas()
+    {
+        Debug.Log("Buying Bananas");
+        if (Inventory.Instance.RemoveCoins(20)) {
+            Debug.Log("Bananas");
+            SoundMaster.Instance.PlayCoinSound(true);
+        }
+    }
+        
+    public void BuyFireSpell()
+    {
+        Debug.Log("Buying Fire Spell");
+        if (Inventory.Instance.RemoveCoins(30)) {
+            Debug.Log("Fire Spell");
+            SoundMaster.Instance.PlayCoinSound(true);
+        }
+    }
+    
+    public void BuyChicken()
+    {
+        Debug.Log("Buying Chicken");
+        if (Inventory.Instance.RemoveCoins(4)) {
+            Debug.Log("Speed Up player double");
+            Stats.Instance.SetMovemenSpeedMultiplier(0.8f);
+            
+            SoundMaster.Instance.PlayCoinSound(true);
+        }
+    }
+    
+    public void Buy50Bombs()
+    {
+        Debug.Log("Buying 50 Bombs");
+        if (Inventory.Instance.RemoveCoins(50)) {
+            Inventory.Instance.AddBombs(50);
+            SoundMaster.Instance.PlayCoinSound(true);
+        }
+    }
+    
     public void BuyBomb()
     {
         if (Inventory.Instance.RemoveCoins(bombCost)) {

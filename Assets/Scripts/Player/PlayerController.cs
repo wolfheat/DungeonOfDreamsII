@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private MoveAction lastAction = null;
 
     private float timer = 0;
-    private const float MoveTime = 0.2f;
+    private const float MoveTime = 0.2f;    
 
     public Action PlayerReachedNewTile;
     public Action<Vector2Int> MovedToNewSquare;
@@ -172,9 +172,9 @@ public class PlayerController : MonoBehaviour
                     SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
                     return;
                 }
-
-                else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar))
-                    altar.PlaceMineral();                    
+                else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
+                    Debug.Log("Interacting with Altar");     
+                }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
                 {
                     Debug.Log("ACTIVATE GLORIA COMPLETION");
@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 Vector3 target = EndPositionForMotion(savedAction);
-
+                
                 //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
 
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Walls or Enemies ahead");
 
                     Door door = LevelCreator.Instance.TargetHasDoor(target);
+                    Altar altar = LevelCreator.Instance.TargetHasAltar(target);
                     // If door is ahead unlock it if player has correct key
                     if (door != null) {
 
@@ -281,7 +282,14 @@ public class PlayerController : MonoBehaviour
                                 SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
                             }
                         }
+                    }else if (altar != null) {
+                        Debug.Log("There is an altar here, open its shop Menu");
+                        Debug.Log("Menu "+altar.MineralAccepted);
+
+                        Debug.Log("Entering Shop");
+                        Shop.Instance.ShowPanel(altar.MineralAccepted);
                     }
+
                 }
 
             }
@@ -406,10 +414,10 @@ public class PlayerController : MonoBehaviour
         Vector3 start = transform.position;
         Vector3 end = target;
         timer = 0;
-        while (timer < MoveTime)
+        while (timer < MoveTime*Stats.Instance.MovingSpeedMultiplier)
         {
             yield return null;
-            transform.position = Vector3.LerpUnclamped(start,end,timer/MoveTime);
+            transform.position = Vector3.LerpUnclamped(start,end,timer/(MoveTime*Stats.Instance.MovingSpeedMultiplier));
             timer += Time.deltaTime;
         }
         //Debug.Log("Moving player "+(transform.position-target).magnitude);

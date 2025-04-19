@@ -45,9 +45,9 @@ public static Inventory Instance { get; private set; }
         UpdateInventory();
     }
     
-    public void AddBombs()
+    public void AddBombs(int amt = 1)
     {
-        BombsHeld++;
+        BombsHeld+=amt;
         UpdateInventory();
     }
     

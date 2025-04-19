@@ -37,7 +37,8 @@ public class Stats : MonoBehaviour
 
     private bool[] MineralsSeeThroughActivated = new bool[4];
 
-    public Vector3 SavedStartPosition { get; private set; } = new Vector3(); 
+    public Vector3 SavedStartPosition { get; private set; } = new Vector3();
+    public float MovingSpeedMultiplier { get; internal set; } = 1f;
 
     private Stopwatch stopwatch = new();
 
@@ -105,6 +106,8 @@ public class Stats : MonoBehaviour
         return String.Format("{0:00}:{1:00}.{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
 
     }
+
+    public void SetMovemenSpeedMultiplier(float multiplier) => MovingSpeedMultiplier = multiplier;
 
     public void SetDefaultSledgeHammer()
 	{

@@ -25,14 +25,17 @@ Apr 2025
 18/4	* Made levels Serial added final boss room, added gems
 		* Gems now unlocks boss room
 19/4	* Added a 6th gem, added boss which opens end portal when defeted
-	
+		* Added pillars with shops at boss entrance
+		* Chicken now gives speed to player
+		
 
 
+		// DO
 
+		// Add Boss health meter at top
 
-		// MUSTS
+		// Add buy stands outside boss area
 
-		// Exits needs portal
 		// Chicken?
 
 		// Add Boss and boss fight
@@ -41,6 +44,7 @@ Apr 2025
 
 
 		// WANTS
+		// Exits needs better portal
 
 		// Make better postprocessing
 		// Make new Start Menu graphics
