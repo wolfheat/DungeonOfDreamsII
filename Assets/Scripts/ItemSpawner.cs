@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Wolfheat.Pool;
+using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, Flesh, DarkSoil, Stone, Chess, Coal, Sand, Moss,Coin}
@@ -11,6 +12,7 @@ public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] EnemyController[] enemyPrefabs;
     [SerializeField] WildFireSpawner wildFireSpawnerPrefab;
+    [SerializeField] FireStormSpawner fireStormSpawnerPrefab;
     [SerializeField] Mineral[] mineralPrefabs;
     [SerializeField] Mineral mineralPrefab;
     [SerializeField] EnemyData[] enemyDatas;
@@ -135,6 +137,11 @@ public class ItemSpawner : MonoBehaviour
         wildFireSpawner.InitiateAt(Convert.V3ToV2Int(pos),Convert.V3ToV2Int(dir));
     }
 
+    internal void SpawnFireStormAt(Vector3 pos, Vector3 dir)
+    {
+        FireStormSpawner fireStormSpawner = Instantiate(fireStormSpawnerPrefab, pos, Quaternion.LookRotation(dir));
+        fireStormSpawner.InitiateAt(Convert.V3ToV2Int(pos));
+    }
     public void SpawnUsableAt(UsableData data, Vector3 pos)
     {
         if(data == null) return;
@@ -207,8 +214,4 @@ public class ItemSpawner : MonoBehaviour
         bomb.transform.position = target;        
     }
 
-    internal void SpawnFireStormAt(Vector3 position, Vector3 forward)
-    {
-        throw new System.NotImplementedException();
-    }
 }

@@ -3,8 +3,7 @@
 using UnityEngine;
 using Wolfheat.StartMenu;
 
-public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead, Dying, TakeHit, FireStorm
-}
+public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead, Dying, TakeHit, FireStorm, ThrowAttack}
 
 public class EnemyStateController
 {
@@ -20,7 +19,7 @@ public class EnemyStateController
     {
         if (currentState == newState) return;
         
-        //Debug.Log("Change state from "+currentState+" to "+newState);
+        Debug.Log("ENEMY Change state from "+currentState+" to "+newState);
         
         if (!force && (currentState == EnemyState.Dead || currentState == EnemyState.Dying))
             return;
@@ -38,6 +37,10 @@ public class EnemyStateController
                 break;
             case EnemyState.FireStorm:
                 animator.CrossFade("Jump", 0.1f);
+                break;
+            case EnemyState.ThrowAttack:
+                Debug.Log("Change to Throw");
+                animator.CrossFade("Throw", 0.1f);
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);

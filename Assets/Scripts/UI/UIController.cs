@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject helpScreen;
     [SerializeField] OxygenController oxygenPanel;
     [SerializeField] GameObject map;
+    [SerializeField] GameObject bossHealthBar;
 
 	public static UIController Instance { get; private set; }
 
@@ -208,8 +209,5 @@ public class UIController : MonoBehaviour
     internal void ActivateMap(bool activate = true) => map.SetActive(activate);
     internal bool MapIsActive() => map.activeSelf;
 
-    internal void ShowBossHealth()
-    {
-
-    }
+    internal void ShowBossHealth(bool doShow = true) => bossHealthBar.SetActive(doShow);
 }

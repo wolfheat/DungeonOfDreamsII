@@ -33,9 +33,13 @@ Apr 2025
 		* Items can only be purchased once
 		* Shops screen now close when moving away from pillar
 		* Added new Enemy attack, Firestorm
+		* Player has a third throwattack not fully integrated
+20/4	*
 
 
 		// DO
+
+		// add boss throwattack 
 
 		// Add Boss health meter at top
 

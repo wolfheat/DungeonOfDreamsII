@@ -43,8 +43,11 @@ public class EnemyController : Interactable
     [SerializeField] public int StartHealth = 3;
     [SerializeField] private Vector3 StartPosition;
 
-    private float FirestormTimeout = 6f;
-    private float FirestormTimer = 6f;
+    private float FirestormTimeout = 3f;
+    private float FirestormTimer = 3f;
+
+    private float PassiveTimeout = 8f;
+    private float PassiveTimer = 8f;
 
 
 
@@ -96,12 +99,18 @@ public class EnemyController : Interactable
     private MoveAction savedAction = null;
     private void Update()
     {
-        // Limit Enemy from doing anything new if allready doing an action or is dead
-        if (DoingMovementAction || Dead) return;
+        if(PassiveTimer > 0) {
+            PassiveTimer -= Time.deltaTime;
+        }
+        if (PassiveTimer <= 0) {
+            Debug.Log("Passive Timer <= 0");
+        }
 
-        if(FirestormTimer > 0)
+        if (FirestormTimer > 0 && enemyStateController.currentState != EnemyState.FireStorm)
             FirestormTimer -= Time.deltaTime;
 
+        // Limit Enemy from doing anything new if allready doing an action or is dead
+        if (!Activated || DoingMovementAction || Dead) return;
         // Check if there is a stored action to perform
         if (savedAction != null)
         {
@@ -113,7 +122,7 @@ public class EnemyController : Interactable
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
-                    Debug.Log(this.name+"Moving to next path point it is not blocked "+target+" ",this);
+                    //Debug.Log(this.name+"Moving to next path point it is not blocked "+target+" ",this);
                     StartCoroutine(Move(target));
                 }
                 else
@@ -124,8 +133,8 @@ public class EnemyController : Interactable
                     {
                         ForgetPath();
                         savedAction = null;
-                        Debug.Log(this.name + "Forgeting path and updating it, path is blocked",this);
-                        Debug.Log(this.name + " Set to Idle state", this);
+                        //Debug.Log(this.name + "Forgeting path and updating it, path is blocked",this);
+                        //Debug.Log(this.name + " Set to Idle state", this);
                         enemyStateController.ChangeState(EnemyState.Idle);
                         // Issue here that enemy gets the same path since the position ahead is not considered occupied from the level array but from boxcasting
 
@@ -159,7 +168,7 @@ public class EnemyController : Interactable
                 UpdatePlayerDistanceAndPath();
             if (path.Count > 0)
                 ActivateNextPoint();
-        }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
+        }else if ((enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.FireStorm || enemyStateController.currentState == EnemyState.ThrowAttack )&& player.IsDead)
         {
             // Player is dead
             ForgetPath();
@@ -208,9 +217,9 @@ public class EnemyController : Interactable
     // CAT SPECIFICS
     private bool CatBehaviour()
     {
-        Debug.Log("Cat behaviour - current state: "+enemyStateController.currentState);
+        Debug.Log("ENEMY Cat behaviour - current state: "+enemyStateController.currentState);
         // Prohibit state to change if cat is attacking
-        if(enemyStateController.currentState == EnemyState.Attack)
+        if(enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.ThrowAttack || enemyStateController.currentState == EnemyState.FireStorm)
             return true; 
 
         // Check if player is on same X or Z coordinate
@@ -229,11 +238,19 @@ public class EnemyController : Interactable
 
             return true;
         }
-        else if (FirestormTimer <= 0 && PlayerCloserThan3())
+        else if (FirestormTimer <= 0 && PlayerDistance() < 4)
         {
             Debug.Log("Player is closer than 4 do fireCircle");
-
             enemyStateController.ChangeState(EnemyState.FireStorm);
+            //path.Clear();
+            savedAction = null;
+
+            return true;
+        }
+        else if (PassiveTimer <= 0)
+        {
+            Debug.Log("ENEMY - Passive timer ended - do Throw attack");
+            enemyStateController.ChangeState(EnemyState.ThrowAttack);
             //path.Clear();
             savedAction = null;
 
@@ -331,7 +348,7 @@ public class EnemyController : Interactable
     private void ActivateNextPoint()
     {
         savedAction = EnemyFacingDirection(path.Peek()) ? new MoveAction(MoveActionType.Step, path.Pop()) : new MoveAction(MoveActionType.Rotate, path.Peek());
-        Debug.Log(this.name+" Activating next point "+savedAction?.moveType+" "+savedAction?.move);
+        //Debug.Log(this.name+" Activating next point "+savedAction?.moveType+" "+savedAction?.move);
     }
 
     public void Reset()
@@ -477,6 +494,7 @@ public class EnemyController : Interactable
     {
         //Debug.Log("Spell cast by Cat");
 
+
         // Create Wildfire Object from cat
         ItemSpawner.Instance.SpawnFireStormAt(transform.position,transform.forward);
 
@@ -491,10 +509,18 @@ public class EnemyController : Interactable
         ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
     }
     
+    public void SpellCastThrowOccured()
+    {
+        // Create Wildfire Object from cat
+        Debug.Log("Throws Bombs");
+        ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
+    }
+    
     public void SpellCastAnimationComplete()
     {
         //Debug.Log("Spell cast animation completed by Cat, go to Idle");
         enemyStateController.ChangeState(EnemyState.Idle);
+        PassiveTimer = PassiveTimeout;
         CatBehaviour();
     }
 
@@ -563,12 +589,12 @@ public class EnemyController : Interactable
         return true;
     }
 
-    private bool PlayerCloserThan3()
+    private int PlayerDistance()
     {
         Vector2Int pos = Convert.V3ToV2Int(transform.position);
         int XDist = Mathf.RoundToInt(Mathf.Abs(playerLastPosition.x - pos.x));
         int YDist = Mathf.RoundToInt(Mathf.Abs(playerLastPosition.y - pos.y));
-        return XDist < 4 && YDist < 4;
+        return Math.Max(XDist,YDist);
     }
     private bool PlayerOnSameGridCross()
     {
