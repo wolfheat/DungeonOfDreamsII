@@ -8,7 +8,7 @@ public class TakeFireDamage : MonoBehaviour
     
 
     private int remainingDamageTakings = 0;    
-    private const int FireDamageTakenXTimes = 5;
+    private const int FireDamageTakenXTimes = 3;
     public WaitForSeconds wait = new WaitForSeconds(1f);
     private Coroutine takeDamageRoutine;
     public const int FireDamage = 1;

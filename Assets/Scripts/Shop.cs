@@ -81,6 +81,10 @@ public class Shop : MonoBehaviour
             Debug.Log("Bananas");
             SoundMaster.Instance.PlayCoinSound(true);
             SpecificAltars[(int)AltarTypes.Bananas].RemoveItemFromPillar();
+
+            // Activate The boss bananas
+            EndRoom.Instance.ActivateBananas();
+
             HidePanel();
         }
     }
@@ -108,13 +112,13 @@ public class Shop : MonoBehaviour
         }
     }
     
-    public void Buy50Bombs()
+    public void Buy20Bombs()
     {
-        Debug.Log("Buying 50 Bombs");
-        if (SpecificAltars[(int)AltarTypes.Bomb].gameObject.activeSelf && Inventory.Instance.RemoveCoins(50)) {
-            Inventory.Instance.AddBombs(50);
+        Debug.Log("Buying 20 Bombs");
+        if (SpecificAltars[(int)AltarTypes.Bomb].gameObject.activeSelf && Inventory.Instance.RemoveCoins(20)) {
+            Inventory.Instance.AddBombs(20);
             SoundMaster.Instance.PlayCoinSound(true);
-            SpecificAltars[(int)AltarTypes.Bomb].RemoveItemFromPillar();
+            //SpecificAltars[(int)AltarTypes.Bomb].RemoveItemFromPillar();
             HidePanel();
         }
     }

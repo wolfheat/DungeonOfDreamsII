@@ -85,8 +85,8 @@ public class PlayerColliderController : MonoBehaviour
         }else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
             Debug.Log("Entering Respawn Point - set this as respawn point");
             Stats.Instance.SetNewRespawnPoint(respawnPoint.transform.position);
-            if(respawnPoint.TryGetComponent<UnlockBLockAteNTER>(out UnlockBLockAteNTER unlockBLocks)) {
-                unlockBLocks.Unlock();
+            if(respawnPoint.TryGetComponent<UnlockBlockAtEntrance>(out UnlockBlockAtEntrance unlockBLocks)) {
+                unlockBLocks.UnlockEntranceToBoss();
             }
         }
         else if (other.TryGetComponent(out ShopItem shop)) {

@@ -282,7 +282,7 @@ namespace Wolfheat.StartMenu
 
         public void PlayMusic(MusicName name)
         {
-            if (activeMusic == name) return;
+            //if (activeMusic == name) return;
 
             Debug.Log("PLAY MUSIC "+name);
             activeMusic = name; // Leave this here so the correct music that should be played is still updated if music is reenabled
@@ -463,7 +463,7 @@ namespace Wolfheat.StartMenu
         }
         public void ResumeMusic()
         {
-            Debug.Log("Resume Music");
+            Debug.Log("Resume Music "+activeMusic);
             PlayMusic(activeMusic);
         }
 

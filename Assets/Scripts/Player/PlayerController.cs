@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (Inventory.Instance.BombsHeld <= 0)
         {
             Debug.Log("You Got No Bombs");
-            SoundMaster.Instance.PlaySound(SoundName.NoBombs);
+            //SoundMaster.Instance.PlaySound(SoundName.NoBombs);
             return;
         }
 
@@ -409,8 +409,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Move(Vector3 target)
     {
-        int stepSoundFromTerrain = TerrainChecker.ProminentTerrainType(transform.position,LevelCreator.Instance.ActiveTerrain);
-        SoundMaster.Instance.PlayStepSound(stepSoundFromTerrain);
+        // Used to define what player moves above
+        //int stepSoundFromTerrain = TerrainChecker.ProminentTerrainType(transform.position,LevelCreator.Instance.ActiveTerrain);
+
+        // 2 = STONE STEPs
+        SoundMaster.Instance.PlayStepSound(2);
 
         Shop.Instance.CloseIfOpen();
 
@@ -571,7 +574,7 @@ public class PlayerController : MonoBehaviour
         }
         else {
             ResetPlayerPosition();
-            Stats.Instance.DeActivateMap();
+            //Stats.Instance.DeActivateMap();
         }
     }
 
@@ -617,6 +620,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Specific position");
         Stats.Instance.SetSpecificPosition(leadsTo);
         ResetPlayerPosition();
-        Stats.Instance.DeActivateMap();
+        //Stats.Instance.DeActivateMap();
     }
 }

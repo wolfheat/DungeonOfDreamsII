@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Wolfheat.Pool;
-using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, Flesh, DarkSoil, Stone, Chess, Coal, Sand, Moss,Coin}
 public enum UsableType {Bomb,SledgeHammer,Compass,Map,Key,Gem,Other}
-public enum PowerUpType { Speed,Damage,Health,Coin}
+public enum PowerUpType { Speed,Damage,Health,Coin,Banana}
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] EnemyController[] enemyPrefabs;

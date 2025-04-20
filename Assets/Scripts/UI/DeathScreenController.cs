@@ -50,6 +50,7 @@ public class DeathScreenController : MonoBehaviour
     {
         Debug.Log("Death Controller Close clicked");
         PlayerController.Instance.Reset();
+
         SoundMaster.Instance.ResetMusic();
         UIController.Pause(false);
         SetActive(false);

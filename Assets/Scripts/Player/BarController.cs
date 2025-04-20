@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 using TMPro;
 
 public class BarController : MonoBehaviour
@@ -24,8 +23,8 @@ public class BarController : MonoBehaviour
     public void SetBar(float value, float MaxValue)
     {
         float percent = value / MaxValue;
-
-        text.text = ((int)value).ToString();
+        
+        text.text = (percent*100).ToString("F2")+"%";
         bar.sizeDelta = new Vector2(-Barwidth * (1 - percent), 0);
         //bar.sizeDelta = new Vector2(-Barwidth * (1 - value), 0);
         //Debug.Log("Bar = "+bar.sizeDelta.x);

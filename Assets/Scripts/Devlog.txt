@@ -34,24 +34,23 @@ Apr 2025
 		* Shops screen now close when moving away from pillar
 		* Added new Enemy attack, Firestorm
 		* Player has a third throwattack not fully integrated
-20/4	*
+20/4	* Bombs can now be bought indefinitely
+		* Added bananas
+		* Added more content before boss
+		* Player now only moves on stone with stone stepsounds
+		* Made sure bananas are not removed if player touches entry at boss area after buying them
+		* Bomb attack changed to do 5hp damage
+		* Limited the amount in a row wildfire attack can happen
+		* Updated Credits page
+		* Removed shortcuts
+		* try Build
 
 
 		// DO
 
-		// add boss throwattack 
-
-		// Add Boss health meter at top
-
-		// Add Boss and boss fight
-		// Make boss harder and have more attacks
-
-		// Adjust fire damage taken to 3 ? 
-		// Add bananas health
-
-		// rewrite text in end credits
-
-
+		// add boss throwattack 		
+		// Adjust fire damage taken to 3 , not needed 				
+		
 		// Have correct lightning postprocessing all areas
 		// Have correct music for all areas
 
@@ -94,15 +93,10 @@ A variety of assets were used to create this game.
 </b>
 
 3D
-* Leartes Studios - Will's Room Environment
-* RRFreelance - Tools Pack 1
-* Polygon  - Farm Pack
 Pure Poly - Ultimate Low Poly Mining
-
-
+BitGem - Hand Painted Series
 Siuniaev - Gambler Cat
-
-* João Baltieri - Mini Simple Characters | Skeleton
+Instant Zoomies - Horror Starter Pack Free
 
 2D
 Vector Dividers Collection
@@ -111,9 +105,6 @@ upklyak (freepik) - Ground cracks on land isolated
 VFX
 Unity Technologies - Particle Pack
 
-* Vefects - Item Pickup VFX
-
-
 <b>Audio
 </b>
 
@@ -121,11 +112,7 @@ Freesound - Various Sounds
 Pixabay - Various Sounds
 Uppbeat - Music
 
-? Tao & Sound - Medieval Fantasy 2 SFX Pack
-
-? Vasyl Sakal - Celestial Lullaby 
-? Brock Hewitt - In The Silence
-
+Vasyl Sakal - Celestial Lullaby 
 Monument Music - Love Story
 
 <b>Fonts
@@ -137,11 +124,10 @@ Prida01 - gluk
 <b>AI Tools
 </b>
 
-* Genny - Voices - Cloe, Matthew
-
 Playground AI - 2D art
-Craiyon AI - 2D art
-Piclumen AI - 2D art
+Craiyon - 2D art
+Piclumen - 2D art
+Suno - Boss Music
 
 <b>Other Tools Used
 </b>

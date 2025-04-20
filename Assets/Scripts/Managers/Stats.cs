@@ -23,9 +23,9 @@ public class Stats : MonoBehaviour
     public const int MineralsToGetSeeThrough = 100;
     //public const float MiningSpeedSpeedUp = 12f;
 
-    public const int MaxHealth = 8;
-    public int CurrentMaxHealth { get; private set; } = 3;
-    public int Health { get; private set; } = 3;
+    public const int MaxHealth = 10;
+    public int CurrentMaxHealth { get; private set; } = 1;
+    public int Health { get; private set; } = 1;
     public int Bombs { get; private set; } = 0;
 
     public bool IsInRegainArea { get; set; } = false;
@@ -159,7 +159,9 @@ public class Stats : MonoBehaviour
 
     internal void Revive()
     {
+        Debug.Log("Revive");
         if (savedValues.valuesSet) {
+            Debug.Log("Revive With Saved Values");
             // Boss revive sets health to max along with all saved values from entering Boss area
             LoadBossValues();
             // Reset Shops
@@ -180,7 +182,7 @@ public class Stats : MonoBehaviour
     {
         if (Health == CurrentMaxHealth)
             return false;
-        SoundMaster.Instance.PlaySound(SoundName.YourWoundsAreHealed);
+        //SoundMaster.Instance.PlaySound(SoundName.YourWoundsAreHealed);
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
         return true;
@@ -358,7 +360,6 @@ public class Stats : MonoBehaviour
 
         public BossSaveValues(int playerHealth = 0, int playerMaxHealth = 0, int bombs=0, int coins=0, float moveSpeed = 1, bool isSet = false)
         {
-            valuesSet = isSet;
             playerCurrentHealth = playerHealth;
             playerCurrentMaxHealth = playerMaxHealth;
             bombsHeld = bombs;

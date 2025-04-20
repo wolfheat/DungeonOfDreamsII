@@ -49,7 +49,8 @@ public class EnemyController : Interactable
     private float PassiveTimeout = 8f;
     private float PassiveTimer = 8f;
 
-
+    private int attackCounter = 0;
+    private int attackCounterMax = 6;
 
     private void OnEnable()
     {
@@ -99,18 +100,24 @@ public class EnemyController : Interactable
     private MoveAction savedAction = null;
     private void Update()
     {
-        if(PassiveTimer > 0) {
+        if (!Activated || Stats.Instance.IsDead) return;
+
+        if (PassiveTimer > 0) {
             PassiveTimer -= Time.deltaTime;
         }
         if (PassiveTimer <= 0) {
-            Debug.Log("Passive Timer <= 0");
+
+            enemyStateController.ChangeState(EnemyState.ThrowAttack);
+            //path.Clear();
+            savedAction = null;
+            return;
         }
 
         if (FirestormTimer > 0 && enemyStateController.currentState != EnemyState.FireStorm)
             FirestormTimer -= Time.deltaTime;
 
         // Limit Enemy from doing anything new if allready doing an action or is dead
-        if (!Activated || DoingMovementAction || Dead) return;
+        if (DoingMovementAction || Dead) return;
         // Check if there is a stored action to perform
         if (savedAction != null)
         {
@@ -231,8 +238,11 @@ public class EnemyController : Interactable
                 savedAction = new MoveAction(MoveActionType.Rotate, playerLastPosition);
                 return true;
             }
+            if(attackCounter < attackCounterMax)
+                enemyStateController.ChangeState(EnemyState.Attack);
+            else
+                enemyStateController.ChangeState(EnemyState.FireStorm);
 
-            enemyStateController.ChangeState(EnemyState.Attack);
             //path.Clear();
             savedAction = null;
 
@@ -355,11 +365,16 @@ public class EnemyController : Interactable
     {
         if (transform.position == StartPosition) return;
         Activated = false;
+        savedAction = null;
         StopAllCoroutines();
         transform.position = StartPosition;
         PlaceMock(StartPosition);
         DoingMovementAction = false;
         newPositionEvaluated = false;
+        Health = StartHealth;
+        healthBar.SetBar(Health, StartHealth);
+        UIController.Instance.ShowBossHealth(false);
+
         enemyStateController.ChangeState(EnemyState.Idle);
     }
 
@@ -493,8 +508,7 @@ public class EnemyController : Interactable
     public void SpellFirestormCastOccured()
     {
         //Debug.Log("Spell cast by Cat");
-
-
+        attackCounter = 0;
         // Create Wildfire Object from cat
         ItemSpawner.Instance.SpawnFireStormAt(transform.position,transform.forward);
 
@@ -504,6 +518,7 @@ public class EnemyController : Interactable
     public void SpellCastOccured()
     {
         //Debug.Log("Spell cast by Cat");
+        attackCounter++;
 
         // Create Wildfire Object from cat
         ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
@@ -511,6 +526,7 @@ public class EnemyController : Interactable
     
     public void SpellCastThrowOccured()
     {
+        attackCounter++;
         // Create Wildfire Object from cat
         Debug.Log("Throws Bombs");
         ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
@@ -691,6 +707,7 @@ public class EnemyController : Interactable
             if (IsBoss) {
                 Debug.Log("Boss Win Remove Walls");
                 BossWinController.Instance.WinRemoveWalls();
+                UIController.Instance.ShowBossHealth(false);
             }
             return true;
         }

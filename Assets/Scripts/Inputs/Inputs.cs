@@ -15,8 +15,8 @@ namespace Wolfheat.Inputs
         {
             // Enable this when you want to use the loading of a saved file
             //SavingUtility.LoadingComplete += LoadingComplete;
-            Controls.Player.T.performed += JumpToNextEntryPoint;
-            Controls.Player.Y.performed += Give10Gold;
+            //Controls.Player.T.performed += JumpToNextEntryPoint;
+            //Controls.Player.Y.performed += Give10Gold;
         }
         private void Start()
         {

@@ -5,6 +5,7 @@ public class BossActivator : MonoBehaviour
 {
     [SerializeField] EnemyController boss;
     [SerializeField] private GameObject[] lockObjects;
+    [SerializeField] private UnlockBlockAtEntrance unlockBlock;
 
     public void ActivateBoss()
     {
@@ -15,6 +16,9 @@ public class BossActivator : MonoBehaviour
             obj.SetActive(true);
 
         // Play door close Sound High
+
+        // Make the Resetter valid to reset Bossarea on death
+        unlockBlock.CanBeReset = true;
 
         // Start Boss Music?
         SoundMaster.Instance.PlayMusic(MusicName.BossMusic);

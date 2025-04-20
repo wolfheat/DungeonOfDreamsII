@@ -20,8 +20,11 @@ public class Bomb : MonoBehaviour
 
     public void WatchOut()
     {
-        if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < 1.6f)
-            SoundMaster.Instance.PlaySound(SoundName.WatchOut);
+        if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < 1.6f) {
+            //SoundMaster.Instance.PlaySound(SoundName.WatchOut);
+            // TODO: Play something else to warn player?
+
+        }
         
     }
     public void Remove()

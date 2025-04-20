@@ -54,6 +54,11 @@ public class InteractableUI : MonoBehaviour
                 Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
                 //SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
                 return;
+            }if (((PowerUpData)data).powerUpType == PowerUpType.Banana)
+            {
+                Debug.Log("Refill health with banana " + data.value);
+                Stats.Instance.Heal();
+                return;
             }else if (((PowerUpData)data).powerUpType == PowerUpType.Coin)
             {
                 Debug.Log("Adding coin " + data.value);
