@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Wolfheat.StartMenu;
 using Debug = UnityEngine.Debug;
@@ -7,20 +8,20 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
 
-    public float MiningSpeed { get => miningSpeed;}
+    public float MiningSpeed { get => miningSpeed; }
     private float miningSpeed;
     public const float MiningSpeedDefault = 3f;
-	public const float MiningSpeedSpeedUp = 6f;
+    public const float MiningSpeedSpeedUp = 6f;
 
-    public int Minerals { get => minerals;}
-	public int minerals = 0;
+    public int Minerals { get => minerals; }
+    public int minerals = 0;
 
-    public int Damage { get => damage;}
+    public int Damage { get => damage; }
     private int damage;
     public const int DamageDefault = 1;
-	public const int DamageBoosted = 30;
-	public const int MineralsToGetSeeThrough = 100;
-	//public const float MiningSpeedSpeedUp = 12f;
+    public const int DamageBoosted = 30;
+    public const int MineralsToGetSeeThrough = 100;
+    //public const float MiningSpeedSpeedUp = 12f;
 
     public const int MaxHealth = 8;
     public int CurrentMaxHealth { get; private set; } = 3;
@@ -32,8 +33,8 @@ public class Stats : MonoBehaviour
     public bool IsDead { get; set; } = false;
 
     public static Stats Instance { get; private set; }
-    public bool HasSledgeHammer { get; private set; }= false;
-    public bool[] MineralsOwned { get; private set; }= new bool[4];
+    public bool HasSledgeHammer { get; private set; } = false;
+    public bool[] MineralsOwned { get; private set; } = new bool[4];
 
     private bool[] MineralsSeeThroughActivated = new bool[4];
 
@@ -51,22 +52,21 @@ public class Stats : MonoBehaviour
     public static Action NoMoreMineralsReached;
 
     private void Awake()
-	{
-		if (Instance != null)
-		{
-			Destroy(gameObject);
-			return;
-		}
-		Instance = this;
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
 
-		miningSpeed = MiningSpeedDefault;
-		damage = DamageDefault;
+        miningSpeed = MiningSpeedDefault;
+        damage = DamageDefault;
 
     }
     private void Start()
     {
-        if(MineralsOwned.Length != ActivationMinerals.Length)
-            Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need "+MineralsOwned.Length);
+        if (MineralsOwned.Length != ActivationMinerals.Length)
+            Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need " + MineralsOwned.Length);
 
         Stats.Instance.DeActivateMap();
 
@@ -95,13 +95,13 @@ public class Stats : MonoBehaviour
         return false;
     }
 
-    public string GetElapsedTime(){
-        
+    public string GetElapsedTime() {
+
         stopwatch.Stop();
 
         TimeSpan ts = stopwatch.Elapsed;
-        
-        if(ts.Hours > 0)
+
+        if (ts.Hours > 0)
             return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
         return String.Format("{0:00}:{1:00}.{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
 
@@ -110,7 +110,7 @@ public class Stats : MonoBehaviour
     public void SetMovemenSpeedMultiplier(float multiplier) => MovingSpeedMultiplier = multiplier;
 
     public void SetDefaultSledgeHammer()
-	{
+    {
         sledgeHammerFlicker.SetFlicker(false);
         miningSpeed = MiningSpeedDefault;
         damage = DamageDefault;
@@ -118,9 +118,9 @@ public class Stats : MonoBehaviour
     }
 
     public void SetBoostSledgeHammer()
-	{
+    {
         sledgeHammerFlicker.SetFlicker(true);
-		miningSpeed = MiningSpeedSpeedUp;
+        miningSpeed = MiningSpeedSpeedUp;
         damage = DamageBoosted;
     }
 
@@ -144,12 +144,11 @@ public class Stats : MonoBehaviour
     {
         Health -= amt;
         Health = Math.Max(Health, 0);
-        Debug.Log("Player lose health "+Health);
+        Debug.Log("Player lose health " + Health);
 
         HealthUpdate?.Invoke(Health);
 
-        if (Health <= 0)
-        {
+        if (Health <= 0) {
             Debug.Log("Player is dead");
 
             IsDead = true;
@@ -160,13 +159,23 @@ public class Stats : MonoBehaviour
 
     internal void Revive()
     {
-        Health = CurrentMaxHealth;
-        OxygenController.Instance.ResetOxygen();
-        HealthUpdate?.Invoke(Health);
+        if (savedValues.valuesSet) {
+            // Boss revive sets health to max along with all saved values from entering Boss area
+            LoadBossValues();
+            // Reset Shops
+            Shop.Instance.ResetShop();
+        }
+        else {
+            // Normal revive only sets health to max
+            Health = CurrentMaxHealth;
+            OxygenController.Instance.ResetOxygen();
+        }
+
         IsDead = false;
+        HealthUpdate?.Invoke(Health);
         SoundMaster.Instance.AddRestartSpeech();
     }
-    
+
     internal bool Heal()
     {
         if (Health == CurrentMaxHealth)
@@ -179,7 +188,7 @@ public class Stats : MonoBehaviour
 
     internal void AddHealth(int value)
     {
-        CurrentMaxHealth = Math.Min(CurrentMaxHealth+value, MaxHealth);
+        CurrentMaxHealth = Math.Min(CurrentMaxHealth + value, MaxHealth);
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
     }
@@ -191,33 +200,28 @@ public class Stats : MonoBehaviour
     }
     internal void RemoveBombs(int amount)
     {
-        Bombs = Math.Max(0,Bombs-amount);
+        Bombs = Math.Max(0, Bombs - amount);
         BombUpdate?.Invoke(Bombs);
     }
 
     internal void AddMineralCount()
     {
         minerals++;
-        if(minerals >= MineralsToGetSeeThrough)
-        {
+        if (minerals >= MineralsToGetSeeThrough) {
             // If there is a unpicked crystal change it to see through and play speech
-            for(int i= 0; i<MineralsOwned.Length; i++)
-            {
-                if (!MineralsOwned[i] && !MineralsSeeThroughActivated[i])
-                {
-                    Debug.Log("Activating mineral "+i);
+            for (int i = 0; i < MineralsOwned.Length; i++) {
+                if (!MineralsOwned[i] && !MineralsSeeThroughActivated[i]) {
+                    Debug.Log("Activating mineral " + i);
                     MineralsSeeThroughActivated[i] = true;
                     SoundMaster.Instance.PlaySound(SoundName.ISeeAMissingPieceThroughTheWalls);
                     ActivationMinerals[i].layer = LayerMask.NameToLayer("ItemsSeeThrough");
-                    foreach(Transform child in ActivationMinerals[i].GetComponentsInChildren<Transform>())
-                    {
+                    foreach (Transform child in ActivationMinerals[i].GetComponentsInChildren<Transform>()) {
                         child.gameObject.layer = LayerMask.NameToLayer("ItemsSeeThrough");
                     }
-                    Debug.Log(MineralsToGetSeeThrough+" MINERALS ACTIVATE SEE THROUGH");
-                    if(HaveCrystalsToActivate())
+                    Debug.Log(MineralsToGetSeeThrough + " MINERALS ACTIVATE SEE THROUGH");
+                    if (HaveCrystalsToActivate())
                         minerals = 0;
-                    else
-                    {
+                    else {
                         Debug.Log("Have activated all crystals stop counter from counting!");
                         NoMoreMineralsReached?.Invoke();
                     }
@@ -230,9 +234,8 @@ public class Stats : MonoBehaviour
     }
 
     private bool HaveCrystalsToActivate()
-    {        
-        for (int i = 0; i < MineralsOwned.Length; i++)
-        {
+    {
+        for (int i = 0; i < MineralsOwned.Length; i++) {
             if (!MineralsOwned[i] && !MineralsSeeThroughActivated[i])
                 return true;
 
@@ -242,13 +245,13 @@ public class Stats : MonoBehaviour
 
     internal void AddMineral(MineralData mineralData)
     {
-        Debug.Log("Adding Mineral "+mineralData.itemName);
-        if(mineralData.mineralType == MineralType.Coin) {
+        Debug.Log("Adding Mineral " + mineralData.itemName);
+        if (mineralData.mineralType == MineralType.Coin) {
             Inventory.Instance.AddCoins(1);
             Debug.Log("Adding Coin");
             return;
         }
-        else if(mineralData.mineralType == MineralType.Gold)
+        else if (mineralData.mineralType == MineralType.Gold)
             MineralsOwned[0] = true;
         else if (mineralData.mineralType == MineralType.Silver)
             MineralsOwned[1] = true;
@@ -256,8 +259,7 @@ public class Stats : MonoBehaviour
             MineralsOwned[2] = true;
         else if (mineralData.mineralType == MineralType.Coal)
             MineralsOwned[3] = true;
-        else
-        {
+        else {
             AddMineralCount();
             return;
         }
@@ -282,8 +284,8 @@ public class Stats : MonoBehaviour
 
     private bool AllMinerals()
     {
-        foreach(var mineral in MineralsOwned)
-            if(!mineral)
+        foreach (var mineral in MineralsOwned)
+            if (!mineral)
                 return false;
         return true;
     }
@@ -302,15 +304,68 @@ public class Stats : MonoBehaviour
 
     internal void SetNewRespawnPoint(Vector3 point)
     {
-        SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0 ,Mathf.RoundToInt(point.z));
+        SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0, Mathf.RoundToInt(point.z));
     }
 
     internal void DeActivateMap()
     {
-        Debug.Log("UI Instance = "+UIController.Instance);
-        
+        Debug.Log("UI Instance = " + UIController.Instance);
+
         UIController.Instance.ActivateMap(false);
     }
 
     internal void ActivateMap() => UIController.Instance.ActivateMap();
+
+    private BossSaveValues savedValues = new BossSaveValues();
+
+    internal void LoadBossValues()
+    {
+        Debug.Log("Player Died Reset Boss Save Values");
+
+        CurrentMaxHealth = savedValues.playerCurrentMaxHealth;
+        Health = CurrentMaxHealth;
+
+        Inventory.Instance.SetBombs(savedValues.bombsHeld);
+        Inventory.Instance.SetCoins(savedValues.coinsHeld);
+
+        MovingSpeedMultiplier = savedValues.movingSpeedMult;
+        Debug.Log("Moving speed multiplier is now "+MovingSpeedMultiplier);
+
+        // Updates the graphics to correct health
+        HealthUpdate?.Invoke(Health);
+    }
+    internal void SaveBossValues()
+    {
+        Debug.Log("Set Boss Save Values");
+        // Player Hearts
+        // Player Speed
+        // No Chicken, No firespell, no Banana
+        // Bombs
+        savedValues = new BossSaveValues(Health, CurrentMaxHealth, Inventory.Instance.BombsHeld, Inventory.Instance.CoinsHeld, MovingSpeedMultiplier, true);
+
+        // Also reset Enemy when player dies
+    }
+
+
+    public struct BossSaveValues
+    {
+        public int playerCurrentHealth;
+        public int playerCurrentMaxHealth;
+        public int bombsHeld;
+        public int coinsHeld;
+        public float movingSpeedMult;
+        public bool valuesSet;
+
+        public BossSaveValues(int playerHealth = 0, int playerMaxHealth = 0, int bombs=0, int coins=0, float moveSpeed = 1, bool isSet = false)
+        {
+            valuesSet = isSet;
+            playerCurrentHealth = playerHealth;
+            playerCurrentMaxHealth = playerMaxHealth;
+            bombsHeld = bombs;
+            coinsHeld = coins;
+            movingSpeedMult = moveSpeed;
+            valuesSet = isSet;
+        }
+    }
+
 }

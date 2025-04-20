@@ -16,6 +16,7 @@ namespace Wolfheat.Inputs
             // Enable this when you want to use the loading of a saved file
             //SavingUtility.LoadingComplete += LoadingComplete;
             Controls.Player.T.performed += JumpToNextEntryPoint;
+            Controls.Player.Y.performed += Give10Gold;
         }
         private void Start()
         {
@@ -34,9 +35,16 @@ namespace Wolfheat.Inputs
         {
             Controls.Player.M.performed -= SoundMaster.Instance.ToggleAllAudio;
             Controls.Player.N.performed -= SoundMaster.Instance.ToggleMusic;
-            Controls.Player.T.performed -= SoundMaster.Instance.ToggleMusic;
+            Controls.Player.T.performed -= JumpToNextEntryPoint;
+            Controls.Player.Y.performed -= Give10Gold;
         }
 
+        public void Give10Gold(InputAction.CallbackContext context)
+        {
+            Debug.Log("Player Gets 10g");
+            Inventory.Instance.AddCoins(10);
+        }
+        
         public void JumpToNextEntryPoint(InputAction.CallbackContext context)
         {
             Debug.Log("Jumping to Next Exit point");

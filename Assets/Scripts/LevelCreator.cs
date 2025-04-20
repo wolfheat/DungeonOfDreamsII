@@ -174,7 +174,7 @@ public class LevelCreator : MonoBehaviour
 
     public Stack<Vector2Int> CanReach(Vector2Int from, Vector2Int to)
     {
-        //Debug.Log("Checking if we can reach " + to + " from position " + from);
+        Debug.Log("Checking if we can reach " + to + " from position " + from);
 
         int minX = Math.Min(from.x, to.x);
         int maxX = Math.Max(from.x, to.x);
@@ -191,6 +191,8 @@ public class LevelCreator : MonoBehaviour
 
         //DrawSquare(from, to);
         Stack<Vector2Int> path = FindPath(from,to,A,Astart);
+
+        Debug.Log("Stack for way to player is length:"+path.Count);
 
         DrawPath(path);
 

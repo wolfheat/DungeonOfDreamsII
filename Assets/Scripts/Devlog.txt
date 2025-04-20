@@ -27,28 +27,35 @@ Apr 2025
 19/4	* Added a 6th gem, added boss which opens end portal when defeted
 		* Added pillars with shops at boss entrance
 		* Chicken now gives speed to player
-		
+		* All items can be bought, Menu closes at successful buy
+		* Shops now reset after payer dies in boss area
+		* Speed modifier now also resets
+		* Items can only be purchased once
+		* Shops screen now close when moving away from pillar
+		* Added new Enemy attack, Firestorm
 
 
 		// DO
 
 		// Add Boss health meter at top
 
-		// Add buy stands outside boss area
-
-		// Chicken?
-
 		// Add Boss and boss fight
+		// Make boss harder and have more attacks
+
+		// Adjust fire damage taken to 3 ? 
+		// Add bananas health
 
 		// rewrite text in end credits
 
+
+		// Have correct lightning postprocessing all areas
+		// Have correct music for all areas
 
 		// WANTS
 		// Exits needs better portal
 
 		// Make better postprocessing
 		// Make new Start Menu graphics
-		// Credits in start menubreaks game, remove?
 
 
 
@@ -67,6 +74,94 @@ Apr 2025
 		// * Compass?
 
 		// Goal for player is to get out of the dungeon . might end up meeting a final boss there?
+
+
+
+<b>Credits
+</b>
+
+A game by wolfheat
+
+
+A variety of assets were used to create this game.
+
+
+<b>Graphics
+</b>
+
+3D
+* Leartes Studios - Will's Room Environment
+* RRFreelance - Tools Pack 1
+* Polygon  - Farm Pack
+Pure Poly - Ultimate Low Poly Mining
+
+
+Siuniaev - Gambler Cat
+
+* João Baltieri - Mini Simple Characters | Skeleton
+
+2D
+Vector Dividers Collection
+upklyak (freepik) - Ground cracks on land isolated
+
+VFX
+Unity Technologies - Particle Pack
+
+* Vefects - Item Pickup VFX
+
+
+<b>Audio
+</b>
+
+Freesound - Various Sounds
+Pixabay - Various Sounds
+Uppbeat - Music
+
+? Tao & Sound - Medieval Fantasy 2 SFX Pack
+
+? Vasyl Sakal - Celestial Lullaby 
+? Brock Hewitt - In The Silence
+
+Monument Music - Love Story
+
+<b>Fonts
+</b>
+
+Prida01 - gluk
+
+
+<b>AI Tools
+</b>
+
+* Genny - Voices - Cloe, Matthew
+
+Playground AI - 2D art
+Craiyon AI - 2D art
+Piclumen AI - 2D art
+
+<b>Other Tools Used
+</b>
+
+Audacity
+
+Gimp
+
+Blender
+
+Unity
+
+
+<b>Game Jam
+</b>
+
+This game was created for the
+Dungeon Crawler Game Jam 2025
+
+
+Thank you for playing!
+
+
+
 
 
 

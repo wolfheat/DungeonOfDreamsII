@@ -58,6 +58,12 @@ public class PlayerColliderController : MonoBehaviour
         else if(other.TryGetComponent(out ExitPoint exitPoint))
         {
             Debug.Log("Exit point for level.");
+
+            if (other.TryGetComponent<BossSaveValues>(out BossSaveValues bossSave)) {
+                Debug.Log("SAVE BOSS VALUES HERE");
+                Stats.Instance.SaveBossValues();
+            }
+
             if(exitPoint.LeadsTo == -1)
                 PlayerController.Instance.GotoNextStartPosition();
             else
@@ -69,13 +75,19 @@ public class PlayerColliderController : MonoBehaviour
             //Debug.Log("Exit portal collission "+portal);
             UIController.Instance.ShowWinScreen();
         }
-        else if (other.TryGetComponent(out HealingArea healingArea)) {
+        else if (other.TryGetComponent(out BossActivator bossActivator)) {
+            Debug.Log("Boss Activator entered");
+            bossActivator.ActivateBoss();
+        }else if (other.TryGetComponent(out HealingArea healingArea)) {
 
             Debug.Log("Entering Healing Area");
             IsPlayerInRegainArea = true;
         }else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
             Debug.Log("Entering Respawn Point - set this as respawn point");
             Stats.Instance.SetNewRespawnPoint(respawnPoint.transform.position);
+            if(respawnPoint.TryGetComponent<UnlockBLockAteNTER>(out UnlockBLockAteNTER unlockBLocks)) {
+                unlockBLocks.Unlock();
+            }
         }
         else if (other.TryGetComponent(out ShopItem shop)) {
             // ShopItem is also considered Respawn point

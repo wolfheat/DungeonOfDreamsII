@@ -656,6 +656,12 @@ MonoBehaviour:
     loop: 1
     audioSource: {fileID: 0}
     name: 4
+  - clip: {fileID: 8300000, guid: 174b1da8b4ba5e243b08cd1d269a2aa1, type: 3}
+    volume: 0.497
+    pitch: 1
+    loop: 1
+    audioSource: {fileID: 0}
+    name: 5
   swosh:
   - {fileID: 8300000, guid: 1195d1b380f363c40a9d96a4e428b1cf, type: 3}
   - {fileID: 8300000, guid: 07df2b6038bbe5e48b512ca2c883a5f0, type: 3}

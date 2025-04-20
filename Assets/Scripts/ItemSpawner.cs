@@ -206,4 +206,9 @@ public class ItemSpawner : MonoBehaviour
         Bomb bomb = Instantiate(bombPrefab,itemHolder.transform);
         bomb.transform.position = target;        
     }
+
+    internal void SpawnFireStormAt(Vector3 position, Vector3 forward)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -3,11 +3,15 @@ using TMPro;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
+
+public enum AltarTypes{Bomb, Chicken, Bananas, Scroll}
+
 public class Shop : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject specificPanel;
     [SerializeField] private GameObject[] ShopItemsSpecific;
+    [SerializeField] private Altar[] SpecificAltars;
 
     [SerializeField] private TextMeshProUGUI bombCostText; 
     [SerializeField] private TextMeshProUGUI keyCostText; 
@@ -24,6 +28,11 @@ public class Shop : MonoBehaviour
 
     public void ShowPanel(int specificID)
     {
+        Debug.Log("Enter specific shop "+specificID);
+        // Only show if item is still available
+        if (!SpecificAltars[specificID].HasMineral)
+            return;
+
         panel.SetActive(false);
         specificPanel.SetActive(true);
         // Show specific menu for one item
@@ -32,7 +41,16 @@ public class Shop : MonoBehaviour
         }
     }
 
-    internal void HidePanel() => panel.SetActive(false);
+    internal void CloseIfOpen()
+    {
+        if (panel.activeSelf || specificPanel.activeSelf) 
+            HidePanel();
+    }
+    public void HidePanel()
+    {
+        panel.SetActive(false);
+        specificPanel.SetActive(false);
+    }
 
     public static Shop Instance { get; private set; }
 
@@ -59,38 +77,45 @@ public class Shop : MonoBehaviour
     public void BuyBananas()
     {
         Debug.Log("Buying Bananas");
-        if (Inventory.Instance.RemoveCoins(20)) {
+        if (SpecificAltars[(int)AltarTypes.Bananas].gameObject.activeSelf && Inventory.Instance.RemoveCoins(20)) {
             Debug.Log("Bananas");
             SoundMaster.Instance.PlayCoinSound(true);
+            SpecificAltars[(int)AltarTypes.Bananas].RemoveItemFromPillar();
+            HidePanel();
         }
     }
         
     public void BuyFireSpell()
     {
         Debug.Log("Buying Fire Spell");
-        if (Inventory.Instance.RemoveCoins(30)) {
+        if (SpecificAltars[(int)AltarTypes.Scroll].gameObject.activeSelf && Inventory.Instance.RemoveCoins(30)) {
             Debug.Log("Fire Spell");
             SoundMaster.Instance.PlayCoinSound(true);
+            SpecificAltars[(int)AltarTypes.Scroll].RemoveItemFromPillar();
+            HidePanel();
         }
     }
     
     public void BuyChicken()
     {
         Debug.Log("Buying Chicken");
-        if (Inventory.Instance.RemoveCoins(4)) {
+        if (SpecificAltars[(int)AltarTypes.Chicken].gameObject.activeSelf && Inventory.Instance.RemoveCoins(40)) {
             Debug.Log("Speed Up player double");
-            Stats.Instance.SetMovemenSpeedMultiplier(0.8f);
-            
+            Stats.Instance.SetMovemenSpeedMultiplier(0.8f);            
             SoundMaster.Instance.PlayCoinSound(true);
+            SpecificAltars[(int)AltarTypes.Chicken].RemoveItemFromPillar();
+            HidePanel();
         }
     }
     
     public void Buy50Bombs()
     {
         Debug.Log("Buying 50 Bombs");
-        if (Inventory.Instance.RemoveCoins(50)) {
+        if (SpecificAltars[(int)AltarTypes.Bomb].gameObject.activeSelf && Inventory.Instance.RemoveCoins(50)) {
             Inventory.Instance.AddBombs(50);
             SoundMaster.Instance.PlayCoinSound(true);
+            SpecificAltars[(int)AltarTypes.Bomb].RemoveItemFromPillar();
+            HidePanel();
         }
     }
     
@@ -116,6 +141,13 @@ public class Shop : MonoBehaviour
         if (Inventory.Instance.RemoveCoins(otherCost)) {
             Inventory.Instance.AddOthers();
             SoundMaster.Instance.PlayCoinSound(true);
+        }
+    }
+
+    internal void ResetShop()
+    {
+        foreach (var altar in SpecificAltars) {
+            altar.AddItemToPillar();
         }
     }
 

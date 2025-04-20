@@ -7,6 +7,7 @@ public class SpotLightController : MonoBehaviour
 
     int postProcessingRoom;
     int AltarRoomTrigger;
+    int BossRoom;
 
     
 
@@ -14,6 +15,7 @@ public class SpotLightController : MonoBehaviour
     {
         postProcessingRoom = LayerMask.NameToLayer("PostProcessingRoom");
         AltarRoomTrigger = LayerMask.NameToLayer("AltarRoomTrigger");
+        BossRoom = LayerMask.NameToLayer("BossPostProcessingRoom");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +26,10 @@ public class SpotLightController : MonoBehaviour
         }else if(other.gameObject.layer == AltarRoomTrigger)
         {
             SoundMaster.Instance.PlayMusic(MusicName.IndoorMusic);
+        }else if(other.gameObject.layer == BossRoom)
+        {
+            Debug.Log("PLAY BOSS MUSIC");
+            SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
         }
     }
     

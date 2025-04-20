@@ -3,9 +3,7 @@
 using UnityEngine;
 using Wolfheat.StartMenu;
 
-public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead,
-    Dying,
-    TakeHit
+public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead, Dying, TakeHit, FireStorm
 }
 
 public class EnemyStateController
@@ -37,6 +35,9 @@ public class EnemyStateController
                 break;
             case EnemyState.Attack:
                 animator.CrossFade("Attack", 0.1f);
+                break;
+            case EnemyState.FireStorm:
+                animator.CrossFade("Jump", 0.1f);
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);

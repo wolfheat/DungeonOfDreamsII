@@ -98,6 +98,9 @@ public class UIController : MonoBehaviour
         // Transition to Dark
         open = UIActions.DeathScreen;
         transitionScreen.Darken();
+
+
+        SoundMaster.Instance.FadeMusic();
     }
     
     public void ShowWinScreen()
@@ -204,4 +207,9 @@ public class UIController : MonoBehaviour
 
     internal void ActivateMap(bool activate = true) => map.SetActive(activate);
     internal bool MapIsActive() => map.activeSelf;
+
+    internal void ShowBossHealth()
+    {
+
+    }
 }

@@ -17,7 +17,7 @@ public class BarController : MonoBehaviour
 
     private void Start()
     {
-        oxygenController.OxygenUpdated += SetBar;
+        //oxygenController.OxygenUpdated += SetBar;
     }
 
 

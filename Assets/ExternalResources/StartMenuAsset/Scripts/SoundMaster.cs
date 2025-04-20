@@ -66,7 +66,7 @@ namespace Wolfheat.StartMenu
         PickUpKey
     }
 
-    public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}
+    public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}
 
     [Serializable]
     public class Music : BaseSound
@@ -282,6 +282,8 @@ namespace Wolfheat.StartMenu
 
         public void PlayMusic(MusicName name)
         {
+            if (activeMusic == name) return;
+
             Debug.Log("PLAY MUSIC "+name);
             activeMusic = name; // Leave this here so the correct music that should be played is still updated if music is reenabled
 

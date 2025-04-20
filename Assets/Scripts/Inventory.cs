@@ -25,9 +25,9 @@ public static Inventory Instance { get; private set; }
         UpdateInventory();
     }
 
-    internal void AddCoins(int value)
+    internal void AddCoins(int value=1)
     {
-        CoinsHeld++;
+        CoinsHeld+=value;
         UpdateInventory();
     }
     
@@ -36,12 +36,26 @@ public static Inventory Instance { get; private set; }
         if(CoinsHeld < value)
             return false;
         CoinsHeld-=value;
+        UpdateInventory();
         return true;
     }
 
     public void AddKey()
     {
         KeysHeld++;
+        UpdateInventory();
+    }
+    
+    public void SetCoins(int amt = 1)
+    {
+        CoinsHeld = amt;
+        UpdateInventory();
+    }
+    
+    public void SetBombs(int amt = 1)
+    {
+        Debug.Log("Set Bombs to "+amt);
+        BombsHeld = amt;
         UpdateInventory();
     }
     

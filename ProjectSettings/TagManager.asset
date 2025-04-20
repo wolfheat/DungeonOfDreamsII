@@ -28,9 +28,9 @@ TagManager:
   - RespawnPoint
   - ShopItem
   - Portals
-  - 
-  - 
-  - 
+  - BossActivator
+  - UnlockPoint
+  - BossPostProcessingRoom
   - 
   - 
   - 

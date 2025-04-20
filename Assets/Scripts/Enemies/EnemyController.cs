@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
@@ -10,6 +10,7 @@ public class EnemyController : Interactable
     public bool IsBoss = false;// { get; set; }
     public EnemyData EnemyData;// { get; set; }
 
+    [SerializeField] BarController healthBar;
     [SerializeField] Collider enemyCollider;
     [SerializeField] LayerMask playerLayerMask;
 
@@ -18,12 +19,13 @@ public class EnemyController : Interactable
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
     [SerializeField] Mock mock;
+    [SerializeField] float moveSpeed = 1;
+    [SerializeField] int EnemySight = 10;
 
     private float timer = 0;
     private string info = "";
     private const float MoveTime = 2f;
     private const float RotateTime = 0.4f;
-    private const float EnemySight = 5f;
     public bool DoingMovementAction { get; set; } = false;
 
     private EnemyStateController enemyStateController;
@@ -34,9 +36,18 @@ public class EnemyController : Interactable
 
     private bool newPositionEvaluated = false;
 
-    private const int StartHealth = 3;
     public int Health { get; private set; }
     public bool Dead { get; private set; }
+
+    [SerializeField] public bool Activated = true;
+    [SerializeField] public int StartHealth = 3;
+    [SerializeField] private Vector3 StartPosition;
+
+    private float FirestormTimeout = 6f;
+    private float FirestormTimer = 6f;
+
+
+
     private void OnEnable()
     {
         Health = StartHealth; // Change to data health later
@@ -46,6 +57,7 @@ public class EnemyController : Interactable
         DoingMovementAction = false;
         mock.gameObject.SetActive(true);
         EnableColliders();
+        StartPosition = transform.position;
     }
 
     public void DisableColliders()
@@ -86,6 +98,9 @@ public class EnemyController : Interactable
     {
         // Limit Enemy from doing anything new if allready doing an action or is dead
         if (DoingMovementAction || Dead) return;
+
+        if(FirestormTimer > 0)
+            FirestormTimer -= Time.deltaTime;
 
         // Check if there is a stored action to perform
         if (savedAction != null)
@@ -139,6 +154,7 @@ public class EnemyController : Interactable
         {
             //Debug.Log("Enemy is idle, check everytime player moves to update stored position");
             // Player Moved 
+            if (!Activated) return;
             if(!Stats.Instance.IsDead && UpdatePlayerPosition())
                 UpdatePlayerDistanceAndPath();
             if (path.Count > 0)
@@ -208,6 +224,16 @@ public class EnemyController : Interactable
             }
 
             enemyStateController.ChangeState(EnemyState.Attack);
+            //path.Clear();
+            savedAction = null;
+
+            return true;
+        }
+        else if (FirestormTimer <= 0 && PlayerCloserThan3())
+        {
+            Debug.Log("Player is closer than 4 do fireCircle");
+
+            enemyStateController.ChangeState(EnemyState.FireStorm);
             //path.Clear();
             savedAction = null;
 
@@ -308,6 +334,18 @@ public class EnemyController : Interactable
         Debug.Log(this.name+" Activating next point "+savedAction?.moveType+" "+savedAction?.move);
     }
 
+    public void Reset()
+    {
+        if (transform.position == StartPosition) return;
+        Activated = false;
+        StopAllCoroutines();
+        transform.position = StartPosition;
+        PlaceMock(StartPosition);
+        DoingMovementAction = false;
+        newPositionEvaluated = false;
+        enemyStateController.ChangeState(EnemyState.Idle);
+    }
+
     public IEnumerator Move(Vector3 target)
     {
         info = "Move started";
@@ -323,10 +361,10 @@ public class EnemyController : Interactable
         PlaceMock(end);        
 
         timer = 0;
-        while (timer < MoveTime)
+        while (timer < MoveTime/moveSpeed)
         {
             yield return null;
-            transform.position = Vector3.LerpUnclamped(start, end, timer / MoveTime);
+            transform.position = Vector3.LerpUnclamped(start, end, timer / (MoveTime / moveSpeed));
             timer += Time.deltaTime;
         }
         info = "Move ended";
@@ -393,12 +431,12 @@ public class EnemyController : Interactable
         // If visible and close enough get path
         if (playerDistance < EnemySight && PlayerVisibleForEnemy())
         {
-            //Debug.Log(this.name+" - gets new Path",this);
+            Debug.Log(this.name+" - gets new Path to player",this);
             GetPath();
         }
         else
         {
-            //Debug.Log("Player To far away");
+            Debug.Log("Player not visible");
             // This clears the path if player is to far away and not visible
             if (path.Count > 0){
                 //Debug.Log(this.name + " - forgets Path (not visible to to far)", this);
@@ -433,6 +471,16 @@ public class EnemyController : Interactable
     {
         //Debug.Log("Skeleton loades to attack");
         SoundMaster.Instance.PlaySound(SoundName.SkeletonBuildUpAttack);
+    }
+    
+    public void SpellFirestormCastOccured()
+    {
+        //Debug.Log("Spell cast by Cat");
+
+        // Create Wildfire Object from cat
+        ItemSpawner.Instance.SpawnFireStormAt(transform.position,transform.forward);
+
+        FirestormTimer = FirestormTimeout;
     }
     
     public void SpellCastOccured()
@@ -515,6 +563,13 @@ public class EnemyController : Interactable
         return true;
     }
 
+    private bool PlayerCloserThan3()
+    {
+        Vector2Int pos = Convert.V3ToV2Int(transform.position);
+        int XDist = Mathf.RoundToInt(Mathf.Abs(playerLastPosition.x - pos.x));
+        int YDist = Mathf.RoundToInt(Mathf.Abs(playerLastPosition.y - pos.y));
+        return XDist < 4 && YDist < 4;
+    }
     private bool PlayerOnSameGridCross()
     {
         Vector2Int pos = Convert.V3ToV2Int(transform.position);
@@ -527,6 +582,10 @@ public class EnemyController : Interactable
         if(Dead) return false;
 
         Health -= amt;
+
+        if (healthBar != null)
+            healthBar.SetBar(Health,StartHealth);
+
         //Debug.Log("Enemy took damage, "+amt+" current health: "+Health);
         SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
 
@@ -547,6 +606,12 @@ public class EnemyController : Interactable
                     enemyGetHitBeginState = enemyStateController.currentState;
                 enemyStateController.ChangeState(EnemyState.TakeHit);
 
+                return true;
+            }
+            else if (EnemyData.enemyType == EnemyType.Cat) {
+                //Debug.Log("Enemy cat take damage");
+                
+                enemyStateController.ChangeState(EnemyState.TakeHit);
                 return true;
             }
         }

@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
-        Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
+        //Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
         TakeFireDamage.PlayerTakeFireDamage += FireDamage;   
 
         playerAnimationController.HitComplete += HitWithTool;
@@ -251,6 +251,11 @@ public class PlayerController : MonoBehaviour
 
                     Door door = LevelCreator.Instance.TargetHasDoor(target);
                     Altar altar = LevelCreator.Instance.TargetHasAltar(target);
+                    if(door != null)
+                        Debug.Log("Wall");
+                    if(altar != null)
+                        Debug.Log("Altar");
+
                     // If door is ahead unlock it if player has correct key
                     if (door != null) {
 
@@ -407,6 +412,8 @@ public class PlayerController : MonoBehaviour
         int stepSoundFromTerrain = TerrainChecker.ProminentTerrainType(transform.position,LevelCreator.Instance.ActiveTerrain);
         SoundMaster.Instance.PlayStepSound(stepSoundFromTerrain);
 
+        Shop.Instance.CloseIfOpen();
+
         // Place mock
         PlaceMock(target);
 
@@ -443,6 +450,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Rotate(Quaternion target)
     {
+        Shop.Instance.CloseIfOpen();
         DoingAction = true;
         Quaternion start = transform.rotation;
         Quaternion end = target;

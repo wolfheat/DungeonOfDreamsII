@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class BossWinController : MonoBehaviour
 {
@@ -21,5 +22,9 @@ public class BossWinController : MonoBehaviour
         foreach (var wall in wallsToRemove) {
             wall.Shrink();
         }
+
+        // Make music fade?
+        SoundMaster.Instance.FadeMusic();
+
     }
 }

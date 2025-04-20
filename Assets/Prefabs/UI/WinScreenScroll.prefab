@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 7258905331927034073, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 8161081888337419147, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_Name
       value: ALL

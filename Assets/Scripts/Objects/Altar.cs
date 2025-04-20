@@ -13,7 +13,6 @@ public class Altar : MonoBehaviour
 
     public static Action AltarActivated;
 
-
     private void OnEnable()
     {
         Stats.MineralsUpdate += SetAsOwned;
@@ -24,6 +23,11 @@ public class Altar : MonoBehaviour
         Stats.MineralsUpdate -= SetAsOwned;
     }
 
+    public void RemoveItemFromPillar()
+    {
+        mineralObject.SetActive(false);
+    }
+    
     private void SetAsOwned()
     {
         if (Stats.Instance.MineralsOwned[acceptsMineralID])
@@ -46,7 +50,14 @@ public class Altar : MonoBehaviour
         mineralObject.SetActive(true);
         AltarActivated?.Invoke();
     }
-    
 
+    internal void AddItemToPillar()
+    {
+        mineralObject.SetActive(true);
+    }
 
+    internal bool IsAvailable()
+    {
+        return mineralObject.activeSelf;
+    }
 }
