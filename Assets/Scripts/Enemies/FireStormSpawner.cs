@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class FireStormSpawner : MonoBehaviour
 {
@@ -74,5 +75,6 @@ public class FireStormSpawner : MonoBehaviour
             ParticleEffects.Instance.PlayTypeAt(ParticleType.WildFire, aligned+Vector3.down*0.48f);
             Explosion.Instance.FireDamage(aligned);
         }
+        
     }
 }

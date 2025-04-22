@@ -44,7 +44,14 @@ Apr 2025
 		* Updated Credits page
 		* Removed shortcuts
 		* try Build
+		* At Jam end 442 joined
 
+		POST JAM
+22/4	* Changed boss floor again
+		* Fixed boss music repeating when stepping on boss activation square 
+		* Boss fire sounds adjusted
+		* Added enemy landing sound
+			
 
 		// DO
 

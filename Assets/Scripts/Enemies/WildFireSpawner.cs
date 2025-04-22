@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class WildFireSpawner : MonoBehaviour
 {

@@ -285,7 +285,7 @@ public class EnemyController : Interactable
         //Debug.Log("Enemy Explodes");
         DisableColliders();
         Explosion.Instance.ExplodeNineAround(ParticleType.Explode, transform.position);        
-        SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
+        //SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
         StopAllCoroutines();
     }
     // -------------------------------
@@ -504,7 +504,11 @@ public class EnemyController : Interactable
         //Debug.Log("Skeleton loades to attack");
         SoundMaster.Instance.PlaySound(SoundName.SkeletonBuildUpAttack);
     }
-    
+
+    public void SpellFirestormSoundTrigger()
+    {
+        SoundMaster.Instance.PlaySound(SoundName.EnemyHitGroundEffect);
+    }
     public void SpellFirestormCastOccured()
     {
         //Debug.Log("Spell cast by Cat");

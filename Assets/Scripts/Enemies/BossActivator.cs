@@ -10,21 +10,27 @@ public class BossActivator : MonoBehaviour
     public void ActivateBoss()
     {
         Debug.Log("Activating Boss");
-        boss.Activated = true;
+        //if (boss == null || boss.Activated)
+          //  return;
 
         foreach (GameObject obj in lockObjects)
             obj.SetActive(true);
 
         // Play door close Sound High
 
-        // Make the Resetter valid to reset Bossarea on death
-        unlockBlock.CanBeReset = true;
 
         // Start Boss Music?
-        SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
+        if (!boss.Activated) {
+            SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
+            
+            // Make the Resetter valid to reset Bossarea on death
+            unlockBlock.CanBeReset = true;
 
-        // Show Boss health
-        UIController.Instance.ShowBossHealth();
+            // Show Boss health
+            UIController.Instance.ShowBossHealth();
+        }
+
+        boss.Activated = true;
     }
 
 }
