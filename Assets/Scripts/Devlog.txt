@@ -51,7 +51,12 @@ Apr 2025
 		* Fixed boss music repeating when stepping on boss activation square 
 		* Boss fire sounds adjusted
 		* Added enemy landing sound
-			
+23/4	* Added courtyard
+		* Adjusted ceilings
+		* Changed light blue gem to purple
+
+
+		* Remove bloat not used
 
 		// DO
 
