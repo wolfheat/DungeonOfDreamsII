@@ -5,10 +5,10 @@ using Wolfheat.StartMenu;
 public class FireStormSpawner : MonoBehaviour
 {
     private float stepTimer = 0;
-    private const float StepTime = 0.5f;
+    private const float StepTime = 0.3f;
 
     private int maxSteps = 3;
-    private int stepDistance = 0;
+    private int stepDistance = -1;
 
     List<List<Vector2Int>> positions;
 
@@ -57,7 +57,7 @@ public class FireStormSpawner : MonoBehaviour
         stepDistance++;
 
         // If to far away destroy the spawner
-        if(stepDistance == maxSteps) { 
+        if(stepDistance >= maxSteps) { 
             Destroy(gameObject);
             return;
         }
@@ -70,6 +70,9 @@ public class FireStormSpawner : MonoBehaviour
     {
         foreach(var pos in positions[stepDistance]) {
             Vector3 aligned = Convert.V2IntToV3(pos);
+            
+            Debug.Log("Spawning Firestorm at "+aligned);
+
             if (LevelCreator.Instance.TargetHasWall(aligned)) continue; // Skips if creating in wall
             //ParticleEffects.Instance.PlayTypeAt(ParticleType.WildFire, aligned);
             ParticleEffects.Instance.PlayTypeAt(ParticleType.WildFire, aligned+Vector3.down*0.48f);

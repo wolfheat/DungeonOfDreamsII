@@ -139,6 +139,7 @@ public class ItemSpawner : MonoBehaviour
 
     internal void SpawnFireStormAt(Vector3 pos, Vector3 dir)
     {
+        Debug.Log("Firestorm initiated from "+pos);
         FireStormSpawner fireStormSpawner = Instantiate(fireStormSpawnerPrefab, pos, Quaternion.LookRotation(dir));
         fireStormSpawner.InitiateAt(Convert.V3ToV2Int(pos));
     }
