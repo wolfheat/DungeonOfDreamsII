@@ -58,6 +58,8 @@ Apr 2025
 		* Removed energy effects on picking coins, now normal pick up effect is used
 		* Removed stones dropped from bombing walls
 		* SAVE
+		* Removed Bloat
+		* Added Lightning with Post Processing adjustments
 
 
 		* Remove bloat not used
@@ -110,11 +112,11 @@ A variety of assets were used to create this game.
 </b>
 
 3D
-//Pure Poly - Ultimate Low Poly Mining
-
+Pure Poly - Ultimate Low Poly Mining
 BitGem - Hand Painted Series
 Siuniaev - Gambler Cat
 Instant Zoomies - Horror Starter Pack Free
+Synty - Ancient Empire
 
 2D
 Vector Dividers Collection
@@ -138,7 +140,6 @@ Monument Music - Love Story
 
 Prida01 - gluk
 
-
 <b>AI Tools
 </b>
 
@@ -157,7 +158,6 @@ Gimp
 Blender
 
 Unity
-
 
 <b>Game Jam
 </b>

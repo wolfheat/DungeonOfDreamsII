@@ -62,6 +62,7 @@ public class PlayerColliderController : MonoBehaviour
             if (other.TryGetComponent<BossSaveValues>(out BossSaveValues bossSave)) {
                 Debug.Log("SAVE BOSS VALUES HERE");
                 Stats.Instance.SaveBossValues();
+                LightEnvironmentManager.Instance.SetBossColor();
             }
 
             if(exitPoint.LeadsTo == -1)
