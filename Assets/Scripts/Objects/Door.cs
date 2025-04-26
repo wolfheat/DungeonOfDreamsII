@@ -44,14 +44,22 @@ public class Door : MonoBehaviour
             //Quaternion.RotateTowards(startRotationQuaternion,endRotationQuaternion,90+15f);
                     
         const float RotateTime = 0.2f;
+        const float OpenDoorHitTime = 0.15f;
         float rotateTimer = 0;
-
+        bool haveSlammed = false;
         // Opening rotation fast
         while(rotateTimer < RotateTime) {
+
+            if(!haveSlammed && rotateTimer > OpenDoorHitTime) {
+                SoundMaster.Instance.PlaySound(SoundName.OpenDoorHitWall);
+                haveSlammed = true;
+            }
+
             rotateTimer += Time.deltaTime;
             doorPart.transform.localRotation = Quaternion.Lerp(startRotationQuaternion,fullyOpenedRotationQuaternion,rotateTimer/RotateTime);
             yield return null;
         }
+
 
         rotateTimer = 0;
 

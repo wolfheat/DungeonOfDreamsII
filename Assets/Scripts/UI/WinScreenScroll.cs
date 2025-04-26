@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using Wolfheat.Inputs;
@@ -8,6 +9,7 @@ public class WinScreenScroll : MonoBehaviour
 {
     [SerializeField] UIController UIController;
     [SerializeField] TextMeshProUGUI winTimeText;
+    [SerializeField] TextMeshProUGUI winPercentText;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject scroll;
     private float StartPosition = -1200f;
@@ -46,6 +48,9 @@ public class WinScreenScroll : MonoBehaviour
     }
 
     internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;
+
+    internal void SetCompletePercentText(string winPercent) => winPercentText.text = winPercent;
+
     /*
 
 <b>Credits

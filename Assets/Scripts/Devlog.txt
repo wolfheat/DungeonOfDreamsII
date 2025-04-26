@@ -61,16 +61,21 @@ Apr 2025
 		* Removed Bloat
 		* Added Lightning with Post Processing adjustments
 25/4	* Animated opening of doors implemented
+		  [PC build - 86Mb]
+		* Adjusted main floor graphics to more 3D
+		* limited texture sizes 
+		  [PC build - 73Mb]
+		* Adjusted items particle effect circles
+26/4	* Removed duplicate walls
+		* Added Completion percent to Credits screen
 
-		* Remove bloat not used
 
+		
 
 		// DO
 
 		// add boss throwattack 		
-		// Adjust fire damage taken to 3 , not needed 				
 		
-		// Have correct lightning postprocessing all areas
 		// Have correct music for all areas
 
 		// WANTS

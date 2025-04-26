@@ -1,12 +1,13 @@
 using System;
 using System.Diagnostics;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 using Wolfheat.StartMenu;
 using Debug = UnityEngine.Debug;
 public class Stats : MonoBehaviour
 {
     [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
+    [SerializeField] GameObject itemsHolder;
 
     public float MiningSpeed { get => miningSpeed; }
     private float miningSpeed;
@@ -63,6 +64,7 @@ public class Stats : MonoBehaviour
         damage = DamageDefault;
 
     }
+    int startAmountItems = 0;
     private void Start()
     {
         if (MineralsOwned.Length != ActivationMinerals.Length)
@@ -72,7 +74,23 @@ public class Stats : MonoBehaviour
 
         // Start Timer
         stopwatch.Start();
+
+        startAmountItems = CountItems();
+        Debug.Log("Start Children Items = "+startAmountItems);
     }
+
+    internal string GetCompletePercent()
+    {
+        int currentItems = CountItems();
+        float percent = 100*(((float)startAmountItems - currentItems) / startAmountItems);
+        Debug.Log("End Children Items "+currentItems+" percent = > "+percent);
+
+        return percent.ToString("F1")+ "%";
+    }
+
+    // coins, bombs, keys, gems, maps
+    private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
+        + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;
 
     [SerializeField] Transform[] levelStartPositions;
     private int activeLevelStartPosition = 0;
@@ -194,6 +212,7 @@ public class Stats : MonoBehaviour
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
     }
+
 
     internal void AddBomb(int amount)
     {
@@ -347,8 +366,6 @@ public class Stats : MonoBehaviour
 
         // Also reset Enemy when player dies
     }
-
-
     public struct BossSaveValues
     {
         public int playerCurrentHealth;
