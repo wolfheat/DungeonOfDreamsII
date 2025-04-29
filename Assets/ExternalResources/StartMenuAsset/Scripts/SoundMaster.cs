@@ -65,7 +65,9 @@ namespace Wolfheat.StartMenu
         PickUpMap,
         PickUpKey,
         EnemyHitGroundEffect,
-        OpenDoorHitWall
+        OpenDoorHitWall,
+        CantDoThatSound,
+        GemPickup
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}

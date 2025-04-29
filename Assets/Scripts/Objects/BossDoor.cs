@@ -5,6 +5,7 @@ public class BossDoor : Door
     override public bool IsBossDoor => true;
 
     [SerializeField] private GameObject[] doorGems;
+    [SerializeField] private GameObject[] doorGemsMockups;
     private bool unlocked = false;
     public bool IsUnlocked => unlocked;
 
@@ -16,6 +17,7 @@ public class BossDoor : Door
         for (int i = 0; i < Inventory.Instance.HeldGems.Length; i++) {
             bool held = Inventory.Instance.HeldGems[i];
             doorGems[i].SetActive(held);
+            doorGemsMockups[i].SetActive(!held);
             if (!held)
                 allPlaced = false;
         }

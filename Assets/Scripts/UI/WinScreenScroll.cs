@@ -10,13 +10,22 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] UIController UIController;
     [SerializeField] TextMeshProUGUI winTimeText;
     [SerializeField] TextMeshProUGUI winPercentText;
+    [SerializeField] GameObject completionist;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject scroll;
-    private float StartPosition = -1200f;
+    
+
+    private float StartPosition = 0f;
     private float EndPosition = 5600;
+    private float ScrollPadding = 250f;
+
     private float speed = 80f;
     private const float Speedup = 6f;
 
+    private void Start()
+    {
+        Hide();
+    }
     public void Show()
     {
         panel.SetActive(true);
@@ -28,7 +37,21 @@ public class WinScreenScroll : MonoBehaviour
 
     private IEnumerator Animate()
     {
+        yield return null;
         RectTransform rect = scroll.GetComponent<RectTransform>();
+        float textBoxHeight = rect.rect.height;
+        float screenHeight = panel.GetComponent<RectTransform>().rect.height;
+
+        StartPosition = - screenHeight - ScrollPadding;
+        EndPosition = textBoxHeight + ScrollPadding;
+        Debug.Log("End position should be 6400 ish = "+ EndPosition+" = ["+textBoxHeight+"]+["+ScrollPadding+"]");
+
+        yield return null;
+
+        Debug.Log("Text box height = "+textBoxHeight);
+        Debug.Log("Text box anchored pos = "+ rect.anchoredPosition);
+        Debug.Log("End position should be 6400 ish = "+ EndPosition);
+
         Vector2 pos = new Vector3(0, StartPosition);
         rect.anchoredPosition = pos;
         while (pos.y<EndPosition) {         
@@ -50,6 +73,8 @@ public class WinScreenScroll : MonoBehaviour
     internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;
 
     internal void SetCompletePercentText(string winPercent) => winPercentText.text = winPercent;
+
+    internal void ShowCompletionist(bool isComplete) => completionist.SetActive(isComplete);
 
     /*
 

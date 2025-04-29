@@ -13,6 +13,12 @@ public class PowerUp : InteractableItem
     }
     public override void InteractWith()
     {
+        // Check if banana and player full health
+        if(Data.powerUpType == PowerUpType.Banana && Stats.Instance.Health == Stats.Instance.CurrentMaxHealth) {
+            Debug.Log("Dont use bananan!");
+            return;
+        }
+
         base.InteractWith();
         UIController.Instance.AddPickedUp(Data);    
     }

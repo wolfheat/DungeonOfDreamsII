@@ -107,12 +107,16 @@ public class UIController : MonoBehaviour
     public void ShowWinScreen()
 	{
 
-        string winTime = Stats.Instance.GetElapsedTime();
-        string completePercent = Stats.Instance.GetCompletePercent();
+        int completePercent = Stats.Instance.GetCompletePercent();
+        if (completePercent== 100) {
+            Debug.Log("Completionist!");
+        }
+        winScreen.ShowCompletionist(completePercent == 100);
+        
+        string completePercentText = completePercent + "%";
 
-
-        winScreen.SetCompleteTimeText(winTime);
-        winScreen.SetCompletePercentText(completePercent);
+        winScreen.SetCompleteTimeText(Stats.Instance.GetElapsedTime());
+        winScreen.SetCompletePercentText(completePercentText);
 
         SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
 

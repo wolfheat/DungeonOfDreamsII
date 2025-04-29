@@ -79,13 +79,13 @@ public class Stats : MonoBehaviour
         Debug.Log("Start Children Items = "+startAmountItems);
     }
 
-    internal string GetCompletePercent()
+    internal int GetCompletePercent()
     {
         int currentItems = CountItems();
         float percent = 100*(((float)startAmountItems - currentItems) / startAmountItems);
         Debug.Log("End Children Items "+currentItems+" percent = > "+percent);
-
-        return percent.ToString("F1")+ "%";
+        return (int)percent;
+        //return percent == 100 ? "100%" : (percent.ToString("F1")+ "%");
     }
 
     // coins, bombs, keys, gems, maps

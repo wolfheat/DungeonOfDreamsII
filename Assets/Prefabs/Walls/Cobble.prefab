@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6476420481263738736, guid: e7bf27a222549894db3608e26d075385, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1359743842423581617, guid: 23391896474926645b20be29b6ef67b1, type: 3}
     - target: {fileID: 6969374353195656814, guid: e7bf27a222549894db3608e26d075385, type: 3}
       propertyPath: m_Name
       value: Cobble

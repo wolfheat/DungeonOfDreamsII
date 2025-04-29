@@ -69,7 +69,9 @@ public class SceneChanger : MonoBehaviour
 
     internal void UnloadScene(string sceneName)
     {
-        if(SceneManager.GetSceneByName(sceneName).isLoaded)
+        if (SceneManager.GetSceneByName(sceneName).isLoaded) {
             SceneManager.UnloadSceneAsync(sceneName);
+            Resources.UnloadUnusedAssets();
+        }
     }
 }

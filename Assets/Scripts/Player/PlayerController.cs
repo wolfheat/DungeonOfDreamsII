@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         if (Inventory.Instance.BombsHeld <= 0)
         {
             Debug.Log("You Got No Bombs");
-            //SoundMaster.Instance.PlaySound(SoundName.NoBombs);
+            SoundMaster.Instance.PlaySound(SoundName.CantDoThatSound);
             return;
         }
 
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             // Something is in the way
             Debug.Log("CANT DO THAT");
-            //SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
+            SoundMaster.Instance.PlaySound(SoundName.CantDoThatSound);
         }
     }
 
