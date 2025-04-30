@@ -39,9 +39,10 @@ public class WinScreenScroll : MonoBehaviour
     {
         yield return null;
         RectTransform rect = scroll.GetComponent<RectTransform>();
+
         float textBoxHeight = rect.rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
-
+        
         StartPosition = - screenHeight - ScrollPadding;
         EndPosition = textBoxHeight + ScrollPadding;
         Debug.Log("End position should be 6400 ish = "+ EndPosition+" = ["+textBoxHeight+"]+["+ScrollPadding+"]");

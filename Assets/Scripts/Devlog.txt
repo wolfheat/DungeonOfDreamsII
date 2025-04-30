@@ -73,9 +73,14 @@ Apr 2025
 		* Added another ambient music for main dungeon
 		* Updated sound for picking up gems
 29/4	* Adjusted credits to fit actual text
-		
+30/4	* Created new teleport particle effects
+		* Fixed Credits scroll start issue
+
+
 
 		// DO
+
+		// Add teleport sound
 
 		// add boss throwattack 		
 		
