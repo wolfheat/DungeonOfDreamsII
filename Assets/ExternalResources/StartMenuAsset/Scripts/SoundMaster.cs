@@ -67,7 +67,8 @@ namespace Wolfheat.StartMenu
         EnemyHitGroundEffect,
         OpenDoorHitWall,
         CantDoThatSound,
-        GemPickup
+        GemPickup,
+        Teleport
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}
@@ -342,7 +343,7 @@ namespace Wolfheat.StartMenu
 
         public void PlaySound(SoundName name, bool allowInterupt= true)
         {
-            Debug.Log("Play Sound "+name);
+            //Debug.Log("Play Sound "+name);
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
 
             //Debug.Log("Play Sound: "+name);

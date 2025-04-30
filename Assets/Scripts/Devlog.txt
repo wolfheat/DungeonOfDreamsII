@@ -75,7 +75,7 @@ Apr 2025
 29/4	* Adjusted credits to fit actual text
 30/4	* Created new teleport particle effects
 		* Fixed Credits scroll start issue
-
+		* Credits screen now ends with thanks for playing staying on screen and growing.
 
 
 		// DO
@@ -118,8 +118,8 @@ Apr 2025
 A game by wolfheat
 
 
-A variety of assets were used to create this game.
 
+A variety of assets were used to create this game.
 
 <b>Graphics
 </b>
@@ -157,16 +157,13 @@ Prida01 - gluk
 Playground AI - 2D art
 Craiyon - 2D art
 Piclumen - 2D art
-Suno - Boss Music
+Suno - Music
 
 <b>Other Tools Used
 </b>
 Audacity
-
 Gimp
-
 Blender
-
 Unity
 
 <b>Game Jam
@@ -176,9 +173,6 @@ Dungeon Crawler Game Jam 2025
 
 
 Thank you for playing!
-
-
-
 
 
 

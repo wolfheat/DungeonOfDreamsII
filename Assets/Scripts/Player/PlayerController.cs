@@ -615,6 +615,11 @@ public class PlayerController : MonoBehaviour
         playerMock.transform.position = position;
     }
 
+    internal void GotoStartPosition()
+    {
+        Stats.Instance.SetSpecificPosition(0);
+        ResetPlayerPosition();
+    }
     internal void GotoStartPosition(int leadsTo)
     {
         Debug.Log("Specific position");

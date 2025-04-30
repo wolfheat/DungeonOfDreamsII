@@ -38,11 +38,10 @@ public class PlayerColliderController : MonoBehaviour
             Shop.Instance.HidePanel();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colliding with "+other.name+" ID:"+other.gameObject.GetInstanceID()+" player ID: "+this.gameObject.GetInstanceID());
-        Debug.Log("GameObject Player ",this.gameObject);
-
+        //Debug.Log("Colliding with "+other.name+" ID:"+other.gameObject.GetInstanceID()+" player ID: "+this.gameObject.GetInstanceID());
         
         if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
         {
@@ -59,21 +58,27 @@ public class PlayerColliderController : MonoBehaviour
         {
             Debug.Log("Exit point for level.");
 
+            // Exit points with boss save values class attached saves the players stats so by respawn these are loaded
             if (other.TryGetComponent<BossSaveValues>(out BossSaveValues bossSave)) {
                 Debug.Log("SAVE BOSS VALUES HERE");
                 Stats.Instance.SaveBossValues();
                 LightEnvironmentManager.Instance.SetBossColor();
             }
 
+            //Play portal sound
+            SoundMaster.Instance.PlaySound(SoundName.Teleport);
+
+                
+
             if(exitPoint.LeadsTo == -1)
-                PlayerController.Instance.GotoNextStartPosition();
+                TransitionScreen.Instance.Darken(PlayerController.Instance.GotoNextStartPosition, 0.14f);
             else
-                PlayerController.Instance.GotoStartPosition(exitPoint.LeadsTo);
+                TransitionScreen.Instance.Darken(PlayerController.Instance.GotoStartPosition, 0.14f);
 
         }
         else if(other.TryGetComponent(out ExitPortal portal))
         {
-            //Debug.Log("Exit portal collission "+portal);
+            Debug.Log("Exit portal entered, Win game!");
             UIController.Instance.ShowWinScreen();
         }
         else if (other.TryGetComponent(out BossActivator bossActivator)) {

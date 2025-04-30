@@ -440,6 +440,12 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 63
+  - clip: {fileID: 8300000, guid: a3c6615afcb9f6746992451f5aec8158, type: 3}
+    volume: 0.494
+    pitch: 1.107
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 66
   effects:
   - clip: {fileID: 8300000, guid: 32bc1dfbee341d14398510ecec62e013, type: 3}
     volume: 0.181

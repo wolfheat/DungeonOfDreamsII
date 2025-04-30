@@ -43,7 +43,7 @@ public class ParticleEffects : MonoBehaviour
         int index = (int)type;
         index = (index < particleSystems.Length ? index : 0);
 
-        Debug.Log("Playing particel effect "+type+" which corresponds to playing: " + particleSystems[index].name);
+        //Debug.Log("Playing particel effect "+type+" which corresponds to playing: " + particleSystems[index].name);
 
         ParticleEffect effect = particlePools[index].GetNextFromPool(particleSystems[index]);
         effect.ParticleType = type;

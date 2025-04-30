@@ -17,6 +17,7 @@ public class WinScreenScroll : MonoBehaviour
 
     private float StartPosition = 0f;
     private float EndPosition = 5600;
+    private float TopScrollPadding = 200f;
     private float ScrollPadding = 250f;
 
     private float speed = 80f;
@@ -38,12 +39,16 @@ public class WinScreenScroll : MonoBehaviour
     private IEnumerator Animate()
     {
         yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
         RectTransform rect = scroll.GetComponent<RectTransform>();
 
         float textBoxHeight = rect.rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
         
-        StartPosition = - screenHeight - ScrollPadding;
+        StartPosition = - screenHeight - TopScrollPadding;
+        //StartPosition = - screenHeight - ScrollPadding;
         EndPosition = textBoxHeight + ScrollPadding;
         Debug.Log("End position should be 6400 ish = "+ EndPosition+" = ["+textBoxHeight+"]+["+ScrollPadding+"]");
 
@@ -63,12 +68,16 @@ public class WinScreenScroll : MonoBehaviour
         }
         Debug.Log("Animation of End Credits complete");
         Hide();
+
+        rect.anchoredPosition = new Vector3(0, StartPosition);
         UIController.Instance.ToMainMenu();
+        StopAllCoroutines();
     }
 
     public void Hide()
     {
         panel.SetActive(false);
+
     }
 
     internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class FogOfWar : MonoBehaviour
 {
@@ -86,8 +88,22 @@ public class FogOfWar : MonoBehaviour
         tex.Apply();
     }
 
+
+    public void TestMethod()
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew(); 
+
+        stopwatch.Stop();
+        UnityEngine.Debug.Log("Method took " + stopwatch.ElapsedMilliseconds + " ms.");
+
+
+    }
+
+
     public void CreateImage(int mapWidth, int mapHeight)
     {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
         // We now know the full size of the map
         Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight,TextureFormat.RGBA32,false);
 
@@ -98,13 +114,17 @@ public class FogOfWar : MonoBehaviour
 
         Color32[] pixels = new Color32[mapWidth * mapHeight];
 
+        /* Old version to fill as black
         for (int i = 0; i < pixels.Length; i++) {
             pixels[i] = Color.black;
-        }
+        }*/
+
+        System.Array.Fill(pixels, new Color32(0, 0, 0, 255));
+
 
         fullMapTexture.SetPixels32(pixels,0);
 
-        Debug.Log("Color alpha of first pixel is " + pixels[0].a);
+        UnityEngine.Debug.Log("Color alpha of first pixel is " + pixels[0].a);
 
         Rect rect = new Rect(0, 0, mapWidth, mapHeight);
 
@@ -116,6 +136,20 @@ public class FogOfWar : MonoBehaviour
         SetSprite(newMapSprite);
 
         rectTransform.sizeDelta = new Vector2(mapWidth, mapHeight);
+
+
+        stopwatch.Stop();
+        UnityEngine.Debug.Log($"CreateImage took {stopwatch.ElapsedMilliseconds} ms"); // 60ms
+
+        StartCoroutine(RevealPlayerPosition());
+    }
+
+    private IEnumerator RevealPlayerPosition()
+    {
+        // reveal players position
+        yield return null;
+        UnityEngine.Debug.Log("Reveal from player position "+ PlayerController.Instance.transform.position+" = "+ Convert.V3ToV2Int(PlayerController.Instance.transform.position));
+        Reveal(Convert.V3ToV2Int(PlayerController.Instance.transform.position));
     }
 
     private void SetSprite(Sprite newMapSprite) => FOV_Image.sprite = newMapSprite;

@@ -89,8 +89,11 @@ public class Stats : MonoBehaviour
     }
 
     // coins, bombs, keys, gems, maps
-    private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
-        + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;
+    private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>(false).ToArray().Length 
+        + itemsHolder.transform.GetComponentsInChildren<PowerUp>(false).ToArray().Length;
+    
+    //private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
+    //    + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;
 
     [SerializeField] Transform[] levelStartPositions;
     private int activeLevelStartPosition = 0;
