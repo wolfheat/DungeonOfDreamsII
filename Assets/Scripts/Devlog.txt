@@ -76,20 +76,23 @@ Apr 2025
 30/4	* Created new teleport particle effects
 		* Fixed Credits scroll start issue
 		* Credits screen now ends with thanks for playing staying on screen and growing.
+		* Fixed issue with death panel not taking player to menu
+		* Using same sound for placing gems as picking them
+		* Made keyboard keys interact with doors
+		* Made ESC close shop if open before pausing game
+		* Made mouse and keyboard work for shop
 
+
+		// Make clicking to open shop not autobuy if over buy button at release
 
 		// DO
-
-		// Add teleport sound
-
-		// add boss throwattack 		
-		
-		// Have correct music for all areas
+		// Fix seam issue when switching between scenes
 
 		// WANTS
-		// Exits needs better portal
-
+		// add boss throwattack 		
 		// Make better postprocessing
+
+		// MAYBES
 		// Make new Start Menu graphics
 
 

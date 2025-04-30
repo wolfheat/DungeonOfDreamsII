@@ -30,6 +30,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private LayerMask gridDetectionLayerMask;
     [SerializeField] private LayerMask itemsLayerMask;
     private LayerMask wallLayerMask;
+    private LayerMask doorLayerMask;
     private LayerMask enemyLayerMask;
     [SerializeField] private bool useDrawDebug;
     public GameObject mockHolder;
@@ -57,6 +58,7 @@ public class LevelCreator : MonoBehaviour
         gridSpots = new GridSpot[10000];
 
         wallLayerMask = LayerMask.GetMask("Wall");
+        doorLayerMask = LayerMask.GetMask("Door");
         enemyLayerMask = LayerMask.GetMask("Enemy");
 
     }
@@ -426,11 +428,13 @@ public class LevelCreator : MonoBehaviour
     }
     public Door TargetHasDoor(Vector3 target)
     {
+        Debug.Log("Target has door");
         // Check if target is a Door
-        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, doorLayerMask);
 
         if (colliders.Length != 0)
         {
+            Debug.Log("true");
             return colliders[0].gameObject.GetComponent<Door>();
         }
         return null;

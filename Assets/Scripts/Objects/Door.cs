@@ -13,7 +13,10 @@ public class Door : MonoBehaviour
     {
         Debug.Log("Animate opening door");
 
+        // Disable Door so it wont double open
+        GetComponent<BoxCollider>().enabled = false;
         GetComponent<Collider>().enabled = false;
+
         SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
 
         // Animated opening of door

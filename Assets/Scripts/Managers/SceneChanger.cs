@@ -60,11 +60,20 @@ public class SceneChanger : MonoBehaviour
     }
     private IEnumerator ChangeToActive(string name, bool additive)
     {        
+        string unloadScene = "";
+        // Get active scene so it can be unloaded?
+        if (SceneManager.GetActiveScene().name == "DreamsDungeon2")
+            unloadScene = "DreamsDungeon2";
+        else if (SceneManager.GetActiveScene().name == "StartMenu")
+            unloadScene = "StartMenu";
+
         yield return SceneManager.LoadSceneAsync(name, additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
 
         if (SceneManager.GetSceneByName(name).IsValid())
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
 
+        // Unload the previus scene
+        UnloadScene(unloadScene);
     }
 
     internal void UnloadScene(string sceneName)

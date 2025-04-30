@@ -66,6 +66,10 @@ public class UIController : MonoBehaviour
         // Player can not toggle pause when dead
         //if (playerStats.IsDead) return;
 
+        // If buy menu is open close it instead of pause
+        if (Shop.Instance.CloseIfOpen())
+            return;
+
         bool doPause = GameState.state == GameStates.Running;
         Pause(doPause);
         pauseScreen.SetActive(doPause);
@@ -175,11 +179,12 @@ public class UIController : MonoBehaviour
 
         //SceneManager.UnloadSceneAsync("Dungeon");
         //SceneManager.UnloadSceneAsync("DreamsDungeon2");
+        /*
         if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid()) {
             SceneChanger.Instance.UnloadScene("DreamsDungeon2");
             //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("DreamsDungeon2"));
             Debug.Log("Unloaded Scene DreamsDungeon2");
-        }
+        }*/
 
         SceneChanger.Instance.ChangeScene("StartMenu");
     }

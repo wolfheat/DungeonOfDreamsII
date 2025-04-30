@@ -39,11 +39,7 @@ public class DeathScreenController : MonoBehaviour
             //LevelLoader.Instance.DefineGameDataForSave();
             //SavingUtility.Instance.SavePlayerDataToFile();
         }
-        
-        SoundMaster.Instance.ResetMusic();
-
-        SceneManager.UnloadSceneAsync("Dungeon");
-        SceneChanger.Instance.ChangeScene("StartMenu");
+        UIController.Instance.ToMainMenu();
     }
 
     public void CloseClicked()

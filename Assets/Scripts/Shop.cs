@@ -20,6 +20,11 @@ public class Shop : MonoBehaviour
     private int bombCost = 1; 
     private int keyCost = 3; 
     private int otherCost = 5;
+
+    private int activeShop = 0;
+
+    public bool ShopIsOpen => panel.activeSelf;
+    public bool ShopSpecificIsOpen => specificPanel.activeSelf;
     public void ShowPanel()
     {
         panel.SetActive(true);
@@ -39,12 +44,16 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < ShopItemsSpecific.Length; i++) {
             ShopItemsSpecific[i].SetActive(i == specificID);
         }
+        activeShop = specificID;
     }
 
-    internal void CloseIfOpen()
+    internal bool CloseIfOpen()
     {
-        if (panel.activeSelf || specificPanel.activeSelf) 
+        if (panel.activeSelf || specificPanel.activeSelf) {
             HidePanel();
+            return true;
+        }
+        return false;
     }
     public void HidePanel()
     {
@@ -155,4 +164,25 @@ public class Shop : MonoBehaviour
         }
     }
 
+    internal void BuyShopItem()
+    {
+        Debug.Log("Try buy "+activeShop);
+        switch (activeShop) {
+            case 0:
+                Buy20Bombs();
+                return;
+            case 1:
+                BuyChicken();
+                return;
+            case 2:
+                BuyBananas();
+                return;
+            case 3:
+                BuyFireSpell();
+                return;
+
+            default:
+                break;
+        }
+    }
 }

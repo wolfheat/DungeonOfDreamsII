@@ -7,17 +7,20 @@ public class PickUpController : MonoBehaviour
 {
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
+    public Door Door { get; set; }
     public EnemyController Enemy { get; set; }
     public Mock Mockup { get; set; } = null;
 
     private LayerMask enemyLayerMask;
     private LayerMask mockupLayerMask;
-    private LayerMask wallLayerMask;
+    private LayerMask wallAndDoorLayerMask;
+    private LayerMask doorLayerMask;
     private LayerMask itemLayerMask;
 
     private void Start()
     {
-        wallLayerMask = LayerMask.GetMask("Wall");
+        doorLayerMask = LayerMask.GetMask("Door");
+        wallAndDoorLayerMask = LayerMask.GetMask("Wall") | doorLayerMask;
         enemyLayerMask = LayerMask.GetMask("Enemy");
         mockupLayerMask = LayerMask.GetMask("Mock");
         itemLayerMask = LayerMask.GetMask("Items","ItemsSeeThrough") ;
@@ -91,26 +94,22 @@ public class PickUpController : MonoBehaviour
         Vector3 alignedPos = Convert.Align(transform.position);
 
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(alignedPos, Game.boxSize,Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(alignedPos, Game.boxSize,Quaternion.identity, wallAndDoorLayerMask);
 
-        /*
-        Vector3 a = alignedPos + transform.right*Game.boxSize.x-transform.up*Game.boxSize.y+transform.forward*Game.boxSize.z;
-        Vector3 b = a + Vector3.up*Game.boxSize.y*2;
-        Vector3 c = a - transform.right*Game.boxSize.y*2;
-        Vector3 d = c + Vector3.up*Game.boxSize.y*2;
-        
-        // Draw the cube checked
-        Debug.DrawLine(a, b, Color.green,3f);
-        Debug.DrawLine(c, d, Color.green,3f);
-        */
 
-        // This shows whats ahead of the player, not needed
-        //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).Where(x => x!=null).ToList());
-
-        if (colliders.Length == 0)
+        if (colliders.Length == 0) {
             Wall = null;
-        else
-            Wall = colliders[0].gameObject.GetComponent<Wall>();
+            Door = null;
+        }
+        else if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
+            this.Wall = FoundWall;
+            Door = null;
+            // Found A wall
+        }else if(colliders[0].gameObject.TryGetComponent(out Door FoundDoor)) {
+            // Found A wall
+             this.Door = FoundDoor;
+            Wall = null;
+        }
     }
     
     public void UpdateInteractables()

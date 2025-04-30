@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Step,SideStep,Rotate}
@@ -136,11 +137,12 @@ public class PlayerController : MonoBehaviour
 
     public void InterractWith(CallbackContext context)
     {
-        InterractWith();
+        Debug.Log("Interract");
+        InterractWith(true);
     }
     
 
-    public void InterractWith()
+    public void InterractWith(bool mouseSource = false)
     {
         if (Stats.Instance.IsDead) return;
         pickupController.UpdateColliders();
@@ -148,16 +150,34 @@ public class PlayerController : MonoBehaviour
         // Disable interact when inventory
         //if (UIController.CraftingActive || UIController.InventoryActive || GameState.IsPaused)
 
+
+        if(EventSystem.current.IsPointerOverGameObject())
+            Debug.Log("Pointer is over UI");
+        if (Mouse.current.leftButton.IsPressed())
+            Debug.Log("Left button is pressed");
+
+
         // Check if item exists to pick up
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject() && Mouse.current.leftButton.IsPressed())
         {
+            // Only check for this if not in shop - prob should only do if interact was performed by mouse
             Debug.Log("Interacting over UI element");
+            return;
+        }
+
+        // When shop is open try to buy when interacting
+        if (Shop.Instance.ShopSpecificIsOpen) {
+            if (Mouse.current.leftButton.IsPressed())
+                return;
+            Debug.Log("Shop is open try buy");
+            Shop.Instance.BuyShopItem();
             return;
         }
 
         //toolHolder.ChangeTool(DestructType.Breakable);
 
 
+        Debug.Log("pickupController.ActiveInteractable = "+ pickupController.ActiveInteractable);
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {
@@ -165,15 +185,21 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            Debug.Log("ELSE = wall = "+ pickupController.Wall+" Door = "+ pickupController.Door);
             if (pickupController.Wall != null)
             {
+                Debug.Log("WALL");
                 if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
                 {
                     SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
                     return;
                 }
+                else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
+                    InteractWithDoor(door);
+                }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
-                    Debug.Log("Interacting with Altar");     
+                    Debug.Log("Interacting with Altar");
+                    Shop.Instance.ShowPanel(altar.MineralAccepted);
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
                 {
@@ -187,6 +213,11 @@ public class PlayerController : MonoBehaviour
 
                 }
                 Debug.Log("Wall "+pickupController.Wall?.name);
+            }
+            else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
+                Debug.Log("DOOR");
+                Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
+                InteractWithDoor(pickupController.Door);
             }
             else if (pickupController.Enemy != null)
             {
@@ -258,36 +289,9 @@ public class PlayerController : MonoBehaviour
 
                     // If door is ahead unlock it if player has correct key
                     if (door != null) {
-
-                        if (door.IsBossDoor) {
-                            Debug.Log("Boss Door place gems");
-
-
-                            if (door.TryGetComponent<BossDoor>(out BossDoor bossDoor)) {
-                                if (bossDoor.IsUnlocked) {
-                                    Debug.Log("Opening Boss Door");
-                                    door.OpenDoor();
-                                }
-                                if (bossDoor.PlaceGems()) {
-                                    Debug.Log("Player Placed all his gems. Unlocked:");
-                                }
-                            }
-                        }
-                        else {
-                            bool playerCanUnlock = Inventory.Instance.KeysHeld > 0;
-                            Debug.Log("DOOR AHEAD keys: "+Inventory.Instance.KeysHeld);
-
-                            if (playerCanUnlock) {
-                                Debug.Log("Unlocked");
-                                door.OpenDoor();
-
-                                Inventory.Instance.RemoveKey();
-                            }
-                            else {
-                                SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
-                            }
-                        }
-                    }else if (altar != null) {
+                        InteractWithDoor(door);
+                    }
+                    else if (altar != null) {
                         Debug.Log("There is an altar here, open its shop Menu");
                         Debug.Log("Menu "+altar.MineralAccepted);
 
@@ -309,6 +313,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private static void InteractWithDoor(Door door)
+    {
+        if (door.IsBossDoor) {
+            Debug.Log("Boss Door place gems");
+            if (door.TryGetComponent<BossDoor>(out BossDoor bossDoor)) {
+                if (bossDoor.IsUnlocked) {
+                    Debug.Log("Opening Boss Door");
+                    door.OpenDoor();
+                }
+                if (bossDoor.PlaceGems()) {
+                    Debug.Log("Player Placed all his gems. Unlocked:");
+                }
+            }
+        }
+        else {
+            bool playerCanUnlock = Inventory.Instance.KeysHeld > 0;
+            Debug.Log("DOOR AHEAD keys: " + Inventory.Instance.KeysHeld);
+
+            if (playerCanUnlock) {
+                Debug.Log("Unlocked");
+                door.OpenDoor();
+
+                Inventory.Instance.RemoveKey();
+            }
+            else {
+                SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
+            }
+        }
+    }
 
     private void TurnPerformed(InputAction.CallbackContext obj)
     {
@@ -499,7 +532,7 @@ public class PlayerController : MonoBehaviour
         {
             CenterPlayerPosition();
             Debug.Log("Mouse is held, interact");
-            InterractWith();
+            InterractWith(true);
         }
 
     }
