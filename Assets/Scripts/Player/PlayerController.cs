@@ -144,6 +144,10 @@ public class PlayerController : MonoBehaviour
 
     public void InterractWith(bool mouseSource = false)
     {
+        
+
+
+
         if (Stats.Instance.IsDead) return;
         pickupController.UpdateColliders();
 

@@ -15,10 +15,11 @@ public class SceneChanger : MonoBehaviour
             return;
         }
         Instance = this;
-              
+
 
 #if UNITY_EDITOR
-        CheckedForScenes();
+        Resources.UnloadUnusedAssets();
+        //CheckedForScenes();
 #else      
             ChangeScene("StartMenu");            
 #endif
@@ -26,6 +27,7 @@ public class SceneChanger : MonoBehaviour
 
     private void CheckedForScenes()
     {
+        
         Debug.Log("** Checking Scenes to Set active. **");
         if (SceneManager.GetSceneByName("StartMenu").IsValid() && SceneManager.GetSceneByName("StartMenu").isLoaded)
         {
@@ -68,6 +70,7 @@ public class SceneChanger : MonoBehaviour
             unloadScene = "StartMenu";
 
         yield return SceneManager.LoadSceneAsync(name, additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
+        yield return null;
 
         if (SceneManager.GetSceneByName(name).IsValid())
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));

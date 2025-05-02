@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class LightEnvironmentManager : MonoBehaviour
@@ -17,13 +19,26 @@ public class LightEnvironmentManager : MonoBehaviour
 		Instance = this;
 	}
 
+	[ContextMenu("Set Normal Environment Color")]
 	public void SetNormalColor()
 	{
+		Debug.Log(" ** ** ** Set Normal Environment Color ** ** ** ");
+		StartCoroutine(DelayedEnvironementChange(normalColor));
         RenderSettings.ambientLight = normalColor;
+
     }
-	
+
+    private IEnumerator DelayedEnvironementChange(Color32 color)
+    {
+		yield return null;
+		Debug.Log(" Delayed ** ** ** Set Normal Environment Color ** ** ** ");
+		RenderSettings.ambientLight = color;
+    }
+
+    [ContextMenu("Set Boss Environement Color")]
 	public void SetBossColor()
     {
+		Debug.Log(" ** ** ** Set Boss Environment Color ** ** ** ");
         RenderSettings.ambientLight = bossColor;
     }
 

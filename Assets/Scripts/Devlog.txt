@@ -81,6 +81,14 @@ Apr 2025
 		* Made keyboard keys interact with doors
 		* Made ESC close shop if open before pausing game
 		* Made mouse and keyboard work for shop
+1/5		* Fixed environment colors not working
+		* Deleted duplicate  map item
+		* Adjusted Start Menu pan
+2/5		* Started Adding Leaderboard
+		* Added name change and storage locally for player name
+		* Adding Unity Leaderboards
+
+
 
 
 		// Make clicking to open shop not autobuy if over buy button at release

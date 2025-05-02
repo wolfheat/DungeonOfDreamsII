@@ -21,6 +21,7 @@ namespace Wolfheat.Inputs
     Controls.Player.Y.performed += Give10Gold;
 #endif
         }
+
         private void Start()
         {
             LoadingComplete();
@@ -40,6 +41,7 @@ namespace Wolfheat.Inputs
             Controls.Player.N.performed -= SoundMaster.Instance.ToggleMusic;
             Controls.Player.T.performed -= JumpToNextEntryPoint;
             Controls.Player.Y.performed -= Give10Gold;
+            Controls.Disable();
         }
 
         public void Give10Gold(InputAction.CallbackContext context)

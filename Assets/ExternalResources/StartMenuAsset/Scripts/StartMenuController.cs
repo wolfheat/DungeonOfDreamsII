@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,14 +11,16 @@ namespace Wolfheat.StartMenu
     public string animationName;
     public bool disable;
 }
-public enum MenuOption {MainMenu, Settings, Credits, StartGame, Exit}
+public enum MenuOption {MainMenu, Settings, Credits, StartGame, Leaderboards ,Exit}
 
 public class StartMenuController : MonoBehaviour
 {
     public static StartMenuController Instance { get; private set; }
     public MenuState menuState = MenuState.Idle;
+    [SerializeField] WinScreenScroll creditsScroll;
     [SerializeField] StartMenuPanel credits;
     [SerializeField] StartMenuPanel settings;
+    [SerializeField] StartMenuPanel leaderboards;
     [SerializeField] StartMenuPanel startMenu;
     [SerializeField] private MenuOption nextMenu;
     public static MenuButton lastButton;
@@ -26,7 +29,7 @@ public class StartMenuController : MonoBehaviour
 
     public void SetNextMenu(int nextMenuindex)
     {
-        Debug.Log("Set Next: " + Time.realtimeSinceStartup);
+        //Debug.Log("Set Next: " + Time.realtimeSinceStartup);
         if (menuState == MenuState.Transitioning) return;
         nextMenu = (MenuOption)nextMenuindex;
         SoundMaster.Instance.PlaySound(SoundName.MenuClick);
@@ -63,12 +66,15 @@ public class StartMenuController : MonoBehaviour
         credits.gameObject.SetActive(false);
 
         Debug.Log("Soundmaster "+SoundMaster.Instance);
+
+        WinScreenScroll.Completed += CreditsShownComplete;
     }
 
 
     private void OnDisable()
     {
         actions.Player.M.performed -= SoundMaster.Instance.ToggleMusic;
+        WinScreenScroll.Completed -= CreditsShownComplete;
     }
 
 
@@ -89,11 +95,15 @@ public class StartMenuController : MonoBehaviour
             case MenuOption.StartGame:
                 StartGame();
                 break;
+            case MenuOption.Leaderboards:
+                ShowLeaderboards();
+                break;
             case MenuOption.Exit:
                 ExitGame();
                 break;
         }
     }
+
 
     public void AnimationComplete()
     {
@@ -120,6 +130,13 @@ public class StartMenuController : MonoBehaviour
         SceneChanger.Instance.ChangeScene("DreamsDungeon2");
     }
 
+    private void ShowLeaderboards()
+    {
+        Debug.Log("Leaderboards Pressed");
+        menuState = MenuState.Transitioning;
+        leaderboards.gameObject.SetActive(true);
+        currentOption = leaderboards;   
+    }
     private void ShowSettings()
     {
         Debug.Log("Settings Pressed");
@@ -128,11 +145,19 @@ public class StartMenuController : MonoBehaviour
         currentOption = settings;
     }
 
+    private void CreditsShownComplete()
+    {
+        Debug.Log("Shown Credits Complete");
+        ShowMenu(MenuOption.MainMenu);
+    }
+
     private void ShowCredits()
     {
         Debug.Log("Credits Pressed");
         menuState = MenuState.Transitioning;
-        credits.gameObject.SetActive(true);
+        creditsScroll.gameObject.SetActive(true);
+        creditsScroll.ShowFromStartMenu();
+
         currentOption = credits;
     }
         

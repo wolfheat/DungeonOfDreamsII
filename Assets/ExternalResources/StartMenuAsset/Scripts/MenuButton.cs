@@ -13,7 +13,7 @@ namespace Wolfheat.StartMenu
         public void OnPointerClick(PointerEventData eventData)
         {
             //SoundMaster.Instance.PlaySound(SoundName.MenuClick);
-            Debug.Log("Click in Button: "+Time.realtimeSinceStartup);
+            //Debug.Log("Click in Button: "+Time.realtimeSinceStartup);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

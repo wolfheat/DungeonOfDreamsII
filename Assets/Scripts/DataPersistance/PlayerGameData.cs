@@ -118,19 +118,8 @@ public class PlayerGameData
 
     // Players Inventory
 
-    // Position
-    public float[] PlayerPosition { get; set; }
-    public SaveItem[][] Destructables { get; set; }
-    public SaveItem[][] Resources { get; set; }
-    public SaveEnemy[][] Enemies { get; set; }
-    
     // Totals
     public int PlayTime { get; set; }
-    public float[] PlayerRotation { get; set; }
-    public int PlayerHealth { get; set; }
-    public float PlayerOxygen { get; set; }
-    public InventorySave Inventory { get; set; }
-    public SaveDroppedItem[] Pickables { get; set; }
 
     // Action Events
     public static Action InventoryUpdate;
@@ -146,16 +135,13 @@ public class PlayerGameData
 [Serializable]
 public class GameSettingsData
 {
-    // General Game Settings
-    public int ActiveTouchControl { get; set; } // Having these private set wont let the load method write these values
-    public int CameraPos { get; set; } // Having these private set wont let the load method write these values
-
+    // General Game Settings    
     public SoundSettings soundSettings = new SoundSettings();
-    public LightSettings lightSettings = new LightSettings();
-    public PlayerInputSettings playerInputSettings = new PlayerInputSettings(); // Use shake etc
 
     // Action Events
     public static Action GameSettingsUpdated;
+
+    public string PlayerName = "Anonymous";
 
     // General Settings - methods
     public void SetSoundSettings(float master, float music, float SFX,bool setFromFile=false)
@@ -165,5 +151,10 @@ public class GameSettingsData
         soundSettings.SFXVolume = SFX;
         if(!setFromFile)
             GameSettingsUpdated?.Invoke();
+    }
+    public void SetPlayerName(string nameToSet)
+    {
+        PlayerName = nameToSet;    
+        GameSettingsUpdated?.Invoke();
     }
 }

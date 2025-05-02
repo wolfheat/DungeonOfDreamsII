@@ -9,6 +9,7 @@ namespace Wolfheat.StartMenu
 {
     public class SettingsController : MonoBehaviour
     {
+        [SerializeField] NameChanger nameChanger;
         [SerializeField] Slider master;
         [SerializeField] Slider music;
         [SerializeField] Slider sfx;
@@ -28,18 +29,19 @@ namespace Wolfheat.StartMenu
             Debug.Log("Settings Controller enabled, read data from file");
             //Read data from file
             soundSettings = SavingUtility.gameSettingsData.soundSettings;
-            inputSettings = SavingUtility.gameSettingsData.playerInputSettings;
+
             if (soundSettings != null)
             {
                 UpdateUISettingsPage();
             }
-
+            UpdatePlayerName();
             UpdateSoundPercent();
             UpdateMouseSensitivityPercent();
             StartCoroutine(EnableSliderListeners());
             SoundMaster.Instance.GlobalMuteChanged += MuteChanged;
         }
 
+        private void UpdatePlayerName() => nameChanger.SetPlayerName(SavingUtility.gameSettingsData.PlayerName);
 
         private void OnDisable()
         {
@@ -86,18 +88,6 @@ namespace Wolfheat.StartMenu
             sfxPercent.text = sfx.value <= SoundMaster.MuteBoundary ? "MUTED" : (sfx.value*100).ToString("F0");
         }
 
-        public void UpdateInputSetting()
-        {
-            if (!listenForSliderValues)
-            {
-                Debug.Log("Slider value changed but disregarded "+mouse.value);
-                return;
-            }
-            Debug.Log("SETTINGSCONTROLLER - Slider value changed for Mouse Input");
-
-            SavingUtility.gameSettingsData.playerInputSettings.MouseSensitivity = mouse.value;
-            UpdateMouseSensitivityPercent();
-        }
         public void UpdateSound()
         {
             if (!listenForSliderValues)

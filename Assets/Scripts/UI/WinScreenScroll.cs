@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+//using System.Numerics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 
@@ -22,13 +24,40 @@ public class WinScreenScroll : MonoBehaviour
 
     private float speed = 80f;
     private const float Speedup = 6f;
+    private bool startMenuView = false;
+
+    public static Action Completed;
 
     private void Start()
     {
         Hide();
+        StartMenuInputs.Instance.Controls.Player.Esc.performed += ESCAPE;
+    }
+    
+    private void OnDisable()
+    {
+        StartMenuInputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
+    }
+
+    public void ShowFromStartMenu()
+    {
+        startMenuView = true;
+        panel.SetActive(true);
+
+        StartCoroutine(Animate());
+
+        //SoundMaster.Instance.PlayMusic(MusicName.CreditsMusic);
+    }
+
+    private void ESCAPE(InputAction.CallbackContext context)
+    {
+        // Player tries to escape the credits screen
+        Debug.Log("SKIP ESC");
+        Hide();
     }
     public void Show()
     {
+        startMenuView = false;
         panel.SetActive(true);
 
         Debug.Log("Win screen Active Pause game");
@@ -38,12 +67,15 @@ public class WinScreenScroll : MonoBehaviour
 
     private IEnumerator Animate()
     {
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
         RectTransform rect = scroll.GetComponent<RectTransform>();
+        rect.anchoredPosition = new Vector3(0, 0); 
+        //scroll.transform.localPosition = new Vector3(0,-1000f,0);
+        yield return null;
+        yield return null;
+        yield return null;
+        yield return null;
 
+        rect.anchoredPosition = new Vector3(0, StartPosition);
         float textBoxHeight = rect.rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
         
@@ -62,7 +94,7 @@ public class WinScreenScroll : MonoBehaviour
         rect.anchoredPosition = pos;
         while (pos.y<EndPosition) {         
             yield return null;
-            float animationSpeed = Inputs.Instance.Controls.Player.Click.IsPressed() ? speed * Speedup : speed;
+            float animationSpeed = Mouse.current.leftButton.isPressed  ? speed * Speedup : speed;
             pos += Vector2.up * animationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition = pos;
         }
@@ -70,14 +102,17 @@ public class WinScreenScroll : MonoBehaviour
         //Hide();
 
         rect.anchoredPosition = new Vector3(0, StartPosition);
-        UIController.Instance.ToMainMenu();
+        if (startMenuView) 
+            Hide();
+        else
+            UIController.Instance.ToMainMenu();
         StopAllCoroutines();
     }
 
     public void Hide()
     {
+        Completed?.Invoke();
         panel.SetActive(false);
-
     }
 
     internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;
