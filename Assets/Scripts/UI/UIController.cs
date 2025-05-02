@@ -131,7 +131,12 @@ public class UIController : MonoBehaviour
         // Transition to Dark
 		transitionScreen.Darken();
         open = UIActions.WinScreen;
+
+        SavingUtility.gameSettingsData.SendScoreToLeaderboard(Stats.Instance.GetElapsedTimeMS(),completePercent);
+
+
 	}
+
 
     private UIActions open = UIActions.None;
     //private UIActions close = UIActions.None;

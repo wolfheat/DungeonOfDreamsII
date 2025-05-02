@@ -157,4 +157,9 @@ public class GameSettingsData
         PlayerName = nameToSet;    
         GameSettingsUpdated?.Invoke();
     }
+
+    internal void SendScoreToLeaderboard(int timeMs, int completePercent)
+    {
+        LeaderboardConnect.Instance.AddPlayerScoreAsync(SavingUtility.gameSettingsData.PlayerName,timeMs,completePercent);
+    }
 }

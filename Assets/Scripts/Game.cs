@@ -22,6 +22,30 @@ public static class Convert
         return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.z));
     }
 
+    internal static string CutHashtagAndEnding(string playerName)
+    {
+        // If there is an ending with #XXXXX cut it
+        int stringLength = playerName.Length;
+        char[] chars = playerName.ToCharArray();
+
+        for (int i = stringLength-1; i >=0; i--) {
+            if (chars[i] == '#')
+                return i==0 ? "Anonomous" : playerName.Substring(0,i);
+        }
+        // Did not find any hashtag return the entire name
+        return playerName;
+    }
+
+    internal static string MStoTimeString(double ms)
+    {
+        long msInt = (long)ms;
+        TimeSpan ts = new TimeSpan(msInt*10000);
+
+        if (ts.Hours > 0)
+            return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+        return String.Format("{0:00}:{1:00}.{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+    }
+
     internal static Vector2Int PosToStep(Vector3 pos,Vector2Int step)
     {
         if (step.x - pos.x > 0.8f) return Vector2Int.right;

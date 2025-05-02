@@ -116,6 +116,14 @@ public class Stats : MonoBehaviour
         return false;
     }
 
+    internal int GetElapsedTimeMS()
+    {
+        stopwatch.Stop();
+
+        TimeSpan ts = stopwatch.Elapsed;
+        return (int)ts.TotalMilliseconds;
+    }
+
     public string GetElapsedTime() {
 
         stopwatch.Stop();
@@ -369,6 +377,7 @@ public class Stats : MonoBehaviour
 
         // Also reset Enemy when player dies
     }
+
     public struct BossSaveValues
     {
         public int playerCurrentHealth;
