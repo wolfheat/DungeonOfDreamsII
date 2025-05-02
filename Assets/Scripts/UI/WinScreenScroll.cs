@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+
 //using System.Numerics;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,12 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] TextMeshProUGUI winPercentText;
     [SerializeField] GameObject completionist;
     [SerializeField] GameObject panel;
+    [SerializeField] GameObject panelHider;
+    [SerializeField] GameObject allText;
     [SerializeField] GameObject scroll;
-    
+
+    [SerializeField] private LayerMask UIInvisibleLayer;
+    [SerializeField] private LayerMask UILayer;
 
     private float StartPosition = 0f;
     private float EndPosition = 5600;
@@ -42,7 +47,7 @@ public class WinScreenScroll : MonoBehaviour
     public void ShowFromStartMenu()
     {
         startMenuView = true;
-        panel.SetActive(true);
+        //panel.SetActive(true);
 
         StartCoroutine(Animate());
 
@@ -58,8 +63,7 @@ public class WinScreenScroll : MonoBehaviour
     public void Show()
     {
         startMenuView = false;
-        panel.SetActive(true);
-
+        
         Debug.Log("Win screen Active Pause game");
         StartCoroutine(Animate());
         SoundMaster.Instance.PlayMusic(MusicName.CreditsMusic);
@@ -67,31 +71,35 @@ public class WinScreenScroll : MonoBehaviour
 
     private IEnumerator Animate()
     {
+        panelHider.SetActive(true);
         RectTransform rect = scroll.GetComponent<RectTransform>();
-        rect.anchoredPosition = new Vector3(0, 0); 
-        //scroll.transform.localPosition = new Vector3(0,-1000f,0);
         yield return null;
+        panel.SetActive(true);
         yield return null;
-        yield return null;
+        rect.anchoredPosition = new Vector3(0, StartPosition);
+
         yield return null;
 
-        rect.anchoredPosition = new Vector3(0, StartPosition);
         float textBoxHeight = rect.rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
         
         StartPosition = - screenHeight - TopScrollPadding;
+        Debug.Log("Start position = " + StartPosition);
+
+        Vector2 pos = new Vector3(0, StartPosition);
+        rect.anchoredPosition = pos;
+
         //StartPosition = - screenHeight - ScrollPadding;
         EndPosition = textBoxHeight + ScrollPadding;
         Debug.Log("End position should be 6400 ish = "+ EndPosition+" = ["+textBoxHeight+"]+["+ScrollPadding+"]");
 
         yield return null;
 
+        panelHider.SetActive(false);
+
         Debug.Log("Text box height = "+textBoxHeight);
         Debug.Log("Text box anchored pos = "+ rect.anchoredPosition);
         Debug.Log("End position should be 6400 ish = "+ EndPosition);
-
-        Vector2 pos = new Vector3(0, StartPosition);
-        rect.anchoredPosition = pos;
         while (pos.y<EndPosition) {         
             yield return null;
             float animationSpeed = Mouse.current.leftButton.isPressed  ? speed * Speedup : speed;
@@ -107,6 +115,8 @@ public class WinScreenScroll : MonoBehaviour
         else
             UIController.Instance.ToMainMenu();
         StopAllCoroutines();
+
+        panelHider.SetActive(false);
     }
 
     public void Hide()

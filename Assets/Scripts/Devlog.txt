@@ -88,7 +88,7 @@ Apr 2025
 		* Added name change and storage locally for player name
 		* Adding Unity Leaderboards
 		* Leaderboards working, but only one best result is shared per machine
-
+		* Adjusted credits by a hiding panel
 
 
 		// Make clicking to open shop not autobuy if over buy button at release

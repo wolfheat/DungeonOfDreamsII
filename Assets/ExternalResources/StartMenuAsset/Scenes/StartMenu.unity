@@ -2329,6 +2329,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1494590268}
     m_Modifications:
+    - target: {fileID: 1490349331375097038, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714974715648653931, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714974715648653931, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714974715648653931, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1173.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714974715648653931, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714974715648653931, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 964
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979766669666178248, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2454269703244782486, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2429,6 +2457,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3934127179731371860, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5596156138562896054, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_SizeDelta.y
       value: 5554.8
@@ -2461,6 +2493,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 964
       objectReference: {fileID: 0}
+    - target: {fileID: 7094204428480748488, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7604487613804884915, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2479,6 +2515,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873634147717636727, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190188628969430592, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3167,7 +3207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.38039216, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3183,7 +3223,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!222 &290981490
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10014,15 +10054,15 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286611584
-  m_fontColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+    topRight: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+    bottomLeft: {r: 0.49019608, g: 0.47843137, b: 0.47843137, a: 1}
+    bottomRight: {r: 0.49019608, g: 0.47843137, b: 0.47843137, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -12880,7 +12920,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 134217727
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -12889,7 +12929,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1314643158
@@ -19237,15 +19277,15 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286611584
-  m_fontColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+    topRight: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+    bottomLeft: {r: 0.49019608, g: 0.47843137, b: 0.47843137, a: 1}
+    bottomRight: {r: 0.49019608, g: 0.47843137, b: 0.47843137, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -20553,7 +20593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.3773585, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20569,7 +20609,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!222 &2109390869
 CanvasRenderer:
   m_ObjectHideFlags: 0

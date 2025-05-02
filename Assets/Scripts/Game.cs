@@ -42,8 +42,8 @@ public static class Convert
         TimeSpan ts = new TimeSpan(msInt*10000);
 
         if (ts.Hours > 0)
-            return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-        return String.Format("{0:00}:{1:00}.{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            return String.Format("{0}:{1:00}:{2:00}.{3:000}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds );
+        return String.Format("{0}:{1:00}.{2:000}", ts.Minutes, ts.Seconds, ts.Milliseconds );
     }
 
     internal static Vector2Int PosToStep(Vector3 pos,Vector2Int step)
