@@ -68,6 +68,7 @@ public class StartMenuController : MonoBehaviour
         Debug.Log("Soundmaster "+SoundMaster.Instance);
 
         WinScreenScroll.Completed += CreditsShownComplete;
+
     }
 
 

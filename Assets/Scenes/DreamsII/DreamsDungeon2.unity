@@ -103666,29 +103666,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2711804817638177296, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2895831025442547354, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: UIController
       value: 
       objectReference: {fileID: 458558927}
     - target: {fileID: 3057306407870528588, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3057306407870528588, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3057306407870528588, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 299.344
       objectReference: {fileID: 0}
     - target: {fileID: 3057306407870528588, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 5596156138562896054, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 5554.8
       objectReference: {fileID: 0}
     - target: {fileID: 6033116739209986719, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_Name
@@ -103708,7 +103712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6340911599038766099, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 5554.8
       objectReference: {fileID: 0}
     - target: {fileID: 6340911599038766099, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -103716,19 +103720,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7604487613804884915, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7604487613804884915, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7604487613804884915, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 299.344
       objectReference: {fileID: 0}
     - target: {fileID: 7604487613804884915, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -85.402
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

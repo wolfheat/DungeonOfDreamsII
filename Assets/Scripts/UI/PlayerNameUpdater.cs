@@ -11,6 +11,7 @@ public class PlayerNameUpdater : MonoBehaviour
     {
         GameSettingsData.GameSettingsUpdated += UpdateName;
         SavingUtility.LoadingComplete += UpdateName;
+        UpdateName();
     }
 
     private void OnDisable()

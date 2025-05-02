@@ -87,7 +87,7 @@ Apr 2025
 2/5		* Started Adding Leaderboard
 		* Added name change and storage locally for player name
 		* Adding Unity Leaderboards
-
+		* Leaderboards working, but only one best result is shared per machine
 
 
 

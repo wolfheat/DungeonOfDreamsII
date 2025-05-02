@@ -111,7 +111,8 @@ public class WinScreenScroll : MonoBehaviour
 
     public void Hide()
     {
-        Completed?.Invoke();
+        if(startMenuView)
+            Completed?.Invoke();
         panel.SetActive(false);
     }
 

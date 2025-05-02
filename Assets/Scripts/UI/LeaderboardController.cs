@@ -65,11 +65,12 @@ public class LeaderboardTableManager : MonoBehaviour
             Debug.Log("** Results are empty can not create any entries in the leaderboard list");
             return;
         }
-
+            
         // Create all new entries
-        foreach (LeaderboardEntry leaderboardItems in page.Results) {
+        for (int i = 0; i < page.Results.Count; i++) {
+            LeaderboardEntry leaderboardItems = page.Results[i];
             LeaderboardListEntry listEntry = Instantiate(leaderboardEntryPrefab, leaderboardHolder, false);
-            listEntry.SetData(leaderboardItems);
+            listEntry.SetData(leaderboardItems,i+1);
         }
     }
 }

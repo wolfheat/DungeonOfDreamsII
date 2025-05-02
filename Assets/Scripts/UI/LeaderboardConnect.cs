@@ -43,7 +43,7 @@ public partial class LeaderboardConnect : MonoBehaviour
         string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
 
         try {
-            await LeaderboardsService.Instance.AddPlayerScoreAsync(percent == 100f ? leaderboardCompletionistID : leaderboardSpeedID, playerScore, new AddPlayerScoreOptions { Metadata = metadataJson });
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(percent == 100f ? leaderboardCompletionistID : leaderboardSpeedID, playerScore, new AddPlayerScoreOptions { Metadata = scoreMetadata });
         }
         catch (LeaderboardsException e){
 
@@ -55,7 +55,8 @@ public partial class LeaderboardConnect : MonoBehaviour
     public async Task<LeaderboardScoresPage> UpdateLeaderboard(int leaderboardType)
     {
         Debug.Log("** Updating Leaderboard");
-        return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardCompletionistID : leaderboardSpeedID);
+        return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardCompletionistID : leaderboardSpeedID, new GetScoresOptions { IncludeMetadata = true });
+        //return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardCompletionistID : leaderboardSpeedID);
     }
 
 }
