@@ -1058,6 +1058,24 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""0471d497-da03-4de8-8927-a7a5119957ff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateKeyboard"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b106d63-c76b-4eca-b1e8-1876cd7e2791"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1544,6 +1562,28 @@ namespace UnityEngine.InputSystem
                     ""action"": ""UpArrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""430bcfe3-ad4b-4ff1-a2ae-97315f84cf6c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""601b963c-c155-46ce-9967-77a98202df03"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1643,6 +1683,8 @@ namespace UnityEngine.InputSystem
             m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
             m_UI_Space = m_UI.FindAction("Space", throwIfNotFound: true);
             m_UI_UpArrow = m_UI.FindAction("UpArrow", throwIfNotFound: true);
+            m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
+            m_UI_ActivateKeyboard = m_UI.FindAction("ActivateKeyboard", throwIfNotFound: true);
         }
 
         ~@Controls()
@@ -1874,6 +1916,8 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_UI_Enter;
         private readonly InputAction m_UI_Space;
         private readonly InputAction m_UI_UpArrow;
+        private readonly InputAction m_UI_ESC;
+        private readonly InputAction m_UI_ActivateKeyboard;
         public struct UIActions
         {
             private @Controls m_Wrapper;
@@ -1892,6 +1936,8 @@ namespace UnityEngine.InputSystem
             public InputAction @Enter => m_Wrapper.m_UI_Enter;
             public InputAction @Space => m_Wrapper.m_UI_Space;
             public InputAction @UpArrow => m_Wrapper.m_UI_UpArrow;
+            public InputAction @ESC => m_Wrapper.m_UI_ESC;
+            public InputAction @ActivateKeyboard => m_Wrapper.m_UI_ActivateKeyboard;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1943,6 +1989,12 @@ namespace UnityEngine.InputSystem
                 @UpArrow.started += instance.OnUpArrow;
                 @UpArrow.performed += instance.OnUpArrow;
                 @UpArrow.canceled += instance.OnUpArrow;
+                @ESC.started += instance.OnESC;
+                @ESC.performed += instance.OnESC;
+                @ESC.canceled += instance.OnESC;
+                @ActivateKeyboard.started += instance.OnActivateKeyboard;
+                @ActivateKeyboard.performed += instance.OnActivateKeyboard;
+                @ActivateKeyboard.canceled += instance.OnActivateKeyboard;
             }
 
             private void UnregisterCallbacks(IUIActions instance)
@@ -1989,6 +2041,12 @@ namespace UnityEngine.InputSystem
                 @UpArrow.started -= instance.OnUpArrow;
                 @UpArrow.performed -= instance.OnUpArrow;
                 @UpArrow.canceled -= instance.OnUpArrow;
+                @ESC.started -= instance.OnESC;
+                @ESC.performed -= instance.OnESC;
+                @ESC.canceled -= instance.OnESC;
+                @ActivateKeyboard.started -= instance.OnActivateKeyboard;
+                @ActivateKeyboard.performed -= instance.OnActivateKeyboard;
+                @ActivateKeyboard.canceled -= instance.OnActivateKeyboard;
             }
 
             public void RemoveCallbacks(IUIActions instance)
@@ -2084,6 +2142,8 @@ namespace UnityEngine.InputSystem
             void OnEnter(InputAction.CallbackContext context);
             void OnSpace(InputAction.CallbackContext context);
             void OnUpArrow(InputAction.CallbackContext context);
+            void OnESC(InputAction.CallbackContext context);
+            void OnActivateKeyboard(InputAction.CallbackContext context);
         }
     }
 }

@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Wolfheat.StartMenu;
 
-public class PauseController : MonoBehaviour
+public class PauseController : MonoBehaviour, IPointerMoveHandler
 {
+    [SerializeField] Button defaultButton;
     [SerializeField] UIController UIController;
     [SerializeField] GameObject panel;
 
@@ -28,7 +31,11 @@ public class PauseController : MonoBehaviour
     public void SetActive(bool doSetActive)
     {
         Debug.Log("Setting pause menu active: "+doSetActive+" Savingutility.playerGameData: "+SavingUtility.playerGameData);
-        panel.SetActive(doSetActive);        
+        panel.SetActive(doSetActive);
+        if (panel.activeSelf) {
+            Debug.Log("Selecting Default Button");
+            defaultButton.Select();
+        }
     }
 
     public void CloseClicked()
@@ -36,5 +43,10 @@ public class PauseController : MonoBehaviour
         Debug.Log("Pause Controller Close clicked");
         UIController.Pause(false);
         SetActive(false);
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

@@ -41,7 +41,7 @@ public class WinScreenScroll : MonoBehaviour
     private void OnEnable()
     {        
         if(StartMenuInputs.Instance != null)
-            StartMenuInputs.Instance.Controls.Player.Esc.performed += ESCAPE;
+            StartMenuInputs.Instance.Controls.UI.ESC.performed += ESCAPE;
         if(Inputs.Instance != null)
         Inputs.Instance.Controls.Player.Esc.performed += ESCAPE;
     }
@@ -49,7 +49,7 @@ public class WinScreenScroll : MonoBehaviour
     private void OnDisable()
     {
         if (StartMenuInputs.Instance != null)
-            StartMenuInputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
+            StartMenuInputs.Instance.Controls.UI.ESC.performed -= ESCAPE;
         if (Inputs.Instance != null)
             Inputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
     }
@@ -66,6 +66,7 @@ public class WinScreenScroll : MonoBehaviour
 
     private void ESCAPE(InputAction.CallbackContext context)
     {
+        if (!panel.gameObject.activeSelf) return;
         // Player tries to escape the credits screen
         Debug.Log("SKIP ESC");
         ExitWinScrollMenu();

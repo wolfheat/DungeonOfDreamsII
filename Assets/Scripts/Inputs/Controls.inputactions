@@ -1034,6 +1034,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "0471d497-da03-4de8-8927-a7a5119957ff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateKeyboard",
+                    "type": "Button",
+                    "id": "1b106d63-c76b-4eca-b1e8-1876cd7e2791",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1518,6 +1536,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "UpArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "430bcfe3-ad4b-4ff1-a2ae-97315f84cf6c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "601b963c-c155-46ce-9967-77a98202df03",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

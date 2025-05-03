@@ -1,7 +1,10 @@
 
+using System;
 using TMPro;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Wolfheat.Inputs;
 
 public class LeaderboardTableManager : MonoBehaviour
 {
@@ -19,6 +22,12 @@ public class LeaderboardTableManager : MonoBehaviour
         }
         Instance = this;
     }
+
+    private void OnEnable() => StartMenuInputs.Instance.Controls.Player.Move.performed += DirectionInput;
+
+    private void DirectionInput(InputAction.CallbackContext context) => ShowNextLeaderboard();
+
+    private void OnDisable() => StartMenuInputs.Instance.Controls.Player.Move.performed -= DirectionInput;
 
     private void Start()
     {

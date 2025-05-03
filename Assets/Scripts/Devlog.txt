@@ -92,6 +92,7 @@ Apr 2025
 3/5		* Removed some bload code
 		* Slowed down enemy die animation and stays longer before removed
 		* Improved map	
+		* Made keyboard work for menu and pause menu
 
 		// Add death sounds for enemy??
 		// Make map bombed walls display in another way?
