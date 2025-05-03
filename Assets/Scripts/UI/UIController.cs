@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
@@ -18,7 +17,7 @@ public class UIController : MonoBehaviour
     [SerializeField] WinScreenScroll winScreen;
     [SerializeField] GameObject helpScreen;
     [SerializeField] OxygenController oxygenPanel;
-    [SerializeField] GameObject map;
+    [SerializeField] Image mapMask;
     [SerializeField] GameObject bossHealthBar;
 
 	public static UIController Instance { get; private set; }
@@ -33,7 +32,6 @@ public class UIController : MonoBehaviour
 			return;
 		}
 		Instance = this;
-        Debug.Log("UI CONTROLLER INSTANCE SET");
 
     }
     public void OnEnable()
@@ -49,7 +47,6 @@ public class UIController : MonoBehaviour
 
     private void Tilde(InputAction.CallbackContext context)
     {
-        Debug.Log("Tilde");
         helpScreen.gameObject.SetActive(!helpScreen.gameObject.activeSelf);
     }
 
@@ -78,7 +75,6 @@ public class UIController : MonoBehaviour
     public void Pause(bool pause = true)
     {
         GameState.state = pause ? GameStates.Paused : GameStates.Running;
-        Debug.Log("Gamestate set to " + GameState.state);
         Time.timeScale = pause ? 0f : 1f;
     }
 
@@ -127,7 +123,6 @@ public class UIController : MonoBehaviour
         // Pausing makes scroll not active
         Pause(true);
 
-        Debug.Log("Show End Screen after transition");
         // Transition to Dark
 		transitionScreen.Darken();
         open = UIActions.WinScreen;
@@ -145,7 +140,6 @@ public class UIController : MonoBehaviour
 
     public void TransitionComplete()
 	{
-        Debug.Log("Transition Complete");        
         switch (open)
         {
             case UIActions.None:
@@ -179,18 +173,7 @@ public class UIController : MonoBehaviour
 
     internal void ToMainMenu()
     {
-        Debug.Log("Go to Main menu, unload Dungeon, load start menu");
         SoundMaster.Instance.ResetMusic();
-
-        //SceneManager.UnloadSceneAsync("Dungeon");
-        //SceneManager.UnloadSceneAsync("DreamsDungeon2");
-        /*
-        if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid()) {
-            SceneChanger.Instance.UnloadScene("DreamsDungeon2");
-            //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("DreamsDungeon2"));
-            Debug.Log("Unloaded Scene DreamsDungeon2");
-        }*/
-
         SceneChanger.Instance.ChangeScene("StartMenu");
     }
 
@@ -223,8 +206,9 @@ public class UIController : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    internal void ActivateMap(bool activate = true) => map.SetActive(activate);
-    internal bool MapIsActive() => map.activeSelf;
+    internal void ActivateMap(bool activate = true) => mapMask.enabled = !activate;
+
+    internal bool MapIsActive() => mapMask != null && mapMask.gameObject.activeSelf;
 
     internal void ShowBossHealth(bool doShow = true) => bossHealthBar.SetActive(doShow);
 }

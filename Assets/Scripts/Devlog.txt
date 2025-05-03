@@ -89,6 +89,11 @@ Apr 2025
 		* Adding Unity Leaderboards
 		* Leaderboards working, but only one best result is shared per machine
 		* Adjusted credits by a hiding panel
+3/5		* Removed some bload code
+		* Slowed down enemy die animation and stays longer before removed
+
+
+		// Add death sounds for enemy??
 
 
 		// Make clicking to open shop not autobuy if over buy button at release

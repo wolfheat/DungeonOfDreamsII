@@ -13,9 +13,7 @@ public class GemInventory : MonoBehaviour
 
     public void ActivateGem(int index)
     {
-        Debug.Log("Show gem index "+index);
-        Debug.Log("Size "+gems.Length);
-        Debug.Log("item " + gems[index]);
+        Debug.Log("Show gem index "+index+" in the gem inventory.");
         gems[index].Show(true);
         heldGems[index] = true;
     }

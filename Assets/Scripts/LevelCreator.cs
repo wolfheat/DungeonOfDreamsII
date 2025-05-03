@@ -176,8 +176,6 @@ public class LevelCreator : MonoBehaviour
 
     public Stack<Vector2Int> CanReach(Vector2Int from, Vector2Int to)
     {
-        Debug.Log("Checking if we can reach " + to + " from position " + from);
-
         int minX = Math.Min(from.x, to.x);
         int maxX = Math.Max(from.x, to.x);
         int minY = Math.Min(from.y, to.y);        
@@ -193,8 +191,6 @@ public class LevelCreator : MonoBehaviour
 
         //DrawSquare(from, to);
         Stack<Vector2Int> path = FindPath(from,to,A,Astart);
-
-        Debug.Log("Stack for way to player is length:"+path.Count);
 
         DrawPath(path);
 
@@ -428,13 +424,11 @@ public class LevelCreator : MonoBehaviour
     }
     public Door TargetHasDoor(Vector3 target)
     {
-        Debug.Log("Target has door");
         // Check if target is a Door
         Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, doorLayerMask);
 
         if (colliders.Length != 0)
         {
-            Debug.Log("true");
             return colliders[0].gameObject.GetComponent<Door>();
         }
         return null;
@@ -475,7 +469,6 @@ public class LevelCreator : MonoBehaviour
         Vector2Int pos = Convert.V3ToV2Int(position);
         if (level[pos.x + 50, pos.y + 50] == 1)
         {
-            Debug.Log("Removing Wall at pos "+pos);
             level[pos.x + 50, pos.y + 50] = 0;
         }else Debug.LogWarning("There is no wall at pos " + pos);
 
@@ -484,7 +477,6 @@ public class LevelCreator : MonoBehaviour
     internal bool TargetHasPlacedBomb(Vector3 target)
     {
         Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, itemsLayerMask).Where(x=>x.GetComponent<Bomb>()!=null).ToArray();
-        Debug.Log("Colliders with Bomb = "+colliders.Length);
         return colliders.Length>0;
     }
 

@@ -21,9 +21,6 @@ public class SpotLightController : MonoBehaviour
     {
         if(other.gameObject.layer == postProcessingRoom)
         {
-            Debug.Log("Spotlight off");
-            //spotLight.enabled = false;
-            Debug.Log("Play outdoor music");
             SoundMaster.Instance.PlayMusic(MusicName.OutDoorMusic);
             LightEnvironmentManager.Instance.SetNormalColor();            
         }
@@ -32,7 +29,6 @@ public class SpotLightController : MonoBehaviour
             SoundMaster.Instance.PlayMusic(MusicName.IndoorMusic);
         }else if(other.gameObject.layer == BossRoom)
         {
-            Debug.Log("PLAY BOSS MUSIC");
             SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
         }
     }

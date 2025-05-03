@@ -65,6 +65,7 @@ public class InteractableUI : MonoBehaviour
                 Inventory.Instance.AddCoins(data.value);
                 //Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
                 SoundMaster.Instance.PlayCoinSound();
+
                 return;
             }
 
@@ -124,7 +125,7 @@ public class InteractableUI : MonoBehaviour
             }else if (((UsableData)data).usableType == UsableType.Gem)
             {
                 int gemtype = ((UsableData)data).value;
-                Debug.Log("Adding gem "+gemtype);
+                Debug.Log("Adding gem of type "+gemtype);
 
                 //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
                 Inventory.Instance.Gem(gemtype);

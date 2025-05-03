@@ -15,10 +15,10 @@ public class LeaderboardListEntry : MonoBehaviour
     {
         indexText.text = index.ToString();
         playerNameText.text = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName);
-        Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
+        //Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
         playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
 
-        Debug.Log("Metadata string = "+leaderboardItems.Metadata);
+        //Debug.Log("Metadata string = "+leaderboardItems.Metadata);
 
         // Percent completed metadata handeling
         if(leaderboardItems.Metadata == null || leaderboardItems.Metadata.Length == 0)

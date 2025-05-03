@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-[InitializeOnLoad]
+//[InitializeOnLoad]
 public static class PlayModeSceneRestorer
 {
     private const string SceneSetupPath = "Library/PlayModeSceneSetup.json"; // Temporary file, not in source control

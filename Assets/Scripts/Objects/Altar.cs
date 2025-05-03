@@ -7,7 +7,6 @@ public class Altar : MonoBehaviour
     [SerializeField] GameObject ownCrystalactivation;
     [SerializeField] GameObject mineralObject;
     [SerializeField] int acceptsMineralID;
-    bool hasMineral = false;
     public bool HasMineral { get { return mineralObject.activeSelf; }}
     public int MineralAccepted { get { return acceptsMineralID;}}
 

@@ -18,7 +18,7 @@ public class SpriteMapCreator : MonoBehaviour
 
     int mapWidth = 128;
     int mapHeight = 128;
-    int tileSize = 128;
+    int tileSize = 32;
 
     public Vector2 offset = Vector2.zero;
     public Vector2Int origoOffset = Vector2Int.zero;
@@ -71,7 +71,6 @@ public class SpriteMapCreator : MonoBehaviour
 
         Sprite newMapSprite = Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f), 100.0f);
         newMapSprite.name = "Generated Map Sprite";
-        Debug.Log("Craeting a new sprite with size "+texture2D.width+" "+texture2D.height);
         image.sprite = newMapSprite;
 
 
@@ -118,8 +117,6 @@ public class SpriteMapCreator : MonoBehaviour
         mapHeight = height * tileSize;
 
         offset = new Vector2((float)mapWidth/2+minCorner.x*tileSize-tileSize/2, (float)mapHeight/2 + minCorner.y * tileSize - tileSize / 2);
-
-        Debug.Log("GameSize ["+mapWidth+","+mapHeight+"] ["+width+","+height+"] ");
 
         // We now know the full size of the map
         Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight);

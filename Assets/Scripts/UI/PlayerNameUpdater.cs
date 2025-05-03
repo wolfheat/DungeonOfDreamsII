@@ -23,6 +23,7 @@ public class PlayerNameUpdater : MonoBehaviour
     private void UpdateName()
     {
         Debug.Log("-- Updating Player Name in Start Menu");
-        playerNameText.text = SavingUtility.gameSettingsData.PlayerName;
+        if(SavingUtility.gameSettingsData != null)
+            playerNameText.text = SavingUtility.gameSettingsData.PlayerName;
     }
 }

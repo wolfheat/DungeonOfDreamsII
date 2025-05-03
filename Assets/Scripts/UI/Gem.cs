@@ -10,8 +10,6 @@ public class Gem : MonoBehaviour
 
     internal void Show(bool show)
     {
-        Debug.Log("Showing active gem "+red);
-
         red.SetActive(show);    
         grey.SetActive(!show);
   //      if (show)

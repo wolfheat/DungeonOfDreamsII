@@ -23,7 +23,6 @@ public class EnemyController : Interactable
     [SerializeField] int EnemySight = 10;
 
     private float timer = 0;
-    private string info = "";
     private const float MoveTime = 2f;
     private const float RotateTime = 0.4f;
     public bool DoingMovementAction { get; set; } = false;
@@ -34,7 +33,6 @@ public class EnemyController : Interactable
 
     private Vector2Int playerLastPosition = Vector2Int.zero;
 
-    private bool newPositionEvaluated = false;
 
     public int Health { get; private set; }
     public bool Dead { get; private set; }
@@ -292,7 +290,6 @@ public class EnemyController : Interactable
 
     public void ActionCompleted()
     {
-        info = "Action Complete";
         // Have new saved action updated with motion
         //Debug.Log(" * Action completed * Moved or Rotated to end up here ");
 
@@ -370,7 +367,6 @@ public class EnemyController : Interactable
         transform.position = StartPosition;
         PlaceMock(StartPosition);
         DoingMovementAction = false;
-        newPositionEvaluated = false;
         Health = StartHealth;
         healthBar.SetBar(Health, StartHealth);
         UIController.Instance.ShowBossHealth(false);
@@ -380,7 +376,6 @@ public class EnemyController : Interactable
 
     public IEnumerator Move(Vector3 target)
     {
-        info = "Move started";
         // Also change animation here?
         // Always want player to animate walk when moving?
         enemyStateController.ChangeState(EnemyState.Chase);
@@ -399,10 +394,8 @@ public class EnemyController : Interactable
             transform.position = Vector3.LerpUnclamped(start, end, timer / (MoveTime / moveSpeed));
             timer += Time.deltaTime;
         }
-        info = "Move ended";
 
         DoingMovementAction = false;
-        newPositionEvaluated = false;
         ActionCompleted();
     }
 
@@ -571,7 +564,6 @@ public class EnemyController : Interactable
         if (!Stats.Instance.IsDead && UpdatePlayerPosition())
         {
             enemyStateController.ChangeState(EnemyState.Idle);
-            newPositionEvaluated = true;
             UpdatePlayerDistanceAndPath();
             Debug.Log("Action Complete - Player Path updated");
             if (path.Count > 0)

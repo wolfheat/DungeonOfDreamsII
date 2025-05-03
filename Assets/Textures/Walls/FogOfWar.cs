@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -94,54 +95,39 @@ public class FogOfWar : MonoBehaviour
 
         stopwatch.Stop();
         UnityEngine.Debug.Log("Method took " + stopwatch.ElapsedMilliseconds + " ms.");
-
-
     }
 
 
     public void CreateImage(int mapWidth, int mapHeight)
     {
-        Stopwatch stopwatch = Stopwatch.StartNew();
-
         // We now know the full size of the map
-        Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight,TextureFormat.RGBA32,false);
+        Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight, TextureFormat.RGBA32, false);
 
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
 
         fullMapTexture.filterMode = FilterMode.Point;
 
+        // Awaited Pixels set
         Color32[] pixels = new Color32[mapWidth * mapHeight];
-
-        /* Old version to fill as black
-        for (int i = 0; i < pixels.Length; i++) {
-            pixels[i] = Color.black;
-        }*/
-
         System.Array.Fill(pixels, new Color32(0, 0, 0, 255));
 
-
-        fullMapTexture.SetPixels32(pixels,0);
-
-        UnityEngine.Debug.Log("Color alpha of first pixel is " + pixels[0].a);
+        fullMapTexture.SetPixelData(pixels, 0);
 
         Rect rect = new Rect(0, 0, mapWidth, mapHeight);
 
         fullMapTexture.Apply();
 
         Sprite newMapSprite = Sprite.Create(fullMapTexture, rect, new Vector2(0.5f, 0.5f), 100.0f);
-        newMapSprite.name = "FOV_Sprite";          
+        newMapSprite.name = "FOV_Sprite";
 
         SetSprite(newMapSprite);
 
         rectTransform.sizeDelta = new Vector2(mapWidth, mapHeight);
 
-
-        stopwatch.Stop();
-        UnityEngine.Debug.Log($"CreateImage took {stopwatch.ElapsedMilliseconds} ms"); // 60ms
-
         StartCoroutine(RevealPlayerPosition());
     }
+
 
     private IEnumerator RevealPlayerPosition()
     {

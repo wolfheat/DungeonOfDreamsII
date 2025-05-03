@@ -118,7 +118,6 @@ public static Inventory Instance { get; private set; }
 
     internal void Gem(int gemtype)
     {
-        Debug.Log("Adding Gem "+gemtype+" to player Inventory");
         gemInventory.ActivateGem(gemtype);
     }
 }

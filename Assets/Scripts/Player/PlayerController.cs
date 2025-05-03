@@ -144,22 +144,9 @@ public class PlayerController : MonoBehaviour
 
     public void InterractWith(bool mouseSource = false)
     {
-        
-
-
 
         if (Stats.Instance.IsDead) return;
         pickupController.UpdateColliders();
-
-        // Disable interact when inventory
-        //if (UIController.CraftingActive || UIController.InventoryActive || GameState.IsPaused)
-
-
-        if(EventSystem.current.IsPointerOverGameObject())
-            Debug.Log("Pointer is over UI");
-        if (Mouse.current.leftButton.IsPressed())
-            Debug.Log("Left button is pressed");
-
 
         // Check if item exists to pick up
         if (EventSystem.current.IsPointerOverGameObject() && Mouse.current.leftButton.IsPressed())
@@ -181,7 +168,7 @@ public class PlayerController : MonoBehaviour
         //toolHolder.ChangeTool(DestructType.Breakable);
 
 
-        Debug.Log("pickupController.ActiveInteractable = "+ pickupController.ActiveInteractable);
+        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {
@@ -189,10 +176,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("ELSE = wall = "+ pickupController.Wall+" Door = "+ pickupController.Door);
             if (pickupController.Wall != null)
             {
-                Debug.Log("WALL");
                 if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
                 {
                     SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
@@ -202,24 +187,18 @@ public class PlayerController : MonoBehaviour
                     InteractWithDoor(door);
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
-                    Debug.Log("Interacting with Altar");
                     Shop.Instance.ShowPanel(altar.MineralAccepted);
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
                 {
-                    Debug.Log("ACTIVATE GLORIA COMPLETION");
                     gloria.ActivateCompletion();   
                     
                 }
                 else {
                     playerAnimationController.SetState(PlayerState.Hit);
-                    Debug.Log("Setstate HIT");
-
                 }
-                Debug.Log("Wall "+pickupController.Wall?.name);
             }
             else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
-                Debug.Log("DOOR");
                 Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
                 InteractWithDoor(pickupController.Door);
             }
@@ -233,8 +212,6 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Hit Enemy Mock "+pickupController.Mockup.name, pickupController.Mockup); 
                 playerAnimationController.SetState(PlayerState.Attack);
             }
-
-            //else Debug.Log("No Block to crush");
         }
 
     }
@@ -282,23 +259,17 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     CenterPlayerPosition();
-                    Debug.Log("Walls or Enemies ahead");
+                    //Debug.Log("Walls or Enemies ahead");
 
                     Door door = LevelCreator.Instance.TargetHasDoor(target);
                     Altar altar = LevelCreator.Instance.TargetHasAltar(target);
-                    if(door != null)
-                        Debug.Log("Wall");
-                    if(altar != null)
-                        Debug.Log("Altar");
+                    
 
                     // If door is ahead unlock it if player has correct key
                     if (door != null) {
                         InteractWithDoor(door);
                     }
                     else if (altar != null) {
-                        Debug.Log("There is an altar here, open its shop Menu");
-                        Debug.Log("Menu "+altar.MineralAccepted);
-
                         Debug.Log("Entering Shop");
                         Shop.Instance.ShowPanel(altar.MineralAccepted);
                     }
@@ -644,6 +615,8 @@ public class PlayerController : MonoBehaviour
         DoingAction = false;
 
         takeFireDamage.StopFire();
+
+        MovedToNewSquare?.Invoke(Convert.V3ToV2Int(transform.position));
     }
 
     private void PlaceMock(Vector3 position)

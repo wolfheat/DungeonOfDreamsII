@@ -70,8 +70,7 @@ public class Stats : MonoBehaviour
         if (MineralsOwned.Length != ActivationMinerals.Length)
             Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need " + MineralsOwned.Length);
 
-        Stats.Instance.DeActivateMap();
-
+        
         // Start Timer
         stopwatch.Start();
 
@@ -337,13 +336,6 @@ public class Stats : MonoBehaviour
     internal void SetNewRespawnPoint(Vector3 point)
     {
         SavedStartPosition = new Vector3(Mathf.RoundToInt(point.x), 0, Mathf.RoundToInt(point.z));
-    }
-
-    internal void DeActivateMap()
-    {
-        Debug.Log("UI Instance = " + UIController.Instance);
-
-        UIController.Instance.ActivateMap(false);
     }
 
     internal void ActivateMap() => UIController.Instance.ActivateMap();

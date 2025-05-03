@@ -29,12 +29,12 @@ public class PlayerColliderController : MonoBehaviour
     {
         if (other.TryGetComponent(out HealingArea healingArea)) {
 
-            Debug.Log("Exiting Healing Area");
+            //Debug.Log("Exiting Healing Area");
             IsPlayerInRegainArea = false;
         }
         else if (other.TryGetComponent(out ShopItem shop)) {
 
-            Debug.Log("Exiting Shop");
+            //Debug.Log("Exiting Shop");
             Shop.Instance.HidePanel();
         }
     }
@@ -56,8 +56,6 @@ public class PlayerColliderController : MonoBehaviour
         }
         else if(other.TryGetComponent(out ExitPoint exitPoint))
         {
-            Debug.Log("Exit point for level.");
-
             // Exit points with boss save values class attached saves the players stats so by respawn these are loaded
             if (other.TryGetComponent<BossSaveValues>(out BossSaveValues bossSave)) {
                 Debug.Log("SAVE BOSS VALUES HERE");
@@ -78,18 +76,14 @@ public class PlayerColliderController : MonoBehaviour
         }
         else if(other.TryGetComponent(out ExitPortal portal))
         {
-            Debug.Log("Exit portal entered, Win game!");
             UIController.Instance.ShowWinScreen();
         }
         else if (other.TryGetComponent(out BossActivator bossActivator)) {
-            Debug.Log("Boss Activator entered");
             bossActivator.ActivateBoss();
         }else if (other.TryGetComponent(out HealingArea healingArea)) {
 
-            Debug.Log("Entering Healing Area");
             IsPlayerInRegainArea = true;
         }else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
-            Debug.Log("Entering Respawn Point - set this as respawn point");
             Stats.Instance.SetNewRespawnPoint(respawnPoint.transform.position);
             if(respawnPoint.TryGetComponent<UnlockBlockAtEntrance>(out UnlockBlockAtEntrance unlockBLocks)) {
                 unlockBLocks.UnlockEntranceToBoss();
@@ -97,7 +91,6 @@ public class PlayerColliderController : MonoBehaviour
         }
         else if (other.TryGetComponent(out ShopItem shop)) {
             // ShopItem is also considered Respawn point
-            Debug.Log("Entering Shop");
             Shop.Instance.ShowPanel();
         }
     }
