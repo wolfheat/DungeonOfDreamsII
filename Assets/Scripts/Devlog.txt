@@ -91,9 +91,11 @@ Apr 2025
 		* Adjusted credits by a hiding panel
 3/5		* Removed some bload code
 		* Slowed down enemy die animation and stays longer before removed
-
+		* Improved map	
 
 		// Add death sounds for enemy??
+		// Make map bombed walls display in another way?
+		// Show portals on minimap?
 
 
 		// Make clicking to open shop not autobuy if over buy button at release

@@ -1,9 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Wolfheat.StartMenu
 {
-    public class MenuButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class MenuButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISelectHandler
     {
         public void AnimationComplete()
         {
@@ -18,6 +19,12 @@ namespace Wolfheat.StartMenu
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            EnteringButton();
+            StartMenuController.PlayerUsingMouse = true;
+        }
+
+        private void EnteringButton()
+        {
             if (StartMenuController.lastButton == this) return;
 
             StartMenuController.lastButton = this;
@@ -28,5 +35,10 @@ namespace Wolfheat.StartMenu
         {
             StartMenuController.lastButton = null;
         }
-}
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            EnteringButton();
+        }
+    }
 }

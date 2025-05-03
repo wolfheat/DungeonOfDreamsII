@@ -36,12 +36,22 @@ public class WinScreenScroll : MonoBehaviour
     private void Start()
     {
         Hide();
-        StartMenuInputs.Instance.Controls.Player.Esc.performed += ESCAPE;
+        //StartMenuInputs.Instance.Controls.Player.Esc.performed += ESCAPE;
     }
-    
+    private void OnEnable()
+    {        
+        if(StartMenuInputs.Instance != null)
+            StartMenuInputs.Instance.Controls.Player.Esc.performed += ESCAPE;
+        if(Inputs.Instance != null)
+        Inputs.Instance.Controls.Player.Esc.performed += ESCAPE;
+    }
+
     private void OnDisable()
     {
-        StartMenuInputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
+        if (StartMenuInputs.Instance != null)
+            StartMenuInputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
+        if (Inputs.Instance != null)
+            Inputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
     }
 
     public void ShowFromStartMenu()
@@ -58,7 +68,7 @@ public class WinScreenScroll : MonoBehaviour
     {
         // Player tries to escape the credits screen
         Debug.Log("SKIP ESC");
-        Hide();
+        ExitWinScrollMenu();
     }
     public void Show()
     {
@@ -82,8 +92,8 @@ public class WinScreenScroll : MonoBehaviour
 
         float textBoxHeight = rect.rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
-        
-        StartPosition = - screenHeight - TopScrollPadding;
+
+        StartPosition = -screenHeight - TopScrollPadding;
         Debug.Log("Start position = " + StartPosition);
 
         Vector2 pos = new Vector3(0, StartPosition);
@@ -91,29 +101,47 @@ public class WinScreenScroll : MonoBehaviour
 
         //StartPosition = - screenHeight - ScrollPadding;
         EndPosition = textBoxHeight + ScrollPadding;
-        Debug.Log("End position should be 6400 ish = "+ EndPosition+" = ["+textBoxHeight+"]+["+ScrollPadding+"]");
+        Debug.Log("End position should be 6400 ish = " + EndPosition + " = [" + textBoxHeight + "]+[" + ScrollPadding + "]");
 
         yield return null;
 
         panelHider.SetActive(false);
 
-        Debug.Log("Text box height = "+textBoxHeight);
-        Debug.Log("Text box anchored pos = "+ rect.anchoredPosition);
-        Debug.Log("End position should be 6400 ish = "+ EndPosition);
-        while (pos.y<EndPosition) {         
+        Debug.Log("Text box height = " + textBoxHeight);
+        Debug.Log("Text box anchored pos = " + rect.anchoredPosition);
+        Debug.Log("End position should be 6400 ish = " + EndPosition);
+        while (pos.y < EndPosition) {
             yield return null;
-            float animationSpeed = Mouse.current.leftButton.isPressed  ? speed * Speedup : speed;
+            // Include keyboars speed up
+            float animationSpeed = (Mouse.current.leftButton.isPressed
+                || SpeedUpWinScreenButtonsPressed()
+                ) ? speed * Speedup : speed;
+            //float animationSpeed = Mouse.current.leftButton.isPressed  ? speed * Speedup : speed;
             pos += Vector2.up * animationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition = pos;
         }
         Debug.Log("Animation of End Credits complete");
         //Hide();
 
+
         rect.anchoredPosition = new Vector3(0, StartPosition);
-        if (startMenuView) 
+        ExitWinScrollMenu();
+    }
+
+    private static bool SpeedUpWinScreenButtonsPressed()
+    {
+        return   (Inputs.Instance != null && (Inputs.Instance.Controls.UI.Enter.IsPressed() || Inputs.Instance.Controls.UI.Space.IsPressed() || Inputs.Instance.Controls.UI.UpArrow.IsPressed())) 
+              || (StartMenuInputs.Instance != null && (StartMenuInputs.Instance.Controls.UI.Enter.IsPressed() || StartMenuInputs.Instance.Controls.UI.Space.IsPressed() || StartMenuInputs.Instance.Controls.UI.UpArrow.IsPressed()));
+    }
+
+    private void ExitWinScrollMenu()
+    {
+        if (startMenuView)
             Hide();
-        else
+        else {
+            Debug.Log("TO MAIN MENU - ONLY FROM GAME NOT CREDITS VIEW");
             UIController.Instance.ToMainMenu();
+        }
         StopAllCoroutines();
 
         panelHider.SetActive(false);

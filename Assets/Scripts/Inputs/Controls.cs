@@ -1031,6 +1031,33 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf33faeb-dc0a-4963-99a3-59b2fca551cc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f0e61a1-7324-49f3-95cd-daea2278ad89"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UpArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""d80ea9da-2fec-4537-9856-c9851cc40e38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1462,6 +1489,61 @@ namespace UnityEngine.InputSystem
                     ""action"": ""M"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d561e1dc-279e-4612-a76b-c6ff09325389"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c66d876-cafa-4004-ad03-cf0bd5fa5f44"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c6053dd-31b7-43e6-b8cf-d82eba9d93bd"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55f1895f-4299-4cc0-a568-bfdfe851c3c9"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""031b0598-d0c7-4911-81a5-40db0c142d42"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1558,6 +1640,9 @@ namespace UnityEngine.InputSystem
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
             m_UI_M = m_UI.FindAction("M", throwIfNotFound: true);
+            m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
+            m_UI_Space = m_UI.FindAction("Space", throwIfNotFound: true);
+            m_UI_UpArrow = m_UI.FindAction("UpArrow", throwIfNotFound: true);
         }
 
         ~@Controls()
@@ -1786,6 +1871,9 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_UI_TrackedDevicePosition;
         private readonly InputAction m_UI_TrackedDeviceOrientation;
         private readonly InputAction m_UI_M;
+        private readonly InputAction m_UI_Enter;
+        private readonly InputAction m_UI_Space;
+        private readonly InputAction m_UI_UpArrow;
         public struct UIActions
         {
             private @Controls m_Wrapper;
@@ -1801,6 +1889,9 @@ namespace UnityEngine.InputSystem
             public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
             public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
             public InputAction @M => m_Wrapper.m_UI_M;
+            public InputAction @Enter => m_Wrapper.m_UI_Enter;
+            public InputAction @Space => m_Wrapper.m_UI_Space;
+            public InputAction @UpArrow => m_Wrapper.m_UI_UpArrow;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1843,6 +1934,15 @@ namespace UnityEngine.InputSystem
                 @M.started += instance.OnM;
                 @M.performed += instance.OnM;
                 @M.canceled += instance.OnM;
+                @Enter.started += instance.OnEnter;
+                @Enter.performed += instance.OnEnter;
+                @Enter.canceled += instance.OnEnter;
+                @Space.started += instance.OnSpace;
+                @Space.performed += instance.OnSpace;
+                @Space.canceled += instance.OnSpace;
+                @UpArrow.started += instance.OnUpArrow;
+                @UpArrow.performed += instance.OnUpArrow;
+                @UpArrow.canceled += instance.OnUpArrow;
             }
 
             private void UnregisterCallbacks(IUIActions instance)
@@ -1880,6 +1980,15 @@ namespace UnityEngine.InputSystem
                 @M.started -= instance.OnM;
                 @M.performed -= instance.OnM;
                 @M.canceled -= instance.OnM;
+                @Enter.started -= instance.OnEnter;
+                @Enter.performed -= instance.OnEnter;
+                @Enter.canceled -= instance.OnEnter;
+                @Space.started -= instance.OnSpace;
+                @Space.performed -= instance.OnSpace;
+                @Space.canceled -= instance.OnSpace;
+                @UpArrow.started -= instance.OnUpArrow;
+                @UpArrow.performed -= instance.OnUpArrow;
+                @UpArrow.canceled -= instance.OnUpArrow;
             }
 
             public void RemoveCallbacks(IUIActions instance)
@@ -1972,6 +2081,9 @@ namespace UnityEngine.InputSystem
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
             void OnM(InputAction.CallbackContext context);
+            void OnEnter(InputAction.CallbackContext context);
+            void OnSpace(InputAction.CallbackContext context);
+            void OnUpArrow(InputAction.CallbackContext context);
         }
     }
 }

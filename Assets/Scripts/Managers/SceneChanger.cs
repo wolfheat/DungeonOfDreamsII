@@ -60,7 +60,29 @@ public class SceneChanger : MonoBehaviour
          
         StartCoroutine(ChangeToActive(name,additive)); // Changing this scene to be the active one
     }
+
     private IEnumerator ChangeToActive(string name, bool additive)
+    {        
+        string unloadScene = "";
+        // Get active scene so it can be unloaded?
+        if (SceneManager.GetActiveScene().name == "DreamsDungeon2")
+            unloadScene = "DreamsDungeon2";
+        else if (SceneManager.GetActiveScene().name == "StartMenu")
+            unloadScene = "StartMenu";
+
+        // Unload the previus scene
+        UnloadScene(unloadScene);
+        yield return null;
+
+        yield return SceneManager.LoadSceneAsync(name, additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
+        yield return null;
+
+        if (SceneManager.GetSceneByName(name).IsValid())
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(name));
+
+    }
+    
+    private IEnumerator ChangeToActiveOLD(string name, bool additive)
     {        
         string unloadScene = "";
         // Get active scene so it can be unloaded?

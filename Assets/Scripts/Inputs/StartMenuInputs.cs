@@ -23,6 +23,7 @@ namespace Wolfheat.Inputs
 
             Controls = new Controls();
             Controls.Enable();
+
         }
         private void OnDisable()
         {
