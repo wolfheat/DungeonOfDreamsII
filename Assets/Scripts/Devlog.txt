@@ -99,7 +99,7 @@ Apr 2025
 		* Made startmenu background pan fade instead of backing up?
 		* Added enemy take damage sounds
 		* Death screen now looks like pause screen and has keyboard inputs
-
+		* Added cant afford sound, might change later
 
 		// MENU
 

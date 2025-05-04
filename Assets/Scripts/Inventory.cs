@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Wolfheat.StartMenu;
 public class Inventory : MonoBehaviour
 {
 
@@ -33,8 +34,10 @@ public static Inventory Instance { get; private set; }
     
     internal bool RemoveCoins(int value)
     {
-        if(CoinsHeld < value)
+        if(CoinsHeld < value) {
+            SoundMaster.Instance.PlaySound(SoundName.CantAfford);
             return false;
+        }
         CoinsHeld-=value;
         UpdateInventory();
         return true;
