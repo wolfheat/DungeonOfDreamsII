@@ -96,11 +96,11 @@ Apr 2025
 4/5		* Player can no longer place bombs or interact with keyboard when paused
 		* Fixes space deselecting in main menu, was a Ingame click ui issue
 		* Fixed items animations going under floor
-
+		* Made startmenu background pan fade instead of backing up?
 
 		// MENU
+
 		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
-		// Make startmenu background pan fade instead of backing up?
 		// Add headers for leaderboard?
 
 		// SOUNDS
