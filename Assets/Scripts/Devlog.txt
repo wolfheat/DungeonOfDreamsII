@@ -93,8 +93,17 @@ Apr 2025
 		* Slowed down enemy die animation and stays longer before removed
 		* Improved map	
 		* Made keyboard work for menu and pause menu
+4/5		* Player can no longer place bombs or interact with keyboard when paused
 
-		// Add death sounds for enemy??
+		// Limit player from opening shop menu when paused
+
+		// Add headers for leaderboard?
+
+		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
+		// Fix items animations going under floor
+		// Make starmenu background pan fade instead of backing up?
+
+		// Add death sounds for enemy?? Attack sound also??
 		// Make map bombed walls display in another way?
 		// Show portals on minimap?
 

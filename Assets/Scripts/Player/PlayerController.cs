@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
     }
     public void RightClick(CallbackContext context)
     {
+        if(Stats.Instance.IsDead || GameState.IsPaused)
+            return; 
         Debug.Log("Right Click Place Bomb");
         PlaceBomb();
     }
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour
     public void InterractWith(bool mouseSource = false)
     {
 
-        if (Stats.Instance.IsDead) return;
+        if (Stats.Instance.IsDead || GameState.IsPaused) return;
         pickupController.UpdateColliders();
 
         // Check if item exists to pick up

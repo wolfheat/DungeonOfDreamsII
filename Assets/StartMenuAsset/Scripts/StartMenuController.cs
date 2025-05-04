@@ -29,7 +29,7 @@ namespace Wolfheat.StartMenu
         [SerializeField] StartMenuPanel startMenu;
         [SerializeField] private MenuOption nextMenu;
         [SerializeField] private MenuOption currentMenu;
-        [SerializeField] private MenuOption menuBeforeMain;
+        [SerializeField] private MenuOption menuBeforeMain = MenuOption.MainMenu;
         [SerializeField] GameObject[] menuDefaultSelect;
         [SerializeField] GameObject[] mainMenuButtons;
 
@@ -57,9 +57,9 @@ namespace Wolfheat.StartMenu
         private void Start()
         {
             Debug.Log("Start Menu Controller, set Current to StartMenu as initiation");
-            currentOption = startMenu;
-            currentMenu = MenuOption.MainMenu;
-            ActivateDefaultSelectedForCurrentMenu();
+            //currentOption = startMenu;
+            //currentMenu = MenuOption.MainMenu;
+            //ActivateDefaultSelectedForCurrentMenu();
 
             InitiateStartMenu();
             SoundMaster.Instance.PlayMusic(MusicName.MenuMusic);
@@ -93,6 +93,7 @@ namespace Wolfheat.StartMenu
             switch (currentMenu) {
                 case MenuOption.MainMenu:
                     Debug.Log("ESC on Main Menu do Nothing, or jump to Quit?");
+                    ActivateDefaultSelectedForCurrentMenu();
                     break;
                 case MenuOption.Settings:
                     Debug.Log("ESC on Setting Menu, close it if not entering name?");
@@ -177,10 +178,14 @@ namespace Wolfheat.StartMenu
             if (!PlayerUsingMouse) {
                 Debug.Log("next Menu = "+ currentMenu + " trying to activate default selectable from it, came from "+menuBeforeMain);
                 if (menuDefaultSelect[(int)currentMenu] != null) {
-                    if(currentMenu == MenuOption.MainMenu && menuBeforeMain != MenuOption.MainMenu) 
+                    if(currentMenu == MenuOption.MainMenu && menuBeforeMain != MenuOption.MainMenu) {
+                        Debug.Log(" -- - |Selecting menu button "+menuBeforeMain);
                         mainMenuButtons[(int)menuBeforeMain]?.GetComponent<Selectable>().Select();
-                    else
+                    }
+                    else {  
+                        Debug.Log(" -- - -Selecting menu button "+currentMenu);
                         menuDefaultSelect[(int)currentMenu]?.GetComponent<Selectable>().Select();
+                    }
                 }
                 Debug.Log("Selected: "+ EventSystem.current.currentSelectedGameObject);
             }
