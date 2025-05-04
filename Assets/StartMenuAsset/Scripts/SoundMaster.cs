@@ -68,7 +68,8 @@ namespace Wolfheat.StartMenu
         OpenDoorHitWall,
         CantDoThatSound,
         GemPickup,
-        Teleport
+        Teleport,
+        BossDying
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}
@@ -129,6 +130,7 @@ namespace Wolfheat.StartMenu
         [SerializeField]private AudioClip[] swosh;
         [SerializeField]private AudioClip[] coins;
         [SerializeField]private AudioClip[] getHit;
+        [SerializeField]private AudioClip[] bossGetHit;
         [SerializeField]private AudioClip[] pickAxeHitStone;
         [SerializeField]private AudioClip[] pickAxeHitMoss;
         [SerializeField]private AudioClip[] pickAxeHitFlesh;
@@ -483,10 +485,10 @@ namespace Wolfheat.StartMenu
                 stepSource.PlayOneShot(coins[Random.Range(1, coins.Length)]);
 
         }
-        public void PlaySwoshSound()
+        public void PlayBossTakeDamageSound()
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
-            stepSource.PlayOneShot(swosh[Random.Range(0, swosh.Length)]);
+            stepSource.PlayOneShot(bossGetHit[Random.Range(0, bossGetHit.Length)]);
         }
         public void PlayGetHitSound()
         {

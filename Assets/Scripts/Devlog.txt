@@ -97,6 +97,9 @@ Apr 2025
 		* Fixes space deselecting in main menu, was a Ingame click ui issue
 		* Fixed items animations going under floor
 		* Made startmenu background pan fade instead of backing up?
+		* Added enemy take damage sounds
+		* Death screen now looks like pause screen and has keyboard inputs
+
 
 		// MENU
 
@@ -105,8 +108,7 @@ Apr 2025
 
 		// SOUNDS
 		// Add sound for unable to buy
-		// Add death sounds for enemy?? Attack sound also??
-
+		
 		// MINI MAP
 		// Make map bombed walls display in another way?
 		// Show portals on minimap?

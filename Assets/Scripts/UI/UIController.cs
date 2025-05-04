@@ -61,7 +61,7 @@ public class UIController : MonoBehaviour
     public void Pause(InputAction.CallbackContext context)
     {
         // Player can not toggle pause when dead
-        //if (playerStats.IsDead) return;
+        if (Stats.Instance.IsDead) return;
 
         // If buy menu is open close it instead of pause
         if (Shop.Instance.CloseIfOpen())

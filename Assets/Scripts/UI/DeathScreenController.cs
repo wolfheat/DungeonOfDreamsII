@@ -1,16 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Wolfheat.StartMenu;
 public class DeathScreenController : MonoBehaviour
 {
     [SerializeField] UIController UIController;
     [SerializeField] GameObject panel;
+    [SerializeField] Button defaultButton;
 
     public void Show()
     {
         panel.SetActive(true);
         UIController.Pause(true);
         UIController.HideDarkening();
+
+        // Set Active default
+        defaultButton.Select();
+
         Debug.Log("Death screen Active Pause game");
     }
 

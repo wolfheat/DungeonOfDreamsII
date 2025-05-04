@@ -494,6 +494,12 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 66
+  - clip: {fileID: 8300000, guid: 1a1acf96b986b754fab2a3b90d087b78, type: 3}
+    volume: 1
+    pitch: 1.107
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 67
   effects:
   - clip: {fileID: 8300000, guid: 32bc1dfbee341d14398510ecec62e013, type: 3}
     volume: 0.181
@@ -755,6 +761,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6ce7aaf06446e4646bc4796fb59fb6d4, type: 3}
   getHit:
   - {fileID: 8300000, guid: ca8bc29180616d04d9c146917b03ef6c, type: 3}
+  bossGetHit:
+  - {fileID: 8300000, guid: ffc9734ac2c87694a8119220d3d814f9, type: 3}
+  - {fileID: 8300000, guid: 80e88323daf8b5f4f9b474a46d972ba2, type: 3}
+  - {fileID: 8300000, guid: c53f4dee84b53fa418b202a7c1f39d0d, type: 3}
+  - {fileID: 8300000, guid: bfca797e29862a645a69a4838f041de0, type: 3}
   pickAxeHitStone:
   - {fileID: 8300000, guid: 036bb8b18dd1f084c963446236f00404, type: 3}
   - {fileID: 8300000, guid: 9bac378e75376da4c840efe91f711a89, type: 3}

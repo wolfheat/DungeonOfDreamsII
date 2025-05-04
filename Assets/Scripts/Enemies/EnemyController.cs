@@ -650,6 +650,9 @@ public class EnemyController : Interactable
                 //Debug.Log("Enemy cat take damage");
                 
                 enemyStateController.ChangeState(EnemyState.TakeHit);
+
+                SoundMaster.Instance.PlayBossTakeDamageSound();
+
                 return true;
             }
         }
@@ -696,7 +699,8 @@ public class EnemyController : Interactable
             //Debug.Log("Enemy cat dies");
             Dead = true;
             enemyStateController.ChangeState(EnemyState.Dying);
-            
+            SoundMaster.Instance.PlaySound(SoundName.BossDying);
+
             Debug.Log("Boss Win, Cat dies ");
 
             DisableColliders();
