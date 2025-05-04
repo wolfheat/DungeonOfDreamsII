@@ -46,6 +46,10 @@ public class ObjectAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Skip animation if processor is slowed down to much i.e game just starting
+        if (Time.deltaTime > 0.1f)
+            return;
+
         transform.RotateAround(transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
         transform.Rotate(0, RotationSpeed * Time.deltaTime, 0);
         if (!animationVertical) return;

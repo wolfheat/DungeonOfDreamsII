@@ -111,10 +111,19 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""6392b140-a882-449b-953e-0d25d5488c67"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RightClick"",
                     ""type"": ""Button"",
                     ""id"": ""f7f70f19-f081-409d-9159-cd98e4a3ec9c"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -123,7 +132,7 @@ namespace UnityEngine.InputSystem
                     ""name"": ""Esc"",
                     ""type"": ""Button"",
                     ""id"": ""6eddb0e9-6244-4cde-bcda-98d0e2c86b89"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -565,17 +574,6 @@ namespace UnityEngine.InputSystem
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""0baa9bc3-6fdc-4ed8-9c27-c24b270bfa98"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""1D Axis"",
                     ""id"": ""7c927c10-6943-4b05-a1e5-8034b75a0381"",
                     ""path"": ""1DAxis"",
@@ -924,6 +922,17 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""T"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""628c4a14-fea6-405b-b183-ecef61ea762e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1662,6 +1671,7 @@ namespace UnityEngine.InputSystem
             m_Player_SideStep = m_Player.FindAction("SideStep", throwIfNotFound: true);
             m_Player_Step = m_Player.FindAction("Step", throwIfNotFound: true);
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+            m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
             m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
             m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
             m_Player_Tilde = m_Player.FindAction("Tilde", throwIfNotFound: true);
@@ -1761,6 +1771,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_SideStep;
         private readonly InputAction m_Player_Step;
         private readonly InputAction m_Player_Click;
+        private readonly InputAction m_Player_Space;
         private readonly InputAction m_Player_RightClick;
         private readonly InputAction m_Player_Esc;
         private readonly InputAction m_Player_Tilde;
@@ -1779,6 +1790,7 @@ namespace UnityEngine.InputSystem
             public InputAction @SideStep => m_Wrapper.m_Player_SideStep;
             public InputAction @Step => m_Wrapper.m_Player_Step;
             public InputAction @Click => m_Wrapper.m_Player_Click;
+            public InputAction @Space => m_Wrapper.m_Player_Space;
             public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
             public InputAction @Esc => m_Wrapper.m_Player_Esc;
             public InputAction @Tilde => m_Wrapper.m_Player_Tilde;
@@ -1820,6 +1832,9 @@ namespace UnityEngine.InputSystem
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Space.started += instance.OnSpace;
+                @Space.performed += instance.OnSpace;
+                @Space.canceled += instance.OnSpace;
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
@@ -1866,6 +1881,9 @@ namespace UnityEngine.InputSystem
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
+                @Space.started -= instance.OnSpace;
+                @Space.performed -= instance.OnSpace;
+                @Space.canceled -= instance.OnSpace;
                 @RightClick.started -= instance.OnRightClick;
                 @RightClick.performed -= instance.OnRightClick;
                 @RightClick.canceled -= instance.OnRightClick;
@@ -2120,6 +2138,7 @@ namespace UnityEngine.InputSystem
             void OnSideStep(InputAction.CallbackContext context);
             void OnStep(InputAction.CallbackContext context);
             void OnClick(InputAction.CallbackContext context);
+            void OnSpace(InputAction.CallbackContext context);
             void OnRightClick(InputAction.CallbackContext context);
             void OnEsc(InputAction.CallbackContext context);
             void OnTilde(InputAction.CallbackContext context);

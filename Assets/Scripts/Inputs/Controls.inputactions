@@ -87,10 +87,19 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Space",
+                    "type": "Button",
+                    "id": "6392b140-a882-449b-953e-0d25d5488c67",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RightClick",
                     "type": "Button",
                     "id": "f7f70f19-f081-409d-9159-cd98e4a3ec9c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -99,7 +108,7 @@
                     "name": "Esc",
                     "type": "Button",
                     "id": "6eddb0e9-6244-4cde-bcda-98d0e2c86b89",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -541,17 +550,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "0baa9bc3-6fdc-4ed8-9c27-c24b270bfa98",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "7c927c10-6943-4b05-a1e5-8034b75a0381",
                     "path": "1DAxis",
@@ -900,6 +898,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "T",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "628c4a14-fea6-405b-b183-ecef61ea762e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed += SideStep;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
+        Inputs.Instance.Controls.Player.Space.performed += InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
         //Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
         TakeFireDamage.PlayerTakeFireDamage += FireDamage;   
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed -= SideStep;
         Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
+        Inputs.Instance.Controls.Player.Space.performed -= InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
         playerAnimationController.HitComplete -= HitWithTool;
         TakeFireDamage.PlayerTakeFireDamage -= FireDamage;
@@ -504,8 +506,7 @@ public class PlayerController : MonoBehaviour
 
         pickupController.UpdateColliders();
 
-        //if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
-        if (Inputs.Instance.Controls.Player.Click.IsPressed())
+        if (Inputs.Instance.Controls.Player.Click.IsPressed() || Inputs.Instance.Controls.Player.Space.IsPressed())
         {
             CenterPlayerPosition();
             Debug.Log("Mouse is held, interact");

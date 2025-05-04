@@ -94,16 +94,20 @@ Apr 2025
 		* Improved map	
 		* Made keyboard work for menu and pause menu
 4/5		* Player can no longer place bombs or interact with keyboard when paused
+		* Fixes space deselecting in main menu, was a Ingame click ui issue
+		* Fixed items animations going under floor
 
-		// Limit player from opening shop menu when paused
 
+		// MENU
+		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
+		// Make startmenu background pan fade instead of backing up?
 		// Add headers for leaderboard?
 
-		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
-		// Fix items animations going under floor
-		// Make starmenu background pan fade instead of backing up?
-
+		// SOUNDS
+		// Add sound for unable to buy
 		// Add death sounds for enemy?? Attack sound also??
+
+		// MINI MAP
 		// Make map bombed walls display in another way?
 		// Show portals on minimap?
 

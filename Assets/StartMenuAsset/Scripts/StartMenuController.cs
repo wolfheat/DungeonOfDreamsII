@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -200,6 +201,8 @@ namespace Wolfheat.StartMenu
             menuBeforeMain = currentMenu;
             currentMenu = MenuOption.MainMenu;
             ActivateDefaultSelectedForCurrentMenu();
+
+
         }
 
         private void StartGame()
