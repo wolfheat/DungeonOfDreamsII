@@ -100,15 +100,13 @@ Apr 2025
 		* Added enemy take damage sounds
 		* Death screen now looks like pause screen and has keyboard inputs
 		* Added cant afford sound, might change later
+5/5		* Added beginning sign for portal back to the start
 
 		// MENU
 
 		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
 		// Add headers for leaderboard?
 
-		// SOUNDS
-		// Add sound for unable to buy
-		
 		// MINI MAP
 		// Make map bombed walls display in another way?
 		// Show portals on minimap?
