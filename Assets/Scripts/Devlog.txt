@@ -102,6 +102,11 @@ Apr 2025
 		* Added cant afford sound, might change later
 5/5		* Added beginning sign for portal back to the start
 
+		// Maps show doors, regain area and cracked walls - maybe
+
+		// Keep count of player deaths?
+
+
 		// MENU
 
 		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
@@ -111,25 +116,16 @@ Apr 2025
 		// Make map bombed walls display in another way?
 		// Show portals on minimap?
 
-
 		// Make clicking to open shop not autobuy if over buy button at release
 
 		// DO
-		// Fix seam issue when switching between scenes
-
+		
 		// WANTS
 		// add boss throwattack 		
 		// Make better postprocessing
 
-		// MAYBES
-		// Make new Start Menu graphics
-
-
 
 		// Joined jam 16/2 - 2025 17:45, with 4 days left on jam.
-
-		// Maps show doors, regain area and cracked walls - maybe
-
 
 		// Player can get coins in the dungeon and use them to buy usable items
 		// Items
@@ -165,6 +161,7 @@ Synty - Ancient Empire
 2D
 Vector Dividers Collection
 upklyak (freepik) - Ground cracks on land isolated
+Kenney - Board Game Icons
 
 VFX
 Unity Technologies - Particle Pack

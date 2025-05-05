@@ -117,6 +117,8 @@ public class UIController : MonoBehaviour
 
         winScreen.SetCompleteTimeText(Stats.Instance.GetElapsedTime());
         winScreen.SetCompletePercentText(completePercentText);
+        winScreen.SetDeathsText(Stats.Instance.DeathCount);
+        
 
         SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
 

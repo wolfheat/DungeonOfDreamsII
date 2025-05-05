@@ -2481,7 +2481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6033116739209986719, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_Name
-      value: WinScreenScroll 1
+      value: CreditsScrollFromStartMenu
       objectReference: {fileID: 0}
     - target: {fileID: 6340911599038766099, guid: 265795e21582a0647bc33ee5c1480dfb, type: 3}
       propertyPath: m_AnchorMax.y

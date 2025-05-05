@@ -28,7 +28,7 @@ public class Stats : MonoBehaviour
     public int CurrentMaxHealth { get; private set; } = 1;
     public int Health { get; private set; } = 1;
     public int Bombs { get; private set; } = 0;
-
+    public int DeathCount { get; private set; } = 0;
     public bool IsInRegainArea { get; set; } = false;
 
     public bool IsDead { get; set; } = false;
@@ -62,6 +62,7 @@ public class Stats : MonoBehaviour
 
         miningSpeed = MiningSpeedDefault;
         damage = DamageDefault;
+        DeathCount = 0;
 
     }
     int startAmountItems = 0;
@@ -200,7 +201,7 @@ public class Stats : MonoBehaviour
             Health = CurrentMaxHealth;
             OxygenController.Instance.ResetOxygen();
         }
-
+        DeathCount++;
         IsDead = false;
         HealthUpdate?.Invoke(Health);
         SoundMaster.Instance.AddRestartSpeech();
