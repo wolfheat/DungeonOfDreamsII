@@ -466,7 +466,11 @@ public class LevelCreator : MonoBehaviour
 
     internal void RemoveWall(Vector3 position)
     {
+        Debug.Log("Levelcreator remove wall");
         Vector2Int pos = Convert.V3ToV2Int(position);
+        SpriteMapCreator.Instance.RevealCrackedWall(pos);
+
+
         if (level[pos.x + 50, pos.y + 50] == 1)
         {
             level[pos.x + 50, pos.y + 50] = 0;

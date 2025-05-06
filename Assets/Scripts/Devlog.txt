@@ -101,20 +101,14 @@ Apr 2025
 		* Death screen now looks like pause screen and has keyboard inputs
 		* Added cant afford sound, might change later
 5/5		* Added beginning sign for portal back to the start
-
-		// Maps show doors, regain area and cracked walls - maybe
-
-		// Keep count of player deaths?
-
-
+		* Added portals and spawnpoints for minimap
+		* Added cracked walls to minimap
+		* Added cost sign for shops, upgraded shop visuals a bit
+					
 		// MENU
 
 		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
 		// Add headers for leaderboard?
-
-		// MINI MAP
-		// Make map bombed walls display in another way?
-		// Show portals on minimap?
 
 		// Make clicking to open shop not autobuy if over buy button at release
 

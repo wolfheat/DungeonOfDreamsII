@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 public class SpriteMapCreator : MonoBehaviour
@@ -11,6 +12,8 @@ public class SpriteMapCreator : MonoBehaviour
     [SerializeField] private Image image;
 
     [SerializeField] private GameObject wallHolder;
+    [SerializeField] private GameObject portalsHolder;
+    [SerializeField] private GameObject healingHolder;
 
     [SerializeField] private GameObject playerArrow;
 
@@ -23,6 +26,8 @@ public class SpriteMapCreator : MonoBehaviour
     public Vector2 offset = Vector2.zero;
     public Vector2Int origoOffset = Vector2Int.zero;
 
+    private Texture2D fullMapTexture;
+    private Color[] crackedWallColors;
 
     public static SpriteMapCreator Instance { get; private set; }
 
@@ -65,11 +70,11 @@ public class SpriteMapCreator : MonoBehaviour
         tileSize = 32;
 
         Resources.UnloadUnusedAssets();
-        Texture2D texture2D = FillTexture();
+        fullMapTexture = FillTexture();
 
         Rect rect = new Rect(0,0,mapWidth,mapHeight);
 
-        Sprite newMapSprite = Sprite.Create(texture2D, rect, new Vector2(0.5f, 0.5f), 100.0f);
+        Sprite newMapSprite = Sprite.Create(fullMapTexture, rect, new Vector2(0.5f, 0.5f), 100.0f);
         newMapSprite.name = "Generated Map Sprite";
         image.sprite = newMapSprite;
 
@@ -79,29 +84,29 @@ public class SpriteMapCreator : MonoBehaviour
         FOV.CreateImage(mapWidth,mapHeight);
     }
 
-    internal Wall[] GetWalls() => wallHolder.GetComponentsInChildren<Wall>();
-    internal Door[] GetDoors() => wallHolder.GetComponentsInChildren<Door>();
+    internal Transform[] GetWallsSpots() => wallHolder.GetComponentsInChildren<Wall>().Select(w => w.transform).ToArray();
+    internal Transform[] GetDoorsSpots() => wallHolder.GetComponentsInChildren<Door>().Select(w => w.transform).ToArray();
+    internal Transform[] GetPortalSpots() => portalsHolder.GetComponentsInChildren<ExitPoint>().Select(w => w.transform).ToArray();
+    internal Transform[] GetHealingSpots() => healingHolder.GetComponentsInChildren<HealingArea>().Select(w => w.transform).ToArray();
 
     private Texture2D FillTexture()
     {
         // Get list of all walls
-        Wall[] walls = GetWalls();
-        Door[] doors = GetDoors();
+        Transform[] wallTransforms = GetWallsSpots();
 
-        Vector2Int minCorner = new Vector2Int(Mathf.RoundToInt(walls[0].transform.position.x), Mathf.RoundToInt(walls[0].transform.position.z));
-        Vector2Int maxCorner = new Vector2Int(Mathf.RoundToInt(walls[0].transform.position.x), Mathf.RoundToInt(walls[0].transform.position.z));
+        // Determine bounds of map
+        Vector2Int minCorner = new Vector2Int(Mathf.RoundToInt(wallTransforms[0].transform.position.x), Mathf.RoundToInt(wallTransforms[0].transform.position.z));
+        Vector2Int maxCorner = new Vector2Int(Mathf.RoundToInt(wallTransforms[0].transform.position.x), Mathf.RoundToInt(wallTransforms[0].transform.position.z));
 
-        // Find bottom corner and top Corner
-        
-        foreach (Wall wall in walls) {
-            int xPos = Mathf.RoundToInt(wall.transform.position.x);  
-            int yPos = Mathf.RoundToInt(wall.transform.position.z);  
+        // Find bottom corner and top Corner        
+        foreach (Transform walltransform in wallTransforms) {
+            int xPos = Mathf.RoundToInt(walltransform.transform.position.x);  
+            int yPos = Mathf.RoundToInt(walltransform.transform.position.z);  
             if(xPos < minCorner.x) minCorner.x = xPos;
             if(xPos > maxCorner.x) maxCorner.x = xPos;
             if(yPos < minCorner.y) minCorner.y = yPos;
             if(yPos > maxCorner.y) maxCorner.y = yPos;
-        }
-        
+        }        
 
         int width  = maxCorner.x - minCorner.x + 1;
         int height = maxCorner.y - minCorner.y + 1;
@@ -111,8 +116,7 @@ public class SpriteMapCreator : MonoBehaviour
 
         origoOffset = new Vector2Int(Xdisplace, Ydisplace);
 
-        Debug.Log("Displacements ["+Xdisplace+","+Ydisplace+"]");
-
+        // Determine the total width and height of the final map
         mapWidth = width * tileSize;
         mapHeight = height * tileSize;
 
@@ -122,27 +126,80 @@ public class SpriteMapCreator : MonoBehaviour
         Texture2D fullMapTexture = new Texture2D(mapWidth, mapHeight);
 
         fullMapTexture.filterMode = FilterMode.Point;
+        
         // Fill each tile in the texture
+        Color[] wallColors = sprites[0].texture.GetPixels(0);
+        Color[] doorColors = sprites[1].texture.GetPixels(0);
+        Color[] healingColors = sprites[2].texture.GetPixels(0);
+        Color[] portalColors = sprites[3].texture.GetPixels(0);        
+        crackedWallColors = sprites[4].texture.GetPixels(0);
+        
+        // Set every tile of that type
+        SetTextureFromSprite(wallTransforms, wallColors);
+        SetTextureFromSprite(GetDoorsSpots(), doorColors);
+        SetTextureFromSprite(GetPortalSpots(), portalColors, true);
+        SetTextureFromSprite(GetHealingSpots(), healingColors, true);
 
-                Color[] colors = sprites[0].texture.GetPixels(0);
-                Color[] doorColors = sprites[1].texture.GetPixels(0);
-
-        foreach (Wall wall in walls) {
-            int xPos = Mathf.RoundToInt(wall.transform.position.x)-Xdisplace;
-            int yPos = Mathf.RoundToInt(wall.transform.position.z)-Ydisplace;
-                
-            if(wall.GetComponent<Door>() != null)
-                fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, doorColors);
-            else
-                fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, colors);
-        }
-        foreach (Door door in doors) {
-            int xPos = Mathf.RoundToInt(door.transform.position.x)-Xdisplace;
-            int yPos = Mathf.RoundToInt(door.transform.position.z)-Ydisplace;
-            
-            fullMapTexture.SetPixels(xPos*tileSize, yPos*tileSize, tileSize, tileSize, doorColors);
-        }
+        // Finalize the texture
         fullMapTexture.Apply();
+
         return fullMapTexture;
+
+        // Local Method to set pixels
+        void SetTextureFromSprite(Transform[] positions , Color[] spriteColors, bool blend = false)
+        {
+            Debug.Log("Setting colors for "+positions.Length+" items blend ="+blend);
+            foreach (Transform healingSpot in positions) {
+                int xPos = Mathf.RoundToInt(healingSpot.position.x) - Xdisplace;
+                int yPos = Mathf.RoundToInt(healingSpot.position.z) - Ydisplace;
+
+                if (!blend) {
+                    fullMapTexture.SetPixels(xPos * tileSize, yPos * tileSize, tileSize, tileSize, spriteColors);
+                    continue;
+                }
+
+                // Get the existing pixels from the target area
+                Color[] existingColors = fullMapTexture.GetPixels(xPos * tileSize, yPos * tileSize, tileSize, tileSize);
+
+                // Blend healingColors over existingColors
+                for (int i = 0; i < spriteColors.Length; i++) {
+                    Color src = spriteColors[i];
+                    Color dst = existingColors[i];
+
+                    float alpha = src.a;
+
+                    // Blend only if alpha > 0
+                    if (alpha > 0f) {
+                        existingColors[i] = Color.Lerp(dst, src, alpha);
+                    }
+                    // else leave dst unchanged
+                }
+                
+                fullMapTexture.SetPixels(xPos * tileSize, yPos * tileSize, tileSize, tileSize, existingColors);
+
+            }
+        }
+
     }
+    public void RevealCrackedWall(Vector2Int pos)
+    {
+        Debug.Log("Reveal cracked wall at "+pos);
+        pos *= tileSize;
+
+        pos -= Instance.origoOffset * tileSize;
+        Debug.Log("Reveal offset to "+pos);
+
+        int tileAdjustAmount = 0;
+        pos -= new Vector2Int(tileAdjustAmount, tileAdjustAmount);
+        
+        Debug.Log("Reveal recalulated to "+pos);
+
+
+        // Clamp to avoid out-of-bounds        
+        fullMapTexture.SetPixels(pos.x, pos.y, tileSize, tileSize, crackedWallColors);
+        fullMapTexture.Apply();
+    }
+
+
+
 }

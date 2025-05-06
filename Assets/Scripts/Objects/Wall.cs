@@ -10,6 +10,8 @@ public class Wall : Interactable
     private Coroutine shock;
 
     public int Health { get { return health;} }
+
+    
     public bool Damage(int damage=1)
     {
         // If Bedrock dont damage
@@ -39,6 +41,7 @@ public class Wall : Interactable
 
     private IEnumerator ShrinkRoutine()
     {
+        Debug.Log("Shrinkroutine ");
         float startSize = 1f;
         float endSize = 0.1f;
 

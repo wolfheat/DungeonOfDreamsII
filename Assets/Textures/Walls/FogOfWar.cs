@@ -79,7 +79,7 @@ public class FogOfWar : MonoBehaviour
         pos -= SpriteMapCreator.Instance.origoOffset*tileSize;
         int tileAdjustAmount = (revealSize-tileSize)/2;
         pos -= new Vector2Int(tileAdjustAmount, tileAdjustAmount);
-
+            
         // Clamp to avoid out-of-bounds
         int clampedX = Mathf.Clamp(pos.x, 0, tex.width - revealSize);
         int clampedY = Mathf.Clamp(pos.y, 0, tex.height - revealSize);
