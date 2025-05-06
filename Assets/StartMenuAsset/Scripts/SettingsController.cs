@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Wolfheat.Inputs;
 
 
 namespace Wolfheat.StartMenu
@@ -39,6 +42,7 @@ namespace Wolfheat.StartMenu
             UpdateMouseSensitivityPercent();
             StartCoroutine(EnableSliderListeners());
             SoundMaster.Instance.GlobalMuteChanged += MuteChanged;
+
         }
 
         private void UpdatePlayerName() => nameChanger.SetPlayerName(SavingUtility.gameSettingsData.PlayerName);
@@ -77,7 +81,7 @@ namespace Wolfheat.StartMenu
             // Update percent
             mousePercent.text = (mouse.value * 250).ToString("F0");
         }
-        
+
         public void UpdateSoundPercent()
         {
             Debug.Log("SETTINGSCONTROLLER - Update Sound percent, Music Slider value: " + music.value);

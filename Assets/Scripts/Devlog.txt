@@ -104,7 +104,12 @@ Apr 2025
 		* Added portals and spawnpoints for minimap
 		* Added cracked walls to minimap
 		* Added cost sign for shops, upgraded shop visuals a bit
-					
+6/5		* Added monitor options in the settings
+
+
+
+		// Monitor settings navigation isnt totally correct
+
 		// MENU
 
 		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
