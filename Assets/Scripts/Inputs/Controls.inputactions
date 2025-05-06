@@ -1061,6 +1061,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Z",
+                    "type": "Button",
+                    "id": "a4791bbd-59b7-451f-8617-efbac31faff9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1567,6 +1576,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ActivateKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e086940c-e3ba-432d-b794-87d763d80fe2",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Z",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

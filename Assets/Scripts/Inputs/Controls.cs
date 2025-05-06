@@ -1085,6 +1085,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Z"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4791bbd-59b7-451f-8617-efbac31faff9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1593,6 +1602,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""ActivateKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e086940c-e3ba-432d-b794-87d763d80fe2"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Z"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1695,6 +1715,7 @@ namespace UnityEngine.InputSystem
             m_UI_UpArrow = m_UI.FindAction("UpArrow", throwIfNotFound: true);
             m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
             m_UI_ActivateKeyboard = m_UI.FindAction("ActivateKeyboard", throwIfNotFound: true);
+            m_UI_Z = m_UI.FindAction("Z", throwIfNotFound: true);
         }
 
         ~@Controls()
@@ -1936,6 +1957,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_UI_UpArrow;
         private readonly InputAction m_UI_ESC;
         private readonly InputAction m_UI_ActivateKeyboard;
+        private readonly InputAction m_UI_Z;
         public struct UIActions
         {
             private @Controls m_Wrapper;
@@ -1956,6 +1978,7 @@ namespace UnityEngine.InputSystem
             public InputAction @UpArrow => m_Wrapper.m_UI_UpArrow;
             public InputAction @ESC => m_Wrapper.m_UI_ESC;
             public InputAction @ActivateKeyboard => m_Wrapper.m_UI_ActivateKeyboard;
+            public InputAction @Z => m_Wrapper.m_UI_Z;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -2013,6 +2036,9 @@ namespace UnityEngine.InputSystem
                 @ActivateKeyboard.started += instance.OnActivateKeyboard;
                 @ActivateKeyboard.performed += instance.OnActivateKeyboard;
                 @ActivateKeyboard.canceled += instance.OnActivateKeyboard;
+                @Z.started += instance.OnZ;
+                @Z.performed += instance.OnZ;
+                @Z.canceled += instance.OnZ;
             }
 
             private void UnregisterCallbacks(IUIActions instance)
@@ -2065,6 +2091,9 @@ namespace UnityEngine.InputSystem
                 @ActivateKeyboard.started -= instance.OnActivateKeyboard;
                 @ActivateKeyboard.performed -= instance.OnActivateKeyboard;
                 @ActivateKeyboard.canceled -= instance.OnActivateKeyboard;
+                @Z.started -= instance.OnZ;
+                @Z.performed -= instance.OnZ;
+                @Z.canceled -= instance.OnZ;
             }
 
             public void RemoveCallbacks(IUIActions instance)
@@ -2163,6 +2192,7 @@ namespace UnityEngine.InputSystem
             void OnUpArrow(InputAction.CallbackContext context);
             void OnESC(InputAction.CallbackContext context);
             void OnActivateKeyboard(InputAction.CallbackContext context);
+            void OnZ(InputAction.CallbackContext context);
         }
     }
 }

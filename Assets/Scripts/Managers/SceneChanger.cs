@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Wolfheat.Inputs;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -17,13 +20,75 @@ public class SceneChanger : MonoBehaviour
         Instance = this;
 
 
+
+#if PLATFORM_STANDALONE
+        StartMenuInputs.Instance.Controls.UI.Z.performed += PlayerChangeMonitor;
+        
+#endif
+
 #if UNITY_EDITOR
         Resources.UnloadUnusedAssets();
+        if(Display.displays.Length > 1)
+            Display.displays[1].Activate();
         //CheckedForScenes();
 #else      
             ChangeScene("StartMenu");            
+            // Make game display in second monitor
+
 #endif
     }
+
+
+    private void OnDisable()
+    {
+#if PLATFORM_STANDALONE
+        StartMenuInputs.Instance.Controls.UI.Z.performed -= PlayerChangeMonitor;
+#endif
+    }
+
+    private int activedisplay = 0;
+    private void PlayerChangeMonitor(InputAction.CallbackContext context)
+    {
+        Debug.Log("CHANGE MONITOR");
+        if (!moveWindowInProgress) {
+            StartCoroutine(MoveToDisplay(FullScreenMode.FullScreenWindow));
+        }
+    }
+
+    private bool moveWindowInProgress;
+    private IEnumerator MoveToDisplay(FullScreenMode mode)
+    {
+        activedisplay = (activedisplay+1)%Display.displays.Length;
+
+        moveWindowInProgress = true;
+        Debug.Log("Moving display to "+ activedisplay);
+        try {
+            if (Display.displays.Length < activedisplay) {
+
+                List<DisplayInfo> displaysInfos = new List<DisplayInfo>();
+                Screen.GetDisplayLayout(displaysInfos);
+
+                var display = displaysInfos[activedisplay];
+                                
+                Vector2Int targetCoordinates = new Vector2Int(0, 0);
+
+                if (Screen.fullScreenMode != FullScreenMode.Windowed) {
+                    // Target the center of the display. Doing it this way shows off
+                    // that MoveMainWindow snaps the window to the top left corner
+                    // of the display when running in fullscreen mode.
+                    targetCoordinates.x += Screen.width / 2;
+                    targetCoordinates.y += Screen.height / 2;
+                }
+
+                var moveOperation = Screen.MoveMainWindowTo(display, targetCoordinates);
+                yield return moveOperation;
+            }
+        }
+        finally {
+            moveWindowInProgress = false;
+        }
+    }
+
 
     private void CheckedForScenes()
     {
