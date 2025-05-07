@@ -115,10 +115,9 @@ Apr 2025
 		* Implemented soft scroll for keyboard for leaderboards
 		* Header separated in the leaderboards
 		* Keyboardcontrol for leaderboards refined
+		* Might have fixed boss locking up
 
-
-		// Manage scrolling in leaderboard with keyboard
-
+		
 		// MENU
 		// Make clicking to open shop not autobuy if over buy button at release
 

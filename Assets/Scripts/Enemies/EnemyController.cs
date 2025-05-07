@@ -255,15 +255,23 @@ public class EnemyController : Interactable
 
             return true;
         }
+        /*
         else if (PassiveTimer <= 0)
         {
             Debug.Log("ENEMY - Passive timer ended - do Throw attack");
             enemyStateController.ChangeState(EnemyState.ThrowAttack);
+
+            // Need to make sure enemy does not get stuck going to this change state
+            Debug.Log(" Save action was "+savedAction?.moveType);
+            Debug.Log(" Setting savedaction = null");
+
+            // getting stuck in walk animation here
+
             //path.Clear();
             savedAction = null;
 
             return true;
-        }
+        }*/
         else if (HasPath())
         {
             ActivateNextPoint();
@@ -525,15 +533,19 @@ public class EnemyController : Interactable
     {
         attackCounter++;
         // Create Wildfire Object from cat
-        Debug.Log("Throws Bombs");
         ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
+
+        ItemSpawner.Instance.SpawnWildfireAt(transform.position,(transform.right + transform.forward));
+        ItemSpawner.Instance.SpawnWildfireAt(transform.position,(-transform.right + transform.forward));
     }
     
     public void SpellCastAnimationComplete()
     {
-        //Debug.Log("Spell cast animation completed by Cat, go to Idle");
+        Debug.Log("Spell cast animation completed by Cat, go to Idle");
         enemyStateController.ChangeState(EnemyState.Idle);
         PassiveTimer = PassiveTimeout;
+
+        Debug.Log("Going to Catbehaviour from spell casting complete");
         CatBehaviour();
     }
 
