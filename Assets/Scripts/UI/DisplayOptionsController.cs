@@ -19,27 +19,36 @@ public class DisplayOptionsController : MonoBehaviour
 
     private void OnEnable()
     {
+        SpecialInfo.Instance.ShowInfo("Enable: DisplayOptionsController");
         ResetDisplayButtons();
     }
 
     public void ResetDisplayButtons()
     {
         Debug.Log("RESET DISPLAY BUTTONS");
-        List<DisplayInfo> displaysInfos = new List<DisplayInfo>();
-        Screen.GetDisplayLayout(displaysInfos);
-        int activeScreen = displaysInfos.IndexOf(Screen.mainWindowDisplayInfo);
 
+        int amt = 0;
         foreach (Transform t in transform.GetComponentInChildren<Transform>()) {
             if (t == this.transform) continue;
             Destroy(t.gameObject);
+            amt++;
         }
+        SpecialInfo.Instance.ShowInfo("Destroyed "+amt+" old buttons");
         displayOptions.Clear();
 
         // Display option disabled for WebGL
-#if !UNITY_STANDALONE_WIN
-        disabledText.gameObject.SetActive(true);
-        return;
-#endif
+        if(Application.platform == RuntimePlatform.WebGLPlayer) {
+            disabledText.gameObject.SetActive(true);
+            SpecialInfo.Instance.ShowInfo("WebGL return");
+            return;
+        }       
+
+        // This needs to happen after the removal, cause webGL cant handle this info
+        List<DisplayInfo> displaysInfos = new List<DisplayInfo>();
+        Screen.GetDisplayLayout(displaysInfos);
+
+        int activeScreen = displaysInfos.IndexOf(Screen.mainWindowDisplayInfo);
+        SpecialInfo.Instance.ShowInfo("Create new buttons");
 
         for (int i = 0; i < displaysInfos.Count; i++) {
             DisplayOption option = Instantiate(displayOptionPrefab, this.transform);

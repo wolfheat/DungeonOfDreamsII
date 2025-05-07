@@ -107,14 +107,15 @@ Apr 2025
 6/5		* Added monitor options in the settings
 		* Reworked some UI interface main menu
 		* Leaderboard now include system used
+		[PC build 67Mb]
+		[WebGL build 60Mb]
+7/5		* Fixed issue with webGL not hiding display buttons correctly
+		* Limit player from muting music/sound if typing in a name using "m" or "n"
 
+		// Fix pressing m or n when typing in name changes state of sound and music
 
-
-		// Monitor settings navigation isnt totally correct
 
 		// MENU
-
-		// Fix the issue with entering name in settings and hard to get out from it, inconsistent
 		// Add headers for leaderboard?
 
 		// Make clicking to open shop not autobuy if over buy button at release
