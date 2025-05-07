@@ -193,14 +193,20 @@ namespace Wolfheat.StartMenu
         }
 
         private void InitiateStartMenu()
-        {        
+        {
+            Debug.Log("Initiating start Menu");
+            Debug.Log("null? = "+startMenu == null);
             startMenu.gameObject.SetActive(true);
+
+            Debug.Log("Initiating start Menu B");
             startMenu.animator.CrossFade("Initiate",0.1f);
             //startMenu.animator.Play("Initiate");
             currentOption = startMenu;
             menuBeforeMain = currentMenu;
             currentMenu = MenuOption.MainMenu;
+            Debug.Log("Initiating start Menu C");
             ActivateDefaultSelectedForCurrentMenu();
+            Debug.Log("Initiating start Menu D");
 
 
         }

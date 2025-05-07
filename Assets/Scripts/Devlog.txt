@@ -105,6 +105,8 @@ Apr 2025
 		* Added cracked walls to minimap
 		* Added cost sign for shops, upgraded shop visuals a bit
 6/5		* Added monitor options in the settings
+		* Reworked some UI interface main menu
+		* Leaderboard now include system used
 
 
 

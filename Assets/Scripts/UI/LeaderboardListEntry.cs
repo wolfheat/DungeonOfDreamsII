@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class LeaderboardListEntry : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class LeaderboardListEntry : MonoBehaviour
     internal void SetData(Unity.Services.Leaderboards.Models.LeaderboardEntry leaderboardItems, int index = 0)
     {
         indexText.text = index.ToString();
-        playerNameText.text = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName);
         //Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
         playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
+        playerNameText.text = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName); 
 
         //Debug.Log("Metadata string = "+leaderboardItems.Metadata);
 
@@ -26,7 +27,24 @@ public class LeaderboardListEntry : MonoBehaviour
         else {
             ScoreMetadata scoreMetadata = JsonConvert.DeserializeObject<ScoreMetadata>(leaderboardItems.Metadata);
             playerPercentText.text = ((int)scoreMetadata.perc).ToString()+"%";
+            
+            playerNameText.text += AddSystemText(scoreMetadata.systemID); 
         }
+
     }
 
+    // Adding system text with sprite Asset
+    private string AddSystemText(int systemIndex)
+    {
+        Debug.Log(this.name + " set to system type "+systemIndex);
+        switch (systemIndex) {
+            case 0:
+                return "  <sprite=0>";
+            case 1:
+                return "  <sprite=1>";
+            case 2:
+                return "  <sprite=2>";
+        }
+        return "";
+    }
 }

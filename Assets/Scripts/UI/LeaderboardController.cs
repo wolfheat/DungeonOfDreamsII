@@ -12,6 +12,9 @@ public class LeaderboardTableManager : MonoBehaviour
     [SerializeField] private Transform leaderboardHolder;  
     [SerializeField] private string[] leaderboardNames;  
     [SerializeField] private TextMeshProUGUI leaderboardNameText;  
+    [SerializeField] private GameObject leftArrow;  
+    [SerializeField] private GameObject rightArrow;  
+
     public static LeaderboardTableManager Instance { get; private set; }
 
     private void Awake()
@@ -25,7 +28,15 @@ public class LeaderboardTableManager : MonoBehaviour
 
     private void OnEnable() => StartMenuInputs.Instance.Controls.Player.Move.performed += DirectionInput;
 
-    private void DirectionInput(InputAction.CallbackContext context) => ShowNextLeaderboard();
+    private void DirectionInput(InputAction.CallbackContext context)
+    {
+        Vector2 input = context.ReadValue<Vector2>();
+
+        if (input.x < -0.5f) {
+            ShowPreviousLeaderboard();            
+        }else if(input.x > 0.5f)
+            ShowNextLeaderboard();            
+    }
 
     private void OnDisable() => StartMenuInputs.Instance.Controls.Player.Move.performed -= DirectionInput;
 
@@ -39,7 +50,17 @@ public class LeaderboardTableManager : MonoBehaviour
 
     public void ShowNextLeaderboard()
     {
-        currentLeaderboard = (currentLeaderboard + 1) % TotalLeaderboards;
+        Debug.Log("NEXT");
+        if (currentLeaderboard == TotalLeaderboards - 1) return;
+        currentLeaderboard++;
+        UpdateWithLeaderboard(currentLeaderboard);
+    }
+    
+    public void ShowPreviousLeaderboard()
+    {
+        Debug.Log("PREV");
+        if (currentLeaderboard == 0) return;
+        currentLeaderboard--;
         UpdateWithLeaderboard(currentLeaderboard);
     }
 
@@ -56,6 +77,15 @@ public class LeaderboardTableManager : MonoBehaviour
         leaderboardScoresPages[1] = page2;
         UpdateWithLeaderboard(0);
 
+        UpdateArrows(leaderboardType);
+
+    }
+
+    private void UpdateArrows(int leaderboardType)
+    {
+        Debug.Log("UpdateArrows "+leaderboardType+ " leaderboardType < TotalLeaderboards-1 => "+(leaderboardType < TotalLeaderboards - 1));
+        leftArrow.SetActive(leaderboardType > 0);
+        rightArrow.SetActive(leaderboardType < TotalLeaderboards-1);
     }
 
     private void UpdateWithLeaderboard(int pageIndex)
@@ -63,7 +93,7 @@ public class LeaderboardTableManager : MonoBehaviour
         LeaderboardScoresPage page = leaderboardScoresPages[pageIndex];
 
         // Set Header
-        leaderboardNameText.text = leaderboardNames[pageIndex];
+        leaderboardNameText.text = leaderboardNames[pageIndex]; 
 
         // Remove all present items
         foreach (Transform leaderboardEntry in leaderboardHolder.transform) {
@@ -81,5 +111,7 @@ public class LeaderboardTableManager : MonoBehaviour
             LeaderboardListEntry listEntry = Instantiate(leaderboardEntryPrefab, leaderboardHolder, false);
             listEntry.SetData(leaderboardItems,i+1);
         }
+
+        UpdateArrows(pageIndex);
     }
 }

@@ -38,7 +38,14 @@ public partial class LeaderboardConnect : MonoBehaviour
     {
         await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
 
-        var scoreMetadata = new ScoreMetadata { perc = percent };
+        int systemUsed = 0;
+#if UNITY_EDITOR
+        systemUsed = 2;
+#elif !PLATFORM_STANDALONE_WIN
+        systemUsed = 1;
+#endif
+
+        var scoreMetadata = new ScoreMetadata { perc = percent, systemID = systemUsed};
 
         string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
 

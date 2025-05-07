@@ -129,6 +129,15 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""RightClickKeysSubstitute"",
+                    ""type"": ""Button"",
+                    ""id"": ""1befbaa6-04ae-43c0-8423-bd4b2519aa54"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Esc"",
                     ""type"": ""Button"",
                     ""id"": ""6eddb0e9-6244-4cde-bcda-98d0e2c86b89"",
@@ -861,23 +870,23 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7b2b7093-84bc-4116-9800-dfa26a30399c"",
+                    ""id"": ""0dd91450-7c3e-4a09-97e2-8e8669d22fb7"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightClick"",
+                    ""action"": ""RightClickKeysSubstitute"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""43b02bc1-1faf-473a-88a0-4abe57bd3b1f"",
+                    ""id"": ""26c69a22-4083-4ba5-a8e9-bf4f6a1cfe9a"",
                     ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightClick"",
+                    ""action"": ""RightClickKeysSubstitute"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1693,6 +1702,7 @@ namespace UnityEngine.InputSystem
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
             m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
             m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
+            m_Player_RightClickKeysSubstitute = m_Player.FindAction("RightClickKeysSubstitute", throwIfNotFound: true);
             m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
             m_Player_Tilde = m_Player.FindAction("Tilde", throwIfNotFound: true);
             m_Player_Y = m_Player.FindAction("Y", throwIfNotFound: true);
@@ -1794,6 +1804,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Click;
         private readonly InputAction m_Player_Space;
         private readonly InputAction m_Player_RightClick;
+        private readonly InputAction m_Player_RightClickKeysSubstitute;
         private readonly InputAction m_Player_Esc;
         private readonly InputAction m_Player_Tilde;
         private readonly InputAction m_Player_Y;
@@ -1813,6 +1824,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Click => m_Wrapper.m_Player_Click;
             public InputAction @Space => m_Wrapper.m_Player_Space;
             public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
+            public InputAction @RightClickKeysSubstitute => m_Wrapper.m_Player_RightClickKeysSubstitute;
             public InputAction @Esc => m_Wrapper.m_Player_Esc;
             public InputAction @Tilde => m_Wrapper.m_Player_Tilde;
             public InputAction @Y => m_Wrapper.m_Player_Y;
@@ -1859,6 +1871,9 @@ namespace UnityEngine.InputSystem
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
+                @RightClickKeysSubstitute.started += instance.OnRightClickKeysSubstitute;
+                @RightClickKeysSubstitute.performed += instance.OnRightClickKeysSubstitute;
+                @RightClickKeysSubstitute.canceled += instance.OnRightClickKeysSubstitute;
                 @Esc.started += instance.OnEsc;
                 @Esc.performed += instance.OnEsc;
                 @Esc.canceled += instance.OnEsc;
@@ -1908,6 +1923,9 @@ namespace UnityEngine.InputSystem
                 @RightClick.started -= instance.OnRightClick;
                 @RightClick.performed -= instance.OnRightClick;
                 @RightClick.canceled -= instance.OnRightClick;
+                @RightClickKeysSubstitute.started -= instance.OnRightClickKeysSubstitute;
+                @RightClickKeysSubstitute.performed -= instance.OnRightClickKeysSubstitute;
+                @RightClickKeysSubstitute.canceled -= instance.OnRightClickKeysSubstitute;
                 @Esc.started -= instance.OnEsc;
                 @Esc.performed -= instance.OnEsc;
                 @Esc.canceled -= instance.OnEsc;
@@ -2169,6 +2187,7 @@ namespace UnityEngine.InputSystem
             void OnClick(InputAction.CallbackContext context);
             void OnSpace(InputAction.CallbackContext context);
             void OnRightClick(InputAction.CallbackContext context);
+            void OnRightClickKeysSubstitute(InputAction.CallbackContext context);
             void OnEsc(InputAction.CallbackContext context);
             void OnTilde(InputAction.CallbackContext context);
             void OnY(InputAction.CallbackContext context);

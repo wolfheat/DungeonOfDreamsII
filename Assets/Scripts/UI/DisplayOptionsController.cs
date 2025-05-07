@@ -1,11 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 public class DisplayOptionsController : MonoBehaviour
 {
 
     [SerializeField] private DisplayOption displayOptionPrefab; 
+    [SerializeField] private TextMeshProUGUI disabledText;
+
+    [SerializeField] private Selectable overrideNavUP;
+    [SerializeField] private Selectable overrideNavDOWN;
 
     public static DisplayOptionsController Instance { get; private set; }
 
@@ -29,13 +35,43 @@ public class DisplayOptionsController : MonoBehaviour
         }
         displayOptions.Clear();
 
-
+        // Display option disabled for WebGL
+#if !UNITY_STANDALONE_WIN
+        disabledText.gameObject.SetActive(true);
+        return;
+#endif
 
         for (int i = 0; i < displaysInfos.Count; i++) {
             DisplayOption option = Instantiate(displayOptionPrefab, this.transform);
             option.SetIndexAndTexts(i, displaysInfos[i].name);
             displayOptions.Add(option);
             option.SetAsSelected(i == activeScreen);
+
+        }
+        OverrideNaviagations();
+
+    }
+
+    private void OverrideNaviagations()
+    {
+        Debug.Log("Overriding navigations");
+        // Generate list of Selectables and Navigation
+        List<Selectable> selectables = new List<Selectable>();
+        List<Navigation> navigations = new List<Navigation>();
+        for (int i = 0; i < displayOptions.Count; i++) {
+            selectables.Add(displayOptions[i].GetComponent<Selectable>());
+        }
+
+
+        Navigation nav = new Navigation();
+        nav.mode = Navigation.Mode.Explicit;
+        nav.selectOnUp = overrideNavUP;
+        nav.selectOnDown = overrideNavDOWN;
+
+        for (int i = 0; i < displayOptions.Count; i++) {            
+            nav.selectOnLeft = i > 0 ? selectables[i-1] : null;
+            nav.selectOnRight= i < displayOptions.Count - 1 ? selectables[i+1] : null;
+            selectables[i].navigation = nav;
         }
     }
 

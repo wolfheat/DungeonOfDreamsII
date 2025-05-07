@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
         Inputs.Instance.Controls.Player.Space.performed += InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
+        Inputs.Instance.Controls.Player.RightClickKeysSubstitute.performed += RightClick;
         //Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
         TakeFireDamage.PlayerTakeFireDamage += FireDamage;   
 
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
         Inputs.Instance.Controls.Player.Space.performed -= InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
+        Inputs.Instance.Controls.Player.RightClickKeysSubstitute.performed -= RightClick;   
         playerAnimationController.HitComplete -= HitWithTool;
         TakeFireDamage.PlayerTakeFireDamage -= FireDamage;
     }
