@@ -19,7 +19,7 @@ public class DisplayOptionsController : MonoBehaviour
 
     private void OnEnable()
     {
-        SpecialInfo.Instance.ShowInfo("Enable: DisplayOptionsController");
+        SpecialInfo.Instance?.ShowInfo("Enable: DisplayOptionsController");
         ResetDisplayButtons();
     }
 
@@ -33,13 +33,13 @@ public class DisplayOptionsController : MonoBehaviour
             Destroy(t.gameObject);
             amt++;
         }
-        SpecialInfo.Instance.ShowInfo("Destroyed "+amt+" old buttons");
+        SpecialInfo.Instance?.ShowInfo("Destroyed "+amt+" old buttons");
         displayOptions.Clear();
 
         // Display option disabled for WebGL
         if(Application.platform == RuntimePlatform.WebGLPlayer) {
             disabledText.gameObject.SetActive(true);
-            SpecialInfo.Instance.ShowInfo("WebGL return");
+            SpecialInfo.Instance?.ShowInfo("WebGL return");
             return;
         }       
 
@@ -48,7 +48,7 @@ public class DisplayOptionsController : MonoBehaviour
         Screen.GetDisplayLayout(displaysInfos);
 
         int activeScreen = displaysInfos.IndexOf(Screen.mainWindowDisplayInfo);
-        SpecialInfo.Instance.ShowInfo("Create new buttons");
+        SpecialInfo.Instance?.ShowInfo("Create new buttons");
 
         for (int i = 0; i < displaysInfos.Count; i++) {
             DisplayOption option = Instantiate(displayOptionPrefab, this.transform);
@@ -119,7 +119,7 @@ public class DisplayOptionsController : MonoBehaviour
 
     private IEnumerator MoveToDisplay(FullScreenMode mode,int index = 1)
     {
-        SpecialInfo.Instance.ShowInfo("Run Move Display, in progress: " + moveWindowInProgress);
+        SpecialInfo.Instance?.ShowInfo("Run Move Display, in progress: " + moveWindowInProgress);
 
 
 
@@ -130,14 +130,14 @@ public class DisplayOptionsController : MonoBehaviour
             Screen.GetDisplayLayout(displaysInfos);
 
             activedisplay = index == -1 ? ((activedisplay + 1) % displaysInfos.Count) : index;
-            SpecialInfo.Instance.ShowInfo("New Display Index: " + activedisplay);
+            SpecialInfo.Instance?.ShowInfo("New Display Index: " + activedisplay);
 
             if (activedisplay < displaysInfos.Count) {
 
-                SpecialInfo.Instance.ShowInfo("Displays: " + displaysInfos.Count);
+                SpecialInfo.Instance?.ShowInfo("Displays: " + displaysInfos.Count);
 
 
-                SpecialInfo.Instance.ShowInfo("Active Display: " + activedisplay);
+                SpecialInfo.Instance?.ShowInfo("Active Display: " + activedisplay);
 
 
                 var display = displaysInfos[activedisplay];
@@ -160,7 +160,7 @@ public class DisplayOptionsController : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
 
-                SpecialInfo.Instance.ShowInfo("Active: " + display.name);
+                SpecialInfo.Instance?.ShowInfo("Active: " + display.name);
 
                 yield return moveOperation;
             }

@@ -425,7 +425,7 @@ namespace Wolfheat.StartMenu
         public void ToggleAllAudio(InputAction.CallbackContext context)
         {
             if (NameChanger.Instance != null && NameChanger.Instance.IsEditingName) {
-                SpecialInfo.Instance.ShowInfo("Editing Textfield - do not toggle audio");
+                SpecialInfo.Instance?.ShowInfo("Editing Textfield - do not toggle audio");
                 return;
             }
             Debug.Log("Soundmaster toggle all audio");
@@ -436,7 +436,7 @@ namespace Wolfheat.StartMenu
         public void ToggleMusic(InputAction.CallbackContext context)
         {
             if (NameChanger.Instance != null && NameChanger.Instance.IsEditingName) {
-                SpecialInfo.Instance.ShowInfo("Editing Textfield - do not toggle music");
+                SpecialInfo.Instance?.ShowInfo("Editing Textfield - do not toggle music");
                 return;
             }
             Debug.Log("Soundmaster toggle music");

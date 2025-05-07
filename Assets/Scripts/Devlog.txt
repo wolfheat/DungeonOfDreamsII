@@ -111,17 +111,14 @@ Apr 2025
 		[WebGL build 60Mb]
 7/5		* Fixed issue with webGL not hiding display buttons correctly
 		* Limit player from muting music/sound if typing in a name using "m" or "n"
+		* Added headers for leaderboard
+		* Implemented soft scroll for keyboard for leaderboards
 
-		// Fix pressing m or n when typing in name changes state of sound and music
-
+		// Manage scrolling in leaderboard with keyboard
 
 		// MENU
-		// Add headers for leaderboard?
-
 		// Make clicking to open shop not autobuy if over buy button at release
 
-		// DO
-		
 		// WANTS
 		// add boss throwattack 		
 		// Make better postprocessing

@@ -47,7 +47,9 @@ public class UIController : MonoBehaviour
 
     private void Tilde(InputAction.CallbackContext context)
     {
+#if UNITY_EDITOR        
         helpScreen.gameObject.SetActive(!helpScreen.gameObject.activeSelf);
+#endif
     }
 
     public void OnDisable()
