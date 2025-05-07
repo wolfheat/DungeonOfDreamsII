@@ -1,25 +1,34 @@
 
-using System;
 using System.Collections;
 using TMPro;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Wolfheat.Inputs;
-using static UnityEngine.GraphicsBuffer;
 
 public class LeaderboardTableManager : MonoBehaviour
 {
-    [SerializeField] private LeaderboardListEntry leaderboardHeaderPrefab;  
     [SerializeField] private LeaderboardListEntry leaderboardEntryPrefab;  
     [SerializeField] private Transform leaderboardHolder;  
     [SerializeField] private string[] leaderboardNames;  
     [SerializeField] private TextMeshProUGUI leaderboardNameText;  
     [SerializeField] private GameObject leftArrow;  
     [SerializeField] private GameObject rightArrow;  
-    [SerializeField] private ScrollRect scrollRect;  
+    [SerializeField] private ScrollRect scrollRect;
+
+
+    LeaderboardScoresPage[] leaderboardScoresPages = new LeaderboardScoresPage[TotalLeaderboards];
+
+    // Manual Scrolling with keyboard
+    private const float ManualScrollSpeed = 1.15f;
+    private const float ManualScrollDampening = 0.1f;
+    private const float ScrollTime = 0.3f;
+    private float currentSpeed = 0;
+
+    private int currentLeaderboard = 0;
+    private const int TotalLeaderboards = 2;
+
 
     public static LeaderboardTableManager Instance { get; private set; }
 
@@ -41,46 +50,7 @@ public class LeaderboardTableManager : MonoBehaviour
         if (input.x < -0.5f) {
             ShowPreviousLeaderboard();            
         }else if(input.x > 0.5f)
-            ShowNextLeaderboard();            
-        // Handle scrolling with up and down
-        else if (input.y < -0.5f) {
-            StartCoroutine(LerpToPage(-ScrollStepSize));            
-        }else if(input.y > 0.5f)
-            StartCoroutine(LerpToPage(ScrollStepSize));            
-
-
-
-
-
-    }
-
-    private void ScrollUp()
-    {
-        scrollRect.verticalNormalizedPosition -= 0.1f;
-    }
-
-    private void ScrollDown()
-    {
-        scrollRect.verticalNormalizedPosition += 0.1f;
-    }
-
-    private IEnumerator LerpToPage(float change)
-    {
-        // Change the position by this amount
-        float startPosition = scrollRect.verticalNormalizedPosition;
-        float endPosition = scrollRect.verticalNormalizedPosition + change;
-
-        float timer = 0;
-
-        while (timer < LerpTime) {
-            timer += Time.unscaledDeltaTime;
-            float newPosition = Mathf.Lerp(startPosition, endPosition, timer/LerpTime);
-            scrollRect.verticalNormalizedPosition = newPosition;
-            yield return null;
-        }
-        scrollRect.verticalNormalizedPosition = endPosition;
-
-        Canvas.ForceUpdateCanvases();
+            ShowNextLeaderboard();
     }
 
 
@@ -91,8 +61,26 @@ public class LeaderboardTableManager : MonoBehaviour
         UpdateLeaderboard(0);        
     }
 
-    private int currentLeaderboard = 0;
-    private const int TotalLeaderboards = 2;
+
+    private void Update()
+    {
+        // Read move input from player
+        Vector2 movementDetected = StartMenuInputs.Instance.Controls.Player.Move.ReadValue<Vector2>();
+        if (movementDetected.y < -0.1f) 
+            currentSpeed = -ManualScrollSpeed;
+        else if (movementDetected.y > 0.1f) 
+            currentSpeed = ManualScrollSpeed;
+        
+
+        if (currentSpeed == 0)
+            return;
+
+        currentSpeed *= Mathf.Pow(ManualScrollDampening, Time.unscaledDeltaTime/ScrollTime);
+
+        if (currentSpeed < 0.05 && currentSpeed > -0.05) 
+            currentSpeed = 0;
+        scrollRect.verticalNormalizedPosition += currentSpeed * Time.unscaledDeltaTime;
+    }
 
     public void ShowNextLeaderboard()
     {
@@ -110,10 +98,7 @@ public class LeaderboardTableManager : MonoBehaviour
         UpdateWithLeaderboard(currentLeaderboard);
     }
 
-    LeaderboardScoresPage[] leaderboardScoresPages = new LeaderboardScoresPage[TotalLeaderboards];
-    private const float ScrollStepSize = 0.2f;
-    private const float LerpTime = 0.2f;
-
+    
     // Only update when first loaded
     private async void UpdateLeaderboard(int leaderboardType)
     {
@@ -151,10 +136,6 @@ public class LeaderboardTableManager : MonoBehaviour
             Debug.Log("** Results are empty can not create any entries in the leaderboard list");
             return;
         }
-
-        
-        // Add header
-        LeaderboardListEntry header = Instantiate(leaderboardHeaderPrefab, leaderboardHolder, false);
 
         // Create all new entries
         for (int i = 0; i < page.Results.Count; i++) {

@@ -113,6 +113,9 @@ Apr 2025
 		* Limit player from muting music/sound if typing in a name using "m" or "n"
 		* Added headers for leaderboard
 		* Implemented soft scroll for keyboard for leaderboards
+		* Header separated in the leaderboards
+		* Keyboardcontrol for leaderboards refined
+
 
 		// Manage scrolling in leaderboard with keyboard
 
