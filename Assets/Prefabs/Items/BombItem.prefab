@@ -598,7 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usePool: 1
   soundNameOverride: 59
-  Data: {fileID: 0}
+  Data: {fileID: 11400000, guid: 2a89d3435543f4449a1d7bfce674b099, type: 2}
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}
 --- !u!1 &8796383764838222269

@@ -260,8 +260,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1903931487}
   - component: {fileID: 1903931488}
+  - component: {fileID: 1903931489}
   m_Layer: 5
-  m_Name: LeaderboardConnect
+  m_Name: Leaderboard and Analytics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,6 +297,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1992dfbb73774fc44a1b2e5e36e19659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1903931489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903931483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca1a10eec56bd94f86d5dec676278ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2094922431

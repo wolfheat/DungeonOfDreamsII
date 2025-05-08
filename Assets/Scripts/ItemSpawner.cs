@@ -20,6 +20,7 @@ public class ItemSpawner : MonoBehaviour
 
     [SerializeField] GameObject enemyHolder;
     [SerializeField] GameObject itemHolder;
+    [SerializeField] GameObject softlockHolder;
 
 
     private Pool<Mineral> mineralPool = new Pool<Mineral>();
@@ -143,7 +144,10 @@ public class ItemSpawner : MonoBehaviour
         FireStormSpawner fireStormSpawner = Instantiate(fireStormSpawnerPrefab, pos, Quaternion.LookRotation(dir));
         fireStormSpawner.InitiateAt(Convert.V3ToV2Int(pos));
     }
-    public void SpawnUsableAt(UsableData data, Vector3 pos)
+
+    public void SpawnSoftlockHolderBombItemAt(Vector3 pos) => SpawnUsableAt(usablePrefabs[(int)UsableType.Bomb].Data as UsableData, pos, true);
+
+    public void SpawnUsableAt(UsableData data, Vector3 pos, bool softLockItem = false)
     {
         if(data == null) return;
         Debug.Log("Spawning Usable "+data.itemName+" at "+pos);
@@ -158,7 +162,7 @@ public class ItemSpawner : MonoBehaviour
         usable.Data = data;
         usable.transform.position = pos;
         usable.transform.rotation = usablePrefabs[type].transform.rotation;
-        usable.transform.parent = itemHolder.transform;
+        usable.transform.parent = softLockItem ? softlockHolder.transform : itemHolder.transform;
 
         // Find first mineral that is disabled
         usable.GetComponent<ObjectAnimator>().Reset();

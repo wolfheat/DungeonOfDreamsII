@@ -544,6 +544,10 @@ public class PlayerController : MonoBehaviour
             if(enemy != null)
                 StartCoroutine(Rotate(Quaternion.LookRotation(enemy.transform.position - transform.position)));
 
+            // Send Analytics for bomb deaths
+            if(bombDamage)
+                UGS_Analytics.Instance.BlownUpEvent();
+
             // Set player back to idle 
             playerAnimationController.SetState(PlayerState.Idle);
 

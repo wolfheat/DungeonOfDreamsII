@@ -43,6 +43,7 @@ public class Stats : MonoBehaviour
     public float MovingSpeedMultiplier { get; internal set; } = 1f;
 
     private Stopwatch stopwatch = new();
+    private TimeSpan bossStartTime;
 
     [SerializeField] GameObject[] ActivationMinerals;
 
@@ -78,6 +79,7 @@ public class Stats : MonoBehaviour
         startAmountItems = CountItems();
         Debug.Log("Start Children Items = "+startAmountItems);
     }
+    internal void StoreBossStartTime() => bossStartTime = stopwatch.Elapsed;
 
     internal int GetCompletePercent()
     {
@@ -116,15 +118,28 @@ public class Stats : MonoBehaviour
         return false;
     }
 
-    internal int GetElapsedTimeMS()
+    internal void StopGameTimer()
     {
         stopwatch.Stop();
+    }
 
+    internal int GetElapsedTimeMS()
+    {
         TimeSpan ts = stopwatch.Elapsed;
         return (int)ts.TotalMilliseconds;
     }
+    internal int GetElapsedTimeS()
+    {
+        TimeSpan ts = stopwatch.Elapsed;
+        return (int)ts.TotalSeconds;
+    }
+    internal int GetBossElapsedTimeS()
+    {        
+        TimeSpan ts = stopwatch.Elapsed - bossStartTime;
+        return (int)ts.TotalSeconds;
+    }
 
-    public string GetElapsedTime() {
+    public string GetElapsedTimeString() {
 
         stopwatch.Stop();
 
@@ -181,6 +196,7 @@ public class Stats : MonoBehaviour
             Debug.Log("Player is dead");
 
             IsDead = true;
+            DeathCount++;
             return true;
         }
         return false;

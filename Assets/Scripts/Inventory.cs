@@ -21,6 +21,8 @@ public static Inventory Instance { get; private set; }
     public int CoinsHeld { get; private set;} = 0;
     public bool[] HeldGems => gemInventory.HeldGems;
 
+    public int BombsUsed { get; internal set; } = 0;
+
     private void Start()
     {
         UpdateInventory();
@@ -67,7 +69,7 @@ public static Inventory Instance { get; private set; }
         BombsHeld+=amt;
         UpdateInventory();
     }
-    
+
     public void AddOthers()
     {
         OthersHeld++;
@@ -88,6 +90,7 @@ public static Inventory Instance { get; private set; }
         if (BombsHeld <= 0)
             return false;
         BombsHeld--;
+        BombsUsed++;
         UpdateInventory();
         return true;
     }

@@ -66,12 +66,13 @@ public class PlayerColliderController : MonoBehaviour
             //Play portal sound
             SoundMaster.Instance.PlaySound(SoundName.Teleport);
 
-                
-
             if(exitPoint.LeadsTo == -1)
                 TransitionScreen.Instance.Darken(PlayerController.Instance.GotoNextStartPosition, 0.14f);
             else
                 TransitionScreen.Instance.Darken(PlayerController.Instance.GotoStartPosition, 0.14f);
+
+            // remove all softlock items that might be spawned
+            HealingAreaController.Instance.DisableAllHealingAreas();
 
         }
         else if(other.TryGetComponent(out ExitPortal portal))
@@ -81,9 +82,12 @@ public class PlayerColliderController : MonoBehaviour
         else if (other.TryGetComponent(out BossActivator bossActivator)) {
             bossActivator.ActivateBoss();
         }else if (other.TryGetComponent(out HealingArea healingArea)) {
-
+            Debug.Log("** Hitting Healing area "+healingArea.name);
             IsPlayerInRegainArea = true;
-        }else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
+            healingArea.ActivateBombGenerator();
+
+        }
+        else if (other.TryGetComponent(out RespawnPoint respawnPoint)) {
             Stats.Instance.SetNewRespawnPoint(respawnPoint.transform.position);
             if(respawnPoint.TryGetComponent<UnlockBlockAtEntrance>(out UnlockBlockAtEntrance unlockBLocks)) {
                 unlockBLocks.UnlockEntranceToBoss();

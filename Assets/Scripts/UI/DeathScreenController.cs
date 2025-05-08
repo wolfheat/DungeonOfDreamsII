@@ -45,6 +45,10 @@ public class DeathScreenController : MonoBehaviour
             //LevelLoader.Instance.DefineGameDataForSave();
             //SavingUtility.Instance.SavePlayerDataToFile();
         }
+
+        // Send Analytics for Game Abandoned
+        UGS_Analytics.Instance.GameAbandonedEvent();
+
         UIController.Instance.ToMainMenu();
     }
 

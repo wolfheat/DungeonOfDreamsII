@@ -25,6 +25,10 @@ public class PauseController : MonoBehaviour, IPointerMoveHandler
             //LevelLoader.Instance.DefineGameDataForSave();
             //SavingUtility.Instance.SavePlayerDataToFile();
         }
+
+        // Send Analytics for Game Abandoned
+        UGS_Analytics.Instance.GameAbandonedEvent();
+
         UIController.Instance.ToMainMenu();
         
     }

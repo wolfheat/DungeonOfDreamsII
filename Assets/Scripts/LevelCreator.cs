@@ -484,6 +484,14 @@ public class LevelCreator : MonoBehaviour
         return colliders.Length>0;
     }
 
+    internal bool DetermineIfPlayerIsSoftlocked()
+    {
+        Debug.Log("Calculate if player is soft locked and give him a bomb if that it the case");
+
+
+
+        return true;
+    }
 }
 
 public class APoint

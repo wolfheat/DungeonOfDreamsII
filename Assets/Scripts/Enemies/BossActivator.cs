@@ -22,7 +22,11 @@ public class BossActivator : MonoBehaviour
         // Start Boss Music?
         if (!boss.Activated) {
             SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
-            
+
+            Debug.Log("** Store Boss start time");
+            // Store boss start time in stats
+            Stats.Instance.StoreBossStartTime();
+
             // Make the Resetter valid to reset Bossarea on death
             unlockBlock.CanBeReset = true;
 

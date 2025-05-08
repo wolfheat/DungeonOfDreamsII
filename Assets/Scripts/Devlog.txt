@@ -121,6 +121,9 @@ Apr 2025
 		* Enabled Enter as interact, both for items and shop
 		* Added smoke to bombs
 		* Added limitations for player name
+8/5		* Added Unity Analytics
+		* Made bombs regenerate at healing area by a timer
+		* Adjusted Smoke effects
 
 		
 		// WANTS

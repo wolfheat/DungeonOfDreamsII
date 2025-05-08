@@ -108,6 +108,11 @@ public class UIController : MonoBehaviour
     
     public void ShowWinScreen()
 	{
+        // Stop timer
+        Stats.Instance.StopGameTimer();
+
+        // Send Analytics for Game Complete
+        UGS_Analytics.Instance.GameCompletedEvent();
 
         int completePercent = Stats.Instance.GetCompletePercent();
         if (completePercent== 100) {
@@ -117,7 +122,9 @@ public class UIController : MonoBehaviour
         
         string completePercentText = completePercent + "%";
 
-        winScreen.SetCompleteTimeText(Stats.Instance.GetElapsedTime());
+
+
+        winScreen.SetCompleteTimeText(Stats.Instance.GetElapsedTimeString());
         winScreen.SetCompletePercentText(completePercentText);
         winScreen.SetDeathsText(Stats.Instance.DeathCount);
         
@@ -132,8 +139,6 @@ public class UIController : MonoBehaviour
         open = UIActions.WinScreen;
 
         SavingUtility.gameSettingsData.SendScoreToLeaderboard(Stats.Instance.GetElapsedTimeMS(),completePercent);
-
-
 	}
 
 
