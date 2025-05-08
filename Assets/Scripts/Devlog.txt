@@ -124,6 +124,7 @@ Apr 2025
 8/5		* Added Unity Analytics
 		* Made bombs regenerate at healing area by a timer
 		* Adjusted Smoke effects
+		* Fixed door cracks being to large
 
 		
 		// WANTS
