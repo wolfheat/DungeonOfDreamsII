@@ -116,16 +116,16 @@ Apr 2025
 		* Header separated in the leaderboards
 		* Keyboardcontrol for leaderboards refined
 		* Might have fixed boss locking up
+		* Enemy throw attack is now a trident direction
+		* Made shop buttons not autoclick if first click is released over the buttons
+		* Enabled Enter as interact, both for items and shop
+		* Added smoke to bombs
+		* Added limitations for player name
 
 		
-		// MENU
-		// Make clicking to open shop not autobuy if over buy button at release
-
 		// WANTS
-		// add boss throwattack 		
 		// Make better postprocessing
-
-
+		
 		// Joined jam 16/2 - 2025 17:45, with 4 days left on jam.
 
 		// Player can get coins in the dungeon and use them to buy usable items

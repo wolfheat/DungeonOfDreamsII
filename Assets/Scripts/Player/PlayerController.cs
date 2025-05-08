@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
         Inputs.Instance.Controls.Player.Space.performed += InterractWith;   
+        Inputs.Instance.Controls.UI.Enter.performed += InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
         Inputs.Instance.Controls.Player.RightClickKeysSubstitute.performed += RightClick;
         //Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
         Inputs.Instance.Controls.Player.Space.performed -= InterractWith;   
+        Inputs.Instance.Controls.UI.Enter.performed -= InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
         Inputs.Instance.Controls.Player.RightClickKeysSubstitute.performed -= RightClick;   
         playerAnimationController.HitComplete -= HitWithTool;

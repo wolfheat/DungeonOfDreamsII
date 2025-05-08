@@ -1,6 +1,8 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using Wolfheat.StartMenu;
 
 
@@ -25,6 +27,9 @@ public class Shop : MonoBehaviour
 
     public bool ShopIsOpen => panel.activeSelf;
     public bool ShopSpecificIsOpen => specificPanel.activeSelf;
+    public bool WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks = false;
+
+
     public void ShowPanel()
     {
         panel.SetActive(true);
@@ -33,6 +38,10 @@ public class Shop : MonoBehaviour
 
     public void ShowPanel(int specificID)
     {
+        Debug.Log(" ");
+        WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks = Mouse.current.leftButton.IsPressed();
+        Debug.Log("Open panel with mouse pressed = "+WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks);
+
         Debug.Log("Enter specific shop "+specificID);
         // Only show if item is still available
         if (!SpecificAltars[specificID].HasMineral)
@@ -55,6 +64,12 @@ public class Shop : MonoBehaviour
         }
         return false;
     }
+    public void CloseClicked()
+    {
+        if (WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks) return;
+        HidePanel();
+    }
+    
     public void HidePanel()
     {
         panel.SetActive(false);
@@ -97,8 +112,8 @@ public class Shop : MonoBehaviour
             HidePanel();
         }
     }
-        
-    public void BuyFireSpell()
+
+    private void BuyFireSpell()
     {
         Debug.Log("Buying Fire Spell");
         if (SpecificAltars[(int)AltarTypes.Scroll].gameObject.activeSelf && Inventory.Instance.RemoveCoins(30)) {
@@ -108,8 +123,8 @@ public class Shop : MonoBehaviour
             HidePanel();
         }
     }
-    
-    public void BuyChicken()
+
+    private void BuyChicken()
     {
         Debug.Log("Buying Chicken");
         if (SpecificAltars[(int)AltarTypes.Chicken].gameObject.activeSelf && Inventory.Instance.RemoveCoins(40)) {
@@ -121,7 +136,7 @@ public class Shop : MonoBehaviour
         }
     }
     
-    public void Buy20Bombs()
+    private void Buy20Bombs()
     {
         Debug.Log("Buying 20 Bombs");
         if (SpecificAltars[(int)AltarTypes.Bomb].gameObject.activeSelf && Inventory.Instance.RemoveCoins(20)) {
@@ -131,8 +146,8 @@ public class Shop : MonoBehaviour
             HidePanel();
         }
     }
-    
-    public void BuyBomb()
+
+    private void BuyBomb()
     {
         if (Inventory.Instance.RemoveCoins(bombCost)) {
             Inventory.Instance.AddBombs();
@@ -140,7 +155,7 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public void BuyKey()
+    private void BuyKey()
     {
         if (Inventory.Instance.RemoveCoins(keyCost)) {
             Inventory.Instance.AddKey();
@@ -164,8 +179,12 @@ public class Shop : MonoBehaviour
         }
     }
 
-    internal void BuyShopItem()
+
+
+    public void BuyShopItem()
     {
+        if (WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks) return;
+
         Debug.Log("Try buy "+activeShop);
         switch (activeShop) {
             case 0:
@@ -183,6 +202,14 @@ public class Shop : MonoBehaviour
 
             default:
                 break;
+        }
+    }
+
+    void Update()
+    {
+        if (WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks && !Mouse.current.leftButton.IsPressed()) {
+            Debug.Log("Mouse released");
+            WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks = false;
         }
     }
 }

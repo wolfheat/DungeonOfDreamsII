@@ -1,6 +1,6 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NameChanger : MonoBehaviour
 {
@@ -20,6 +20,22 @@ public class NameChanger : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        playerNameInputField.onValueChanged.AddListener(ValidateInput);
+    }
+
+    private void ValidateInput(string input)
+    {
+        // Only allow letters, numbers, spaces, and underscores
+        string valid = Regex.Replace(input, @"[^a-zA-Z0-9_. ]", "");
+        valid = valid.Length > 20 ? valid.Substring(0, 20) : valid;
+
+
+        if (valid != input) {
+            playerNameInputField.text = valid; 
+        }
+    }
 
 
     public void PlayerEndEditName(TMP_InputField inputfield)
