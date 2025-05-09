@@ -11,6 +11,7 @@ public class LeaderboardListEntry : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI playerTimeText;
     [SerializeField] private TextMeshProUGUI playerPercentText;
+    [SerializeField] private LeaderboardSystemSetter systemSetter;
 
     internal void SetData(Unity.Services.Leaderboards.Models.LeaderboardEntry leaderboardItems, int index = 0)
     {
@@ -27,8 +28,9 @@ public class LeaderboardListEntry : MonoBehaviour
         else {
             ScoreMetadata scoreMetadata = JsonConvert.DeserializeObject<ScoreMetadata>(leaderboardItems.Metadata);
             playerPercentText.text = ((int)scoreMetadata.perc).ToString()+"%";
-            
-            playerNameText.text += AddSystemText(scoreMetadata.systemID); 
+
+            systemSetter.SetAsSystem(scoreMetadata.systemID,scoreMetadata.versionString);
+            //playerNameText.text += AddSystemText(); 
         }
 
     }

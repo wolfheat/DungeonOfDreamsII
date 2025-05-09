@@ -45,7 +45,7 @@ public partial class LeaderboardConnect : MonoBehaviour
         systemUsed = 1;
 #endif
 
-        var scoreMetadata = new ScoreMetadata { perc = percent, systemID = systemUsed};
+        var scoreMetadata = new ScoreMetadata { perc = percent, systemID = systemUsed, versionString = Application.version};
 
         string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
 

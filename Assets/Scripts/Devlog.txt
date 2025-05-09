@@ -125,8 +125,14 @@ Apr 2025
 		* Made bombs regenerate at healing area by a timer
 		* Adjusted Smoke effects
 		* Fixed door cracks being to large
+9/5		* Updated leaderboard layout added version
 
-		
+
+		// Fix player dying when boss dies. It wont reset the boss but the boss health bar and music does, fix
+		// Have my times hidden when below 10 or 15 in the list???
+		// Credits scroll longer than the music??
+
+
 		// WANTS
 		// Make better postprocessing
 		
