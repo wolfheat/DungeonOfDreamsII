@@ -162,14 +162,13 @@ namespace Wolfheat.StartMenu
         public Action GlobalMuteChanged;
 
         private void OnEnable()
-        {
-            
+        {            
             SavingUtility.LoadingComplete += LoadingComplete;
         }
 
         private void LoadingComplete()
         {
-            Debug.Log("Loading of settings complete update");
+            Debug.Log("Loading of settings complete setting the soundSettings");
 
             soundSettings = SavingUtility.gameSettingsData.soundSettings;
         }
@@ -292,7 +291,7 @@ namespace Wolfheat.StartMenu
         {
             //if (activeMusic == name) return;
 
-            Debug.Log("PLAY MUSIC "+name);
+            //Debug.Log("PLAY MUSIC "+name);
             activeMusic = name; // Leave this here so the correct music that should be played is still updated if music is reenabled
 
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseMusic || !SavingUtility.HasLoaded) return;
@@ -378,7 +377,7 @@ namespace Wolfheat.StartMenu
         }
         public void UpdateVolume()
         {
-            Debug.Log("SOUNDMASTER - Updating SoundMaster's Volumes, This uses Sound Settings values");
+            //Debug.Log("SOUNDMASTER - Updating SoundMaster's Volumes, This uses Sound Settings values");
             // Convert to dB
             mixer.SetFloat("Volume", Mathf.Log10(soundSettings.MasterVolume) * 20);
         
@@ -394,26 +393,26 @@ namespace Wolfheat.StartMenu
 
         private void EnableSoundAccordingToMixersVolumes()
         {
-            Debug.Log("SOUNDMASTER - Enabling Sound According to Mixer Volumes, Music volume = " + soundSettings.MusicVolume);
+            //Debug.Log("SOUNDMASTER - Enabling Sound According to Mixer Volumes, Music volume = " + soundSettings.MusicVolume);
             //Master
             soundSettings.UseMaster = soundSettings.MasterVolume > MuteBoundary;
             soundSettings.UseMusic  = soundSettings.MusicVolume > MuteBoundary;
             soundSettings.UseSFX    = soundSettings.SFXVolume > MuteBoundary;
 
-            Debug.Log("SOUNDMASTER - Global Sound:" + (soundSettings.GlobalMaster==true?"ON":"OFF") + "    Master: "+ soundSettings.UseMaster + " Music: " +soundSettings.UseMusic+" SFX: "+ soundSettings.UseSFX);
+            //Debug.Log("SOUNDMASTER - Global Sound:" + (soundSettings.GlobalMaster==true?"ON":"OFF") + "    Master: "+ soundSettings.UseMaster + " Music: " +soundSettings.UseMusic+" SFX: "+ soundSettings.UseSFX);
 
             if (soundSettings.GlobalMaster && soundSettings.UseMaster && soundSettings.UseMusic)
             {
-                Debug.Log("SOUNDMASTER - Global and Master and Music is ON");
+                //Debug.Log("SOUNDMASTER - Global and Master and Music is ON");
                 if (!musicSource.isPlaying)
                 {
-                    Debug.Log("SOUNDMASTER - Resume Music");
+                    //Debug.Log("SOUNDMASTER - Resume Music");
                     ResumeMusic();
                 }
             }
             else
             {
-                Debug.Log("SOUNDMASTER - Global or Master or Music is OFF");
+                //Debug.Log("SOUNDMASTER - Global or Master or Music is OFF");
 
                 if (musicSource.isPlaying)
                     musicSource.Stop();
@@ -428,7 +427,7 @@ namespace Wolfheat.StartMenu
                 SpecialInfo.Instance?.ShowInfo("Editing Textfield - do not toggle audio");
                 return;
             }
-            Debug.Log("Soundmaster toggle all audio");
+            //Debug.Log("Soundmaster toggle all audio");
             soundSettings.GlobalMaster = !soundSettings.GlobalMaster;
             ToggleMusic();
             //GlobalMuteChanged?.Invoke();
@@ -439,19 +438,19 @@ namespace Wolfheat.StartMenu
                 SpecialInfo.Instance?.ShowInfo("Editing Textfield - do not toggle music");
                 return;
             }
-            Debug.Log("Soundmaster toggle music");
+            //Debug.Log("Soundmaster toggle music");
             soundSettings.UseMusic = !soundSettings.UseMusic;
             ToggleMusic();
         }
         public void ToggleMusic()
         {
-            Debug.Log("TOGGLE MUSIC");
+            //Debug.Log("TOGGLE MUSIC");
             
-            Debug.Log("Global Sound Set To:"+ (soundSettings.GlobalMaster==true?"ON":"OFF") + " Master: "+ soundSettings.UseMaster + " Music: " +soundSettings.UseMusic+" SFX: "+ soundSettings.UseSFX);
+            //Debug.Log("Global Sound Set To:"+ (soundSettings.GlobalMaster==true?"ON":"OFF") + " Master: "+ soundSettings.UseMaster + " Music: " +soundSettings.UseMusic+" SFX: "+ soundSettings.UseSFX);
             // Update Music playing 
             if (soundSettings.GlobalMaster)
             {
-                Debug.Log("GLobal master is on");
+                //Debug.Log("GLobal master is on");
                 if (soundSettings.UseMaster && soundSettings.UseMusic && !musicSource.isPlaying)
                     ResumeMusic();
                 else
@@ -460,7 +459,7 @@ namespace Wolfheat.StartMenu
             else 
                 if (musicSource.isPlaying)
                 {
-                        Debug.Log("Stopping Music from playing?");
+                        //Debug.Log("Stopping Music from playing?");
                     musicSource.Stop();
                 }
             GameSettingsData.GameSettingsUpdated?.Invoke();
@@ -480,13 +479,13 @@ namespace Wolfheat.StartMenu
         }
         public void ResumeMusic()
         {
-            Debug.Log("Resume Music "+activeMusic);
+            //Debug.Log("Resume Music "+activeMusic);
             PlayMusic(activeMusic);
         }
 
         public void PlayCoinSound(bool buying = false)
         {
-            Debug.Log("Playing coin sound");
+            //Debug.Log("Playing coin sound");
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
             if(buying)
                 stepSource.PlayOneShot(coins[0]);
@@ -540,7 +539,7 @@ namespace Wolfheat.StartMenu
         public void PlayPickAxeHitWall(WallSoundType type = WallSoundType.Stone, bool crushed = false)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
-            Debug.Log("Hitting wall "+type+" crush = "+crushed);
+            //Debug.Log("Hitting wall "+type+" crush = "+crushed);
             switch (type)
             {
                 case WallSoundType.Stone:
@@ -597,7 +596,7 @@ namespace Wolfheat.StartMenu
         }
         public void ReadDataFromSave()
         {
-            Debug.Log("Updating Sound Volumes from saved file");
+            //Debug.Log("Updating Sound Volumes from saved file");
             UpdateVolume();
         }
 

@@ -15,7 +15,6 @@ public class HealingArea : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.TryGetComponent(out PlayerColliderController player)) {
-            Debug.Log("** Healing Are registrating player as leaving");            
             ActivateBombGenerator();
         }
     }
@@ -43,10 +42,7 @@ public class HealingArea : MonoBehaviour
     private IEnumerator Generator()
     {
         active = true;
-        Debug.Log("** Generator started");
         yield return new WaitForSeconds(BombGeneratorTime);
-
-        Debug.Log("** Generate the bomb");
         bombItem.SetActive(true);
         //ItemSpawner.Instance.SpawnSoftlockHolderBombItemAt(this.transform.position+Vector3.up*0.4f);
         active = false;

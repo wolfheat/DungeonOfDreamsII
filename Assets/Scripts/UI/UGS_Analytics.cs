@@ -10,6 +10,7 @@ public class UGS_Analytics : MonoBehaviour
     private string GameCompleted = "GameCompleted";
     private string GameAbandoned = "AbandonGameToMenu";
     private string BossDefeated = "BossDefeated";
+    private string ReachedShop = "ReachedShop";
     private string BlownUp = "BlownUp";
 
 
@@ -49,7 +50,6 @@ public class UGS_Analytics : MonoBehaviour
     {
         // Call if consent has been given by the user
         AnalyticsService.Instance.StartDataCollection();
-        Debug.Log($"Consent has been provided. The SDK is now collecting data!");
     }
 
     // EVENTS
@@ -79,7 +79,15 @@ public class UGS_Analytics : MonoBehaviour
         SendEvent(customEvent);        
     }
     
-    public void BossDefeatedEvent()
+    public void ReachedShopEvent()
+    {
+        // Define Custom Event Parameters
+        var customEvent = new CustomEvent(ReachedShop);
+        customEvent[levelID] = 0;
+        customEvent[playTime] = Stats.Instance.GetElapsedTimeS();
+        SendEvent(customEvent);        
+    }
+     public void BossDefeatedEvent()
     {
         // Define Custom Event Parameters
         var customEvent = new CustomEvent(BossDefeated);

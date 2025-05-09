@@ -65,7 +65,7 @@ public class SpriteMapCreator : MonoBehaviour
     [ContextMenu("Create Tiles")]
     public void CreateMapFromTiles()
     {
-        Debug.Log("Creating Sprite");
+        Debug.Log("Creating Map");
 
         tileSize = 32;
 
@@ -148,7 +148,7 @@ public class SpriteMapCreator : MonoBehaviour
         // Local Method to set pixels
         void SetTextureFromSprite(Transform[] positions , Color[] spriteColors, bool blend = false)
         {
-            Debug.Log("Setting colors for "+positions.Length+" items blend ="+blend);
+            //Debug.Log("Setting colors for "+positions.Length+" items blend ="+blend);
             foreach (Transform healingSpot in positions) {
                 int xPos = Mathf.RoundToInt(healingSpot.position.x) - Xdisplace;
                 int yPos = Mathf.RoundToInt(healingSpot.position.z) - Ydisplace;
@@ -183,18 +183,13 @@ public class SpriteMapCreator : MonoBehaviour
     }
     public void RevealCrackedWall(Vector2Int pos)
     {
-        Debug.Log("Reveal cracked wall at "+pos);
         pos *= tileSize;
 
         pos -= Instance.origoOffset * tileSize;
-        Debug.Log("Reveal offset to "+pos);
 
         int tileAdjustAmount = 0;
         pos -= new Vector2Int(tileAdjustAmount, tileAdjustAmount);
         
-        Debug.Log("Reveal recalulated to "+pos);
-
-
         // Clamp to avoid out-of-bounds        
         fullMapTexture.SetPixels(pos.x, pos.y, tileSize, tileSize, crackedWallColors);
         fullMapTexture.Apply();

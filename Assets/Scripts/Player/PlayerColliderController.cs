@@ -61,6 +61,7 @@ public class PlayerColliderController : MonoBehaviour
                 Debug.Log("SAVE BOSS VALUES HERE");
                 Stats.Instance.SaveBossValues();
                 LightEnvironmentManager.Instance.SetBossColor();
+                UGS_Analytics.Instance.ReachedShopEvent();
             }
 
             //Play portal sound

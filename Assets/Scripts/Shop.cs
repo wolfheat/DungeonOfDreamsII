@@ -90,7 +90,7 @@ public class Shop : MonoBehaviour
         // Set the costs here
         bombCostText.text = "Bombs " + bombCost + "g";
 
-        Debug.Log("Setting Bombs cost to "+bombCost+" = "+bombCostText.text);
+        //Debug.Log("Setting Bombs cost to "+bombCost+" = "+bombCostText.text);
 
         keyCostText.text = "Keys " + keyCost + "g";
         oxygenCostText.text = "Oxygen " + otherCost + "g";

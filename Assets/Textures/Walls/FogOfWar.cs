@@ -133,7 +133,7 @@ public class FogOfWar : MonoBehaviour
     {
         // reveal players position
         yield return null;
-        UnityEngine.Debug.Log("Reveal from player position "+ PlayerController.Instance.transform.position+" = "+ Convert.V3ToV2Int(PlayerController.Instance.transform.position));
+        //UnityEngine.Debug.Log("Reveal from player position "+ PlayerController.Instance.transform.position+" = "+ Convert.V3ToV2Int(PlayerController.Instance.transform.position));
         Reveal(Convert.V3ToV2Int(PlayerController.Instance.transform.position));
     }
 

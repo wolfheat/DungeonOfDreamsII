@@ -47,7 +47,7 @@ public class ItemSpawner : MonoBehaviour
         // Initiate the List of Usables
         for (int i = 0; i < usablePrefabs.Length; i++)
             usables[i] = new Pool<Usable>();
-        Debug.Log("Initiated usables array " + usables[0]);
+        //Debug.Log("Initiated usables array " + usables[0]);
 
         // Add initial Minerals
         List<Mineral> minerals = GetComponentsInChildren<Mineral>().ToList();
@@ -69,7 +69,7 @@ public class ItemSpawner : MonoBehaviour
         foreach (EnemyController enemy in enemies)
             enemyPool.Add(enemy);
 
-        Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count + "] PowerUp=[ " + powerUpPool.Count + "] Enemies=[" + enemyPool.Count + "]");
+        //Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count + "] PowerUp=[ " + powerUpPool.Count + "] Enemies=[" + enemyPool.Count + "]");
     }
 
     private void GeneratePebbles()
