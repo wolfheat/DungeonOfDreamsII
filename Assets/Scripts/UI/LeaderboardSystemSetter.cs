@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class LeaderboardSystemSetter : MonoBehaviour
 {
     [SerializeField] private Image image; 
-    [SerializeField] private TextMeshProUGUI textfield; 
+    [SerializeField] private TextMeshProUGUI textfield;
+
+    // WIN, WEBL, UNITY
+    [Header("WIN, WEBL, UNITY")]
     [SerializeField] private Sprite[] systemSprites; 
 
     public void SetAsSystem(int systemID, string versionString)

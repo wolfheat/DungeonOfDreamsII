@@ -4,9 +4,11 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Exceptions;
-using Unity.Services.Leaderboards.Internal.Models;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
+
+// WIN, WEBL, UNITY
+public enum SystemIndexes { Win,WebGL,Unity}
 
 public partial class LeaderboardConnect : MonoBehaviour
 {
@@ -33,16 +35,18 @@ public partial class LeaderboardConnect : MonoBehaviour
     }
 
 
+
     // Add player score
     public async void AddPlayerScoreAsync(string playerName, float playerScore, float percent)
     {
         await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
 
-        int systemUsed = 0;
+        
+        int systemUsed = (int)SystemIndexes.Win;
 #if UNITY_EDITOR
-        systemUsed = 2;
+        systemUsed = (int)SystemIndexes.Unity;
 #elif !PLATFORM_STANDALONE_WIN
-        systemUsed = 1;
+        systemUsed = (int)SystemIndexes.WebGL;
 #endif
 
         var scoreMetadata = new ScoreMetadata { perc = percent, systemID = systemUsed, versionString = Application.version};

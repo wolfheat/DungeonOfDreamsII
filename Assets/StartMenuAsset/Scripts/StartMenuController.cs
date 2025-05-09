@@ -122,12 +122,23 @@ namespace Wolfheat.StartMenu
 
         public void OnPointerMove(PointerEventData eventData)
         {
+            if (EnteringDataInInputField()) {
+                Debug.Log("Moveing pointer but player is editing inputfield");
+                return;
+            }
             EventSystem.current.SetSelectedGameObject(null);
             PlayerUsingMouse = true;
         }
 
+        private bool EnteringDataInInputField() => NameChanger.Instance != null && NameChanger.Instance.IsEditingName;
+
         private void PlayerUsedKeyboard(InputAction.CallbackContext context)
         {
+            if (NameChanger.Instance != null && NameChanger.Instance.IsEditingName) {
+                Debug.Log("Player using keyboard yes, but editing inputfield so dismiss change to keybard controls");
+                return;
+            }
+
             if (PlayerUsingMouse) {
                 Debug.Log("Player switched to using keyboard, activate default.");
                 PlayerUsingMouse = false;

@@ -128,8 +128,10 @@ Apr 2025
 9/5		* Updated leaderboard layout added version
 		* Fixed music and boss reset when player dies after boss
 		* Fixed deaths count calculation error
+		* Fixed issue when player moves mouse when entering inputname
+		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
 
-		
+
 		// Have my times hidden when below 10 or 15 in the list???
 		
 
