@@ -117,6 +117,11 @@ public class UGS_Analytics : MonoBehaviour
 
     private void SendEvent(CustomEvent customEvent)
     {
+        if (Stats.Instance.HasTeleported) {
+            Debug.Log("Wont send analytics event when player has teleported during the playthrough");
+            return;
+        }
+
         // Record the event
         AnalyticsService.Instance.RecordEvent(customEvent);
 

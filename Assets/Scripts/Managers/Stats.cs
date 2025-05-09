@@ -41,6 +41,7 @@ public class Stats : MonoBehaviour
 
     public Vector3 SavedStartPosition { get; private set; } = new Vector3();
     public float MovingSpeedMultiplier { get; internal set; } = 1f;
+    public bool HasTeleported { get; internal set; } = false;
 
     private Stopwatch stopwatch = new();
     private TimeSpan bossStartTime;
@@ -196,7 +197,6 @@ public class Stats : MonoBehaviour
             Debug.Log("Player is dead");
 
             IsDead = true;
-            DeathCount++;
             return true;
         }
         return false;
@@ -215,7 +215,6 @@ public class Stats : MonoBehaviour
         else {
             // Normal revive only sets health to max
             Health = CurrentMaxHealth;
-            OxygenController.Instance.ResetOxygen();
         }
         DeathCount++;
         IsDead = false;

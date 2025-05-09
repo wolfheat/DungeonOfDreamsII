@@ -138,6 +138,7 @@ public class UIController : MonoBehaviour
 		transitionScreen.Darken();
         open = UIActions.WinScreen;
 
+        // This wont happen if player has teleported
         SavingUtility.gameSettingsData.SendScoreToLeaderboard(Stats.Instance.GetElapsedTimeMS(),completePercent);
 	}
 

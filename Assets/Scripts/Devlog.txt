@@ -126,12 +126,12 @@ Apr 2025
 		* Adjusted Smoke effects
 		* Fixed door cracks being to large
 9/5		* Updated leaderboard layout added version
+		* Fixed music and boss reset when player dies after boss
+		* Fixed deaths count calculation error
 
-
-		// Fix player dying when boss dies. It wont reset the boss but the boss health bar and music does, fix
+		
 		// Have my times hidden when below 10 or 15 in the list???
-		// Credits scroll longer than the music??
-
+		
 
 		// WANTS
 		// Make better postprocessing

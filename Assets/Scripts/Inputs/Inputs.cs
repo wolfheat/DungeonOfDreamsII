@@ -52,6 +52,7 @@ namespace Wolfheat.Inputs
         
         public void JumpToNextEntryPoint(InputAction.CallbackContext context)
         {
+            Stats.Instance.HasTeleported = true;
             Debug.Log("Jumping to Next Exit point");
             PlayerController.Instance.GotoNextStartPosition();
         }

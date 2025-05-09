@@ -10,17 +10,18 @@ public class BossActivator : MonoBehaviour
     public void ActivateBoss()
     {
         Debug.Log("Activating Boss");
-        //if (boss == null || boss.Activated)
-          //  return;
 
+        // Close door always
         foreach (GameObject obj in lockObjects)
             obj.SetActive(true);
 
-        // Play door close Sound High
+        // If boss is dead do not activate boss stuff
+        if (boss == null || boss.Dead) {
+            Debug.Log("Boss is dead");
 
 
+        }else if (!boss.Activated) {
         // Start Boss Music?
-        if (!boss.Activated) {
             SoundMaster.Instance.PlayMusic(MusicName.BossMusic);
 
             Debug.Log("** Store Boss start time");
@@ -32,9 +33,10 @@ public class BossActivator : MonoBehaviour
 
             // Show Boss health
             UIController.Instance.ShowBossHealth();
+
+            boss.Activated = true;
         }
 
-        boss.Activated = true;
     }
 
 }
