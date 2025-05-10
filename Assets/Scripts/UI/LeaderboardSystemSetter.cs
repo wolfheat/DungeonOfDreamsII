@@ -9,7 +9,7 @@ public class LeaderboardSystemSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textfield;
 
     // WIN, WEBL, UNITY
-    [Header("WIN, WEBL, UNITY")]
+    [Header("WIN, WEBL, UNITY, UNIX, ANDROID")]
     [SerializeField] private Sprite[] systemSprites; 
 
     public void SetAsSystem(int systemID, string versionString)

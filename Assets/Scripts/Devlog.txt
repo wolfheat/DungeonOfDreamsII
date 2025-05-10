@@ -130,7 +130,10 @@ Apr 2025
 		* Fixed deaths count calculation error
 		* Fixed issue when player moves mouse when entering inputname
 		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
-		* Made movement slightly more respondant 
+		* Made movement slightly more respondant 		
+		[PC build 67Mb]
+		[WebGL build 60Mb]
+		[Linux BUild 81Mb]
 
 
 		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?

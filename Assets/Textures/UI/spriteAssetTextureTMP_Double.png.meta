@@ -140,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
+        y: 768
         width: 256
         height: 256
       alignment: 0
@@ -162,7 +162,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 256
+        y: 768
         width: 256
         height: 256
       alignment: 0
@@ -184,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 256
+        y: 768
         width: 256
         height: 256
       alignment: 0
@@ -206,7 +206,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 256
+        y: 768
         width: 256
         height: 256
       alignment: 0
@@ -228,7 +228,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 512
         width: 256
         height: 256
       alignment: 0
@@ -250,7 +250,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 0
+        y: 512
         width: 256
         height: 256
       alignment: 0
@@ -272,7 +272,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 0
+        y: 512
         width: 256
         height: 256
       alignment: 0
@@ -294,7 +294,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 0
+        y: 512
         width: 256
         height: 256
       alignment: 0
@@ -307,6 +307,28 @@ TextureImporter:
       bones: []
       spriteID: f5c5271e58a7da14e849d76497bc486d
       internalID: -904085655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteAssetTextureTMP_Double_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16594ec8f03740548be8499a0c747261
+      internalID: 401993882
       vertices: []
       indices: 
       edges: []
@@ -333,6 +355,7 @@ TextureImporter:
       spriteAssetTextureTMP_Double_5: -421215369
       spriteAssetTextureTMP_Double_6: 718825651
       spriteAssetTextureTMP_Double_7: -904085655
+      spriteAssetTextureTMP_Double_8: 401993882
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
