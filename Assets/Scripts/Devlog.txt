@@ -130,7 +130,13 @@ Apr 2025
 		* Fixed deaths count calculation error
 		* Fixed issue when player moves mouse when entering inputname
 		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
+		* Made movement slightly more respondant 
 
+
+		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?
+
+
+		// Some in responsiveness when moving at boss, why?
 
 		// Have my times hidden when below 10 or 15 in the list???
 		

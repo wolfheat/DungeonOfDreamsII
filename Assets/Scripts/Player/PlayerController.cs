@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TakeFireDamage takeFireDamage;
     public PickUpController pickupController;
     public bool DoingAction { get; set; } = false;
+    public MoveActionType ActiveMoveActionType { get; set; } = MoveActionType.Step;
+
+
     private MoveAction savedAction = null;
     private MoveAction lastAction = null;
 
@@ -262,6 +265,7 @@ public class PlayerController : MonoBehaviour
                 {
                     lastAction = savedAction;
                     //Debug.Log("Storing saved Movement as Last movement and start new movement");
+                    //Debug.Log("Moving to " + target+" "+savedAction.moveType);
                     StartCoroutine(Move(target));
                 }
                 else
@@ -360,10 +364,18 @@ public class PlayerController : MonoBehaviour
         float movement = Inputs.Instance.Controls.Player.SideStep.ReadValue<float>();
         if (movement == 0) return false;
 
+        // Special case Do not overwrite with SideStep if last time player moved it was a SideStep, and there is a Step stored
+        if (lastAction != null && lastAction.moveType == MoveActionType.SideStep && savedAction != null && savedAction.moveType == MoveActionType.Step)
+            return false;
+
+
         // Write or overwrite next action
         MoveAction moveAction;
         moveAction = new MoveAction(MoveActionType.SideStep, Mathf.RoundToInt(movement));
         savedAction = moveAction;
+        
+        //Debug.Log("New Moveaction: Strafe Moving dir " + savedAction.dir + " " + savedAction.moveType);
+
         return true;
     }
     
@@ -377,15 +389,19 @@ public class PlayerController : MonoBehaviour
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
-        
-        //Debug.Log("Adding step movement = " + movement);
-
         if (movement == 0) return false;
 
+        // Special case Do not overwrite with Step if last time player moved it was a Step, and there is a Sidestep stored
+        if(lastAction != null && lastAction.moveType==MoveActionType.Step && savedAction != null && savedAction.moveType == MoveActionType.SideStep)
+            return false;
+        
         // Write or overwrite next action
         MoveAction moveAction;
         moveAction = new MoveAction(MoveActionType.Step, Mathf.RoundToInt(movement));
         savedAction = moveAction;
+
+        //Debug.Log("New Moveaction: Step Moving dir " + savedAction.dir + " " + savedAction.moveType);
+
         return true;
     }
 

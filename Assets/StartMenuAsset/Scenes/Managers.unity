@@ -496,7 +496,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     name: 62
   - clip: {fileID: 8300000, guid: f28cdeff0ca3ed048a3bfa84d9f66b5e, type: 3}
-    volume: 0.494
+    volume: 0.9
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
