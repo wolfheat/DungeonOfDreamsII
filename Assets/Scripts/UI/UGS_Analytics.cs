@@ -1,8 +1,6 @@
 using UnityEngine;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
-using System.Collections.Generic;
-using UnityEngine.Analytics;
 
 
 public class UGS_Analytics : MonoBehaviour

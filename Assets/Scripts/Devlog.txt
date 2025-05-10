@@ -131,9 +131,9 @@ Apr 2025
 		* Fixed issue when player moves mouse when entering inputname
 		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
 		* Made movement slightly more respondant 		
-		[PC build 67Mb]
-		[WebGL build 60Mb]
-		[Linux BUild 81Mb]
+		[PC build 69Mb]		[WebGL build 62Mb]		[Linux BUild 81Mb]
+10/5	* Automatically sets system logo in bottom left corner
+		
 
 
 		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?
