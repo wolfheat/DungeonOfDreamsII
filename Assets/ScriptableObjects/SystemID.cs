@@ -12,7 +12,10 @@ public class SystemID : ScriptableObject
     public Sprite GetSprite(int index) => systemSprites[(int)index];
     public Sprite GetSprite(SystemIndexes index) => systemSprites[(int)index];
     public Sprite GetCurrentSystemSprite() => GetSprite(GetSystemID());
+
+#if UNITY_EDITOR
     public Sprite GetCurrentBuildSystemSprite() => GetSprite((int)GetBuildSystemID());
+#endif
 
     public int GetSystemID()
     {
@@ -29,6 +32,7 @@ public class SystemID : ScriptableObject
         return (int)SystemIndexes.Linux;
 #endif
     }
+#if UNITY_EDITOR
     public SystemIndexes GetBuildSystemID()
     {
         BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
@@ -48,5 +52,6 @@ public class SystemID : ScriptableObject
                 return SystemIndexes.Unity;
         }
     }
+#endif
 
 }

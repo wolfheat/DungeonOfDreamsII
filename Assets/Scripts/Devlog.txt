@@ -131,7 +131,7 @@ Apr 2025
 		* Fixed issue when player moves mouse when entering inputname
 		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
 		* Made movement slightly more respondant 		
-		[PC build 69Mb]		[WebGL build 62Mb]		[Linux BUild 81Mb]
+		[PC build 69Mb]		[WebGL build 62Mb]3m17s		[Linux BUild 81Mb]36s
 10/5	* Automatically sets system logo in bottom left corner
 		
 

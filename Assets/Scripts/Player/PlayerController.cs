@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {
-            pickupController.InteractWithActiveItem();
+            Debug.Log("OLD pickupController.InteractWithActiveItem");
         }
         else
         {
@@ -191,7 +191,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
                 {
-                    SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
+                    Debug.Log("ICantBreakThisWithMyBareHands");
+                    //SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
                     return;
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
@@ -199,12 +200,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
                     Shop.Instance.ShowPanel(altar.MineralAccepted);
-                }
-                else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
-                {
-                    gloria.ActivateCompletion();   
-                    
-                }
+                }                
                 else {
                     playerAnimationController.SetState(PlayerState.Hit);
                 }

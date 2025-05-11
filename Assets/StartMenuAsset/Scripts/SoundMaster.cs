@@ -9,7 +9,9 @@ using Random = UnityEngine.Random;
 namespace Wolfheat.StartMenu
 {
     public enum WallSoundType { Stone, Moss, Flesh, Sand } 
-    public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
+    public enum SoundName
+    {
+        None, MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
         FireSound,
         FireContinious,
         RockExplosion,
@@ -23,45 +25,14 @@ namespace Wolfheat.StartMenu
         Miss,
         HitStone,
         CrushStone,
-        PowerUpDamage,
+        //PowerUpDamage,
         PowerUpSpeed,
         BoomPlayerDies,
         PickUpHeart,
         SkeletonBuildUpAttack,
-        NoBombs,
-        CantDoThat,
-        MoreLifeNow,
-        Energize,
-        ItsGonaBlow,
-        WatchOut,
-        WhatIsThisPlace,
-        MyHeadHurts,
-        IDontRemeber,
-        ThatWasTheLastOne,
-        ThisIsNotHowIRemember,
-        INeedToBeMoreCareful,
-        IShouldGoOut,
-        YourWoundsAreHealed,
-        AmIStillSleeping,
-        INowHaveASledgehammer,
-        IHaveACompass,
-        ThankYouDearAdventurer,
-        ThereIsSomethingMissing,
-        IAmToWeakToHelpYou,
-        ExitSpeech,
-        IHaveFoundAMissingPiece,
-        IGotAllPieces,
-        FirstTimeOutsideSpeech,
-        IHaveLostMyFourCrystals,
-        IGotNoCrystalThatFitsHere,
-        ThereYouGo,
-        Nice,
-        ISeeAMissingPieceThroughTheWalls,
-        ICantBreakThisWithMyBareHands,
         Coin,
         OpenDoor,
         LockedDoor,
-        None,
         PickUpMap,
         PickUpKey,
         EnemyHitGroundEffect,
@@ -122,10 +93,6 @@ namespace Wolfheat.StartMenu
         public AudioMixerGroup SFXMixerGroup;  
         [SerializeField] private Sound[] sounds;
         [SerializeField] private Sound[] effects;
-        [SerializeField] private Sound[] speech;
-        [SerializeField] private Sound[] speechStart;
-        [SerializeField] private Sound[] speechEnd;
-        [SerializeField] private Sound[] speechFirstTimeUses;
         [SerializeField] private Music[] musics;
 
         [SerializeField]private AudioClip[] swosh;
@@ -197,34 +164,6 @@ namespace Wolfheat.StartMenu
                 soundsDictionary.Add(sound.name, sound);
             }
 
-            foreach (var sound in speech)
-            {
-                sound.SetSound(gameObject.AddComponent<AudioSource>());
-                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
-                soundsDictionary.Add(sound.name, sound);
-            }
-            
-            foreach (var sound in speechStart)
-            {
-                sound.SetSound(gameObject.AddComponent<AudioSource>());
-                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
-                soundsDictionary.Add(sound.name, sound);
-            }
-            
-            foreach (var sound in speechEnd)
-            {
-                sound.SetSound(gameObject.AddComponent<AudioSource>());
-                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
-                soundsDictionary.Add(sound.name, sound);
-            }
-            
-            foreach (var sound in speechFirstTimeUses)
-            {
-                sound.SetSound(gameObject.AddComponent<AudioSource>());
-                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
-                soundsDictionary.Add(sound.name, sound);
-            }
-
             //Steps
             stepSource = gameObject.AddComponent<AudioSource>();
             stepSource.volume = 0.5f;
@@ -246,23 +185,6 @@ namespace Wolfheat.StartMenu
             //PlayMusic(MusicName.MenuMusic);
 
             
-        }
-
-        public IEnumerator DelayedSpeech()
-        {
-            // Start of Game
-            yield return new WaitForSeconds(5f);
-            PlaySpeech(SoundName.ThisIsNotHowIRemember);
-            yield return new WaitForSeconds(4f);
-            //PlaySpeech(SoundName.MakingThisGame);
-            //yield return new WaitForSeconds(3f);
-            PlaySpeech(SoundName.IShouldGoOut);
-            yield return new WaitForSeconds(3.5f);
-            //PlaySpeech(SoundName.MyHeadHurts);
-            //yield return new WaitForSeconds(2f);
-            PlaySpeech(SoundName.IDontRemeber);
-            yield return new WaitForSeconds(5f);
-            PlaySpeech(SoundName.WhatIsThisPlace);
         }
 
         private bool haveNotSaidExplode = true;
@@ -325,23 +247,6 @@ namespace Wolfheat.StartMenu
         }
 
         private List<AudioSource> speechQueue = new List<AudioSource>();
-        public AudioSource PlaySpeech(SoundName name,bool clearAll = false)
-        {
-            if(!useSpeech) return null;
-
-            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return null;
-
-            if (!soundsDictionary.ContainsKey(name)) return null; // no such speech
-            if(clearAll) speechQueue.Clear();
-
-            AudioSource speech = soundsDictionary[name].audioSource;
-            if (speechQueue.Contains(speech)) return speech; // No duplicates allowed
-            speechQueue.Add(speech);
-            // Auto start the clip if its the only one in the Queue
-            if(speechQueue.Count==1)
-                speechQueue[0].Play();
-            return speech;
-        }
 
         public void PlaySound(SoundName name, bool allowInterupt= true)
         {
@@ -613,16 +518,6 @@ namespace Wolfheat.StartMenu
         public void StopMusic()
         {
             musicSource.Stop();
-        }
-
-        bool playerBeenOutside = false;
-        [SerializeField] private bool useSpeech = true;
-
-        internal void PlayerExitingStartRoom()
-        {
-            if (playerBeenOutside) return;
-            PlaySpeech(SoundName.FirstTimeOutsideSpeech);
-            playerBeenOutside = true;
         }
     }
 }

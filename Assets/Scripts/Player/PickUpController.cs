@@ -59,7 +59,7 @@ public class PickUpController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, enemyLayerMask);
 
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<EnemyController>().EnemyData as ItemData).ToList());
+        //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<EnemyController>().EnemyData as ItemData).ToList());
 
         if (colliders.Length == 0)
             Enemy = null;
@@ -117,7 +117,7 @@ public class PickUpController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, itemLayerMask);
         
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
+        //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
         if (colliders.Length == 0)
         {
             //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+Game.boxSize);
@@ -159,17 +159,5 @@ public class PickUpController : MonoBehaviour
         //    UpdateColliders();
 
         return true;
-    }
-    public void InteractWithActiveItem()
-    {
-        if (ActiveInteractable == null) return;
-
-        if(ActiveInteractable is Mineral)
-        {
-            Stats.Instance.AddMineral((ActiveInteractable as Mineral).Data);
-        }
-
-        ActiveInteractable.InteractWith();
-        UpdateColliders();
     }
 }

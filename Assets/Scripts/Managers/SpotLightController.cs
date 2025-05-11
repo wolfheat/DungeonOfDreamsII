@@ -9,8 +9,6 @@ public class SpotLightController : MonoBehaviour
     int AltarRoomTrigger;
     int BossRoom;
 
-    
-
     private void Start()
     {
         postProcessingRoom = LayerMask.NameToLayer("PostProcessingRoom");
@@ -39,7 +37,6 @@ public class SpotLightController : MonoBehaviour
         {
             //Debug.Log("Turn On Player Spotlight and Resume Music");
             SoundMaster.Instance.PlayMusic(MusicName.OutDoorMusic);
-            SoundMaster.Instance.PlayerExitingStartRoom();
             spotLight.enabled = true;            
         }
         else if (other.gameObject.layer == AltarRoomTrigger)

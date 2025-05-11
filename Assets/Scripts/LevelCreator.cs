@@ -64,9 +64,7 @@ public class LevelCreator : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(SoundMaster.Instance.DelayedSpeech());
         CreateGrid();
-
     }
 
 #if UNITY_EDITOR

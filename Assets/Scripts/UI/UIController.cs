@@ -79,11 +79,11 @@ public class UIController : MonoBehaviour
         GameState.state = pause ? GameStates.Paused : GameStates.Running;
         Time.timeScale = pause ? 0f : 1f;
     }
-
-    public void UpdateShownItemsUI(List<ItemData> data,bool resetList = false)
-	{
-		interactableUI.UpdateItems(data,resetList);
-	}
+    //
+    //public void UpdateShownItemsUI(List<ItemData> data,bool resetList = false)
+	//{
+	//	interactableUI.UpdateItems(data,resetList);
+	//}
 	
 	public void AddPickedUp(ItemData data)
 	{
@@ -129,7 +129,7 @@ public class UIController : MonoBehaviour
         winScreen.SetDeathsText(Stats.Instance.DeathCount);
         
 
-        SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
+        //SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
 
         // Pausing makes scroll not active
         Pause(true);

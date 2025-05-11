@@ -16,7 +16,6 @@ public class AutoSetVersion : MonoBehaviour
     {
         UpdateVersion();    
     }
-#endif
      
     [ContextMenu("Update Version text")]
     public void UpdateVersion()
@@ -28,5 +27,6 @@ public class AutoSetVersion : MonoBehaviour
         // Also show the system symbol        
         image.sprite = systemID_Data.GetCurrentBuildSystemSprite();
     }
+#endif
 
 }

@@ -4,16 +4,10 @@ using Wolfheat.StartMenu;
 
 public class InteractableUI : MonoBehaviour
 {
-    List<InteractableUIItem> items;
     [SerializeField] InteractableUIItem uiItemPrefab;
-    [SerializeField] BoostUIItem boostuiItemPrefab;
-
-    [SerializeField] GameObject holder;
-    [SerializeField] GameObject pickedHolder;
-    [SerializeField] GameObject boostsHolder;
-
     [SerializeField] RectTransform pickedUpRect;
 
+    private List<InteractableUIItem> items;
     private const float PickedScreenLowPosition = 0f;
     private const float PickedScreenHighPosition = -40f;
     private Vector2 pickedUpStartAnchoredPosition;
@@ -22,27 +16,23 @@ public class InteractableUI : MonoBehaviour
     {
         pickedUpStartAnchoredPosition = pickedUpRect.anchoredPosition;
     }
-    public void AddItem(string name)
-    {
-        Instantiate(uiItemPrefab,holder.transform);
-    }
-    
-    public void UpdateItems(List<ItemData> itemDatas, bool resetList)
-    {
-        if (resetList)
-            foreach (Transform child in holder.transform)
-                Destroy(child.gameObject);
 
-        foreach (var data in itemDatas)
-        {
-            if (data == null) continue;
-            InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
-            //Debug.Log("data"+data+" resetList: "+resetList);
-            item.SetName(data.itemName);
-            item.SetSprite(data.sprite);
-        }
-    }
-    
+    //public void UpdateItems(List<ItemData> itemDatas, bool resetList)
+    //{
+    //    if (resetList)
+    //        foreach (Transform child in holder.transform)
+    //            Destroy(child.gameObject);
+    //
+    //    foreach (var data in itemDatas)
+    //    {
+    //        if (data == null) continue;
+    //        InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
+    //        //Debug.Log("data"+data+" resetList: "+resetList);
+    //        item.SetName(data.itemName);
+    //        item.SetSprite(data.sprite);
+    //    }
+    //}
+    //
     private List<InteractableUIItem> pickedUp = new();
     public void AddPickedUp(ItemData data)
     {
@@ -70,21 +60,21 @@ public class InteractableUI : MonoBehaviour
             }
 
             // Check If boost is allready active and if so updat the timer
-            BoostUIItem[] uiBoosts = boostsHolder.GetComponentsInChildren<BoostUIItem>();
-            foreach (BoostUIItem item in uiBoosts)
-            {
-                if (item.nameString == data.itemName)
-                {
-                    item.AddBoost(data as PowerUpData);
-                    return; // Dont add boosts to picked up list?
-                }
-            }
-
-            Debug.Log("Picking Up never used Power Up: " + (data as PowerUpData).itemName);
-            BoostUIItem boostItem = Instantiate(boostuiItemPrefab, boostsHolder.transform);
-            boostItem.SetName(data.itemName);
-            boostItem.SetSprite(data.sprite);
-            boostItem.AddBoost(data as PowerUpData);
+            //BoostUIItem[] uiBoosts = boostsHolder.GetComponentsInChildren<BoostUIItem>();
+            //foreach (BoostUIItem item in uiBoosts)
+            //{
+            //    if (item.nameString == data.itemName)
+            //    {
+            //        item.AddBoost(data as PowerUpData);
+            //        return; // Dont add boosts to picked up list?
+            //    }
+            //}
+            //
+            //Debug.Log("Picking Up never used Power Up: " + (data as PowerUpData).itemName);
+            //BoostUIItem boostItem = Instantiate(boostuiItemPrefab, boostsHolder.transform);
+            //boostItem.SetName(data.itemName);
+            //boostItem.SetSprite(data.sprite);
+            //boostItem.AddBoost(data as PowerUpData);
 
 
             //SoundMaster.Instance.PlaySound(SoundName.Energize);
@@ -97,19 +87,6 @@ public class InteractableUI : MonoBehaviour
                 Debug.Log("Adding bomb to inventory " + data.value);
                 //Stats.Instance.AddBomb(data.value);
                 Inventory.Instance.AddBombs();
-            }else if (((UsableData)data).usableType == UsableType.SledgeHammer)
-            {
-                Debug.Log("Adding sledgehammer " + data.value);
-                SoundMaster.Instance.PlaySound(SoundName.INowHaveASledgehammer);
-
-                Stats.Instance.ActivateSledgeHammer();
-            }
-            else if (((UsableData)data).usableType == UsableType.Compass)
-            {
-                Debug.Log("Adding compass " + data.value);
-                SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
-                Stats.Instance.ActivateCompass();
-                //Stats.Instance.AddBomb(data.value);
             }else if (((UsableData)data).usableType == UsableType.Map)
             {
                 Debug.Log("Adding map " + data.value);
@@ -133,11 +110,11 @@ public class InteractableUI : MonoBehaviour
             }
         }
 
-        InteractableUIItem pickedUpItem = Instantiate(uiItemPrefab, pickedHolder.transform);
-        pickedUpItem.SetName(data.itemName);
-        pickedUpItem.SetSprite(data.sprite);
-        StartCoroutine(pickedUpItem.StartRemoveTimer());
-        pickedUp.Add(pickedUpItem);
+        //InteractableUIItem pickedUpItem = Instantiate(uiItemPrefab, pickedHolder.transform);
+        //pickedUpItem.SetName(data.itemName);
+        //pickedUpItem.SetSprite(data.sprite);
+        //StartCoroutine(pickedUpItem.StartRemoveTimer());
+        //pickedUp.Add(pickedUpItem);
         
     } 
     
