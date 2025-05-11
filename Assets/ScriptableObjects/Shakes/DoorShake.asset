@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c285b2a7f6974fafdc3d534f09c64, type: 3}
+  m_Name: DoorShake
+  m_EditorClassIdentifier: 
+  ShakeTypeSelected: 1
+  shakeTime: 0.102
+  shakeDelay: 0.16
+  shakeStrengthX: 0.1
+  useDampening: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.2126098
+      outSlope: 1.2126098
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.045732677
+    - serializedVersion: 3
+      time: 0.23423879
+      value: -0.0009903313
+      inSlope: -0.41574726
+      outSlope: -0.41574726
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.118606664
+      outWeight: 0.06378863
+    - serializedVersion: 3
+      time: 0.495547
+      value: 0.00025695463
+      inSlope: 0.5178922
+      outSlope: 0.5178922
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09151266
+      outWeight: 0.19743142
+    - serializedVersion: 3
+      time: 0.7609468
+      value: 0.003741207
+      inSlope: -0.34464803
+      outSlope: -0.34464803
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11871125
+      outWeight: 0.29783666
+    - serializedVersion: 3
+      time: 1.0015901
+      value: 0.0029698806
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeStrengthY: 0
+  FadeInTime: 0.05
+  FadeOutTime: 0.05
+  Damper: 0.05

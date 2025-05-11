@@ -56,6 +56,7 @@ public class Door : MonoBehaviour
             if(!haveSlammed && rotateTimer > OpenDoorHitTime) {
                 Debug.Log(".. SLAM");
                 SoundMaster.Instance.PlaySound(SoundName.OpenDoorHitWall);
+                CameraShakeController.Instance.Shake(ShakeDataType.Door);
                 haveSlammed = true;
             }
 

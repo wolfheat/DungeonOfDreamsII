@@ -509,6 +509,7 @@ public class EnemyController : Interactable
     public void SpellFirestormSoundTrigger()
     {
         SoundMaster.Instance.PlaySound(SoundName.EnemyHitGroundEffect);
+        CameraShakeController.Instance.Shake(ShakeDataType.BossLand);
     }
     public void SpellFirestormCastOccured()
     {
@@ -726,6 +727,14 @@ public class EnemyController : Interactable
         return false;
     }
 
+    public void CatHitsFloorEvent()
+    {
+        CameraShakeController.Instance.Shake(ShakeDataType.BossLand);
+    }
+    public void CatDieAndLandEvent()
+    {
+        CameraShakeController.Instance.Shake(ShakeDataType.BossDie);
+    }
     public void DyingAnimationComplete()
     {
         //Debug.Log("Animation complete");

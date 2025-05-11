@@ -16,6 +16,7 @@ public class Bomb : MonoBehaviour
         SoundMaster.Instance.StopSound(SoundName.Hissing);
         Explosion.Instance.ExplodeNineAround(ParticleType.Explode, transform.position);
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
+        CameraShakeController.Instance.Shake(ShakeDataType.Bomb);
     }
 
     public void WatchOut()

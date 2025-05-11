@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c285b2a7f6974fafdc3d534f09c64, type: 3}
+  m_Name: BombShake
+  m_EditorClassIdentifier: 
+  ShakeTypeSelected: 1
+  shakeTime: 0.238
+  shakeStrengthX: 0.553
+  useDampening: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.08754807
+      value: 0.0077837454
+      inSlope: -2.58733
+      outSlope: -2.58733
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.29850173
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17925271
+      value: 0.0018111691
+      inSlope: 2.3603334
+      outSlope: 2.3603334
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18933327
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30080107
+      value: 0.0022107288
+      inSlope: -2.5044186
+      outSlope: -2.5044186
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31213117
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4218098
+      value: 0.00014382601
+      inSlope: 1.6897118
+      outSlope: 1.6897118
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21348456
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.546164
+      value: 0.0218114
+      inSlope: -1.3412484
+      outSlope: -1.3412484
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.19743142
+    - serializedVersion: 3
+      time: 0.6268338
+      value: -0.032865487
+      inSlope: 1.1112317
+      outSlope: 1.1112317
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2521815
+    - serializedVersion: 3
+      time: 0.7328921
+      value: 0.024643214
+      inSlope: -1.4165735
+      outSlope: -1.4165735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15230323
+    - serializedVersion: 3
+      time: 0.8509629
+      value: -0.002781122
+      inSlope: 1.0206592
+      outSlope: 1.0206592
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.29783666
+    - serializedVersion: 3
+      time: 0.9305678
+      value: 0.0049046925
+      inSlope: -1.4868283
+      outSlope: -1.4868283
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.20664433
+    - serializedVersion: 3
+      time: 1.0015901
+      value: 0.0029698806
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeStrengthY: 0
+  FadeInTime: 0.05
+  FadeOutTime: 0.05
+  Damper: 0.05

@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c285b2a7f6974fafdc3d534f09c64, type: 3}
+  m_Name: BossLandShake
+  m_EditorClassIdentifier: 
+  ShakeTypeSelected: 1
+  shakeTime: 0.7
+  shakeDelay: 0.1
+  shakeStrengthX: 3
+  useDampening: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.101708226
+      value: 0.005800103
+      inSlope: -2.58733
+      outSlope: -2.58733
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.29850173
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.19948587
+      value: 0.0015365109
+      inSlope: 2.3603334
+      outSlope: 2.3603334
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18933327
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30080107
+      value: 0.0022107288
+      inSlope: -2.5044186
+      outSlope: -2.5044186
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31213117
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.40157664
+      value: 0.0015476346
+      inSlope: 1.6897118
+      outSlope: 1.6897118
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21348456
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.50063175
+      value: -0.005135622
+      inSlope: -1.3412484
+      outSlope: -1.3412484
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.19743142
+    - serializedVersion: 3
+      time: 0.60156524
+      value: 0.001619378
+      inSlope: 1.1112317
+      outSlope: 1.1112317
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2521815
+    - serializedVersion: 3
+      time: 0.7025576
+      value: 0.0047915303
+      inSlope: -1.4165735
+      outSlope: -1.4165735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15230323
+    - serializedVersion: 3
+      time: 0.8520005
+      value: 0.0054433653
+      inSlope: 1.0206592
+      outSlope: 1.0206592
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.29783666
+    - serializedVersion: 3
+      time: 0.94703656
+      value: 0.0048991484
+      inSlope: -1.0747861
+      outSlope: -1.0747861
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.40174064
+    - serializedVersion: 3
+      time: 1.0015901
+      value: 0.0029698806
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeStrengthY: 0
+  FadeInTime: 0.05
+  FadeOutTime: 0.05
+  Damper: 0.05

@@ -133,7 +133,8 @@ Apr 2025
 		* Made movement slightly more respondant 		
 		[PC build 69Mb]		[WebGL build 62Mb]3m17s		[Linux BUild 81Mb]36s
 10/5	* Automatically sets system logo in bottom left corner
-		* bloat removed		[PC 67.7Mb] v. 0.0.11
+		* bloat removed		[PC 67.7Mb, 67.4Mb] v. 0.0.11
+11/5	* Added screen shake for bombs, doors, and enemy jumps and death
 
 
 		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?
