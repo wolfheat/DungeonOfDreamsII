@@ -96,7 +96,6 @@ namespace Wolfheat.StartMenu
         [SerializeField] private Sound[] effects;
         [SerializeField] private Music[] musics;
 
-        [SerializeField]private AudioClip[] swosh;
         [SerializeField]private AudioClip[] coins;
         [SerializeField]private AudioClip[] getHit;
         [SerializeField]private AudioClip[] bossGetHit;

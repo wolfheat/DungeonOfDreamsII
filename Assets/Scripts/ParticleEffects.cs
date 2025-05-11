@@ -49,6 +49,6 @@ public class ParticleEffects : MonoBehaviour
         effect.ParticleType = type;
         effect.transform.parent = particleEffectsHolder.transform;
         effect.transform.position = pos;
-        effect.Play();
+        effect.Play(); 
     }
 }
