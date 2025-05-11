@@ -44,7 +44,7 @@ public class EnemyStateController
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);
-                SoundMaster.Instance.BombHissing();
+                //SoundMaster.Instance.BombHissing();
                 break;
             case EnemyState.Dead:
                 break;

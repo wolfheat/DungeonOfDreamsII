@@ -85,18 +85,18 @@ public class InteractableUI : MonoBehaviour
             if (((UsableData)data).usableType == UsableType.Bomb)
             {
                 Debug.Log("Adding bomb to inventory " + data.value);
-                //Stats.Instance.AddBomb(data.value);
+                SoundMaster.Instance.PlaySound(SoundName.PickUp);
                 Inventory.Instance.AddBombs();
             }else if (((UsableData)data).usableType == UsableType.Map)
             {
                 Debug.Log("Adding map " + data.value);
-                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                SoundMaster.Instance.PlaySound(SoundName.PickUpMap);
                 Stats.Instance.ActivateMap();
                 //Stats.Instance.AddBomb(data.value);
             }else if (((UsableData)data).usableType == UsableType.Key)
             {
                 Debug.Log("Adding key ");
-                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                SoundMaster.Instance.PlaySound(SoundName.PickUpKey);
                 Inventory.Instance.AddKey();
                 //Stats.Instance.AddBomb(data.value);
             }else if (((UsableData)data).usableType == UsableType.Gem)
@@ -104,7 +104,7 @@ public class InteractableUI : MonoBehaviour
                 int gemtype = ((UsableData)data).value;
                 Debug.Log("Adding gem of type "+gemtype);
 
-                //SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
+                SoundMaster.Instance.PlaySound(SoundName.GemPickup);
                 Inventory.Instance.Gem(gemtype);
                 //Stats.Instance.AddBomb(data.value);
             }

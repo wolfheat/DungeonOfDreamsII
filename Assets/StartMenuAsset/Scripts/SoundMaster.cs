@@ -11,7 +11,7 @@ namespace Wolfheat.StartMenu
     public enum WallSoundType { Stone, Moss, Flesh, Sand } 
     public enum SoundName
     {
-        None, MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
+        MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
         FireSound,
         FireContinious,
         RockExplosion,
@@ -25,6 +25,7 @@ namespace Wolfheat.StartMenu
         Miss,
         HitStone,
         CrushStone,
+        None,
         //PowerUpDamage,
         PowerUpSpeed,
         BoomPlayerDies,
@@ -187,16 +188,16 @@ namespace Wolfheat.StartMenu
             
         }
 
-        private bool haveNotSaidExplode = true;
-        public void BombHissing()
-        {
-            if (haveNotSaidExplode)
-            {
-                //PlaySound(SoundName.ItsGonaBlow);
-                haveNotSaidExplode= false;
-            }
-            PlaySound(SoundName.Hissing);
-        }
+        //private bool haveNotSaidExplode = true;
+        //public void BombHissing()
+        //{
+        //    if (haveNotSaidExplode)
+        //    {
+        //        //PlaySound(SoundName.ItsGonaBlow);
+        //        haveNotSaidExplode= false;
+        //    }
+        //    PlaySound(SoundName.Hissing);
+        //}
         public void AddRestartSpeech()
         {
             StartCoroutine(AddRestartSpeechCO());
