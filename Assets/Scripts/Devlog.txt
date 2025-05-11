@@ -135,7 +135,12 @@ Apr 2025
 10/5	* Automatically sets system logo in bottom left corner
 		* bloat removed		[PC 67.7Mb, 67.4Mb] v. 0.0.11
 11/5	* Added screen shake for bombs, doors, and enemy jumps and death
+		Post Release [PC 67.7Mb, 67.4Mb] v. 0.0.11
 
+		
+
+
+		// Add sound settings option in-game
 
 		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?
 
