@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
         //toolHolder.ChangeTool(DestructType.Breakable);
 
 
-        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);
+        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);   
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {

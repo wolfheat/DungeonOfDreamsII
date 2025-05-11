@@ -484,55 +484,55 @@ MonoBehaviour:
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 57
+    name: 27
   - clip: {fileID: 8300000, guid: 1649836a51c20c64eac82126629c287b, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 58
+    name: 28
   - clip: {fileID: 8300000, guid: aaea25f598953df47ac1484a6c415107, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 60
+    name: 29
   - clip: {fileID: 8300000, guid: b7ea4056d7f50934d82f7e617885abfc, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 61
+    name: 30
   - clip: {fileID: 8300000, guid: e986cdc23ee42594e89c12c97cabbd15, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 62
+    name: 31
   - clip: {fileID: 8300000, guid: f28cdeff0ca3ed048a3bfa84d9f66b5e, type: 3}
     volume: 0.9
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 63
+    name: 32
   - clip: {fileID: 8300000, guid: a3c6615afcb9f6746992451f5aec8158, type: 3}
     volume: 0.494
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 66
+    name: 35
   - clip: {fileID: 8300000, guid: 1a1acf96b986b754fab2a3b90d087b78, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 67
+    name: 36
   - clip: {fileID: 8300000, guid: 3073d2bd53599cc4a9a4626562d9844c, type: 3}
     volume: 1
     pitch: 1.107
     loop: 0
     audioSource: {fileID: 0}
-    name: 68
+    name: 37
   effects:
   - clip: {fileID: 8300000, guid: 32bc1dfbee341d14398510ecec62e013, type: 3}
     volume: 0.181
@@ -551,203 +551,13 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-    name: 64
+    name: 33
   - clip: {fileID: 8300000, guid: be03f74eb11f6d749856819cc8656c2c, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
-    name: 65
-  speech:
-  - clip: {fileID: 8300000, guid: 078ffddb1911bd64e935ca9ee2b8f4bd, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 26
-  - clip: {fileID: 8300000, guid: 85a7a72047b85f84791a36e1bd8246b8, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 27
-  - clip: {fileID: 8300000, guid: 12b0657146d3f76449f49805ffaec89a, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 28
-  - clip: {fileID: 8300000, guid: b5f0a0d1e489218449ecc9cd977a3b52, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 29
-  - clip: {fileID: 8300000, guid: 43212e9484758b04faa4b6faaf444894, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 31
-  - clip: {fileID: 8300000, guid: b2166942b12da55499840502e6b695a7, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 35
-  - clip: {fileID: 8300000, guid: b79098961488d294ba06db76f8e9a547, type: 3}
-    volume: 0.842
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 11
-  speechStart:
-  - clip: {fileID: 8300000, guid: 0d3cd395d2855714fb5fa0009e9dcfc1, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 32
-  - clip: {fileID: 8300000, guid: 6ae6c1097fb1faf4b8afce01c161050c, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 33
-  - clip: {fileID: 8300000, guid: c826a09c3d35c6f42b8c0e4003708fdc, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
     name: 34
-  - clip: {fileID: 8300000, guid: e1e3d85519a4a8449b673d20307e56ef, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 36
-  - clip: {fileID: 8300000, guid: a0ccf0cf1d5e74443a71e9fdd57f4af2, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 37
-  - clip: {fileID: 8300000, guid: bd0d5e27c18be7a4387e97238e306907, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 38
-  - clip: {fileID: 8300000, guid: b49285d146105984499127e55c2a5a42, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 40
-  - clip: {fileID: 8300000, guid: 9c9c2bc9c3cda6a46887bcaaef4e09e5, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 55
-  speechEnd:
-  - clip: {fileID: 8300000, guid: 3bd25930ea76c7e47a533abee768e00a, type: 3}
-    volume: 0.85
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 43
-  - clip: {fileID: 8300000, guid: adee42ceba2647a438f43cc8b4a4183b, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 45
-  - clip: {fileID: 8300000, guid: c57432bda5204c741a056b421c8d7b3c, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 44
-  - clip: {fileID: 8300000, guid: 038838bbdfc26f84b94c8241efccc380, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 39
-  - clip: {fileID: 8300000, guid: 637e0e63460a1db449a2d5a06d148bb2, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 46
-  - clip: {fileID: 8300000, guid: 63d5383e929ded34b8c747ed0bfc7f8f, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 50
-  - clip: {fileID: 8300000, guid: 67045237429436d47bc6ed9af20b25d5, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 51
-  - clip: {fileID: 8300000, guid: d79e13bec8817234f85b663db5bed207, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 52
-  - clip: {fileID: 8300000, guid: f686794fc07f3414ab6148db5f0b8f24, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 53
-  speechFirstTimeUses:
-  - clip: {fileID: 8300000, guid: 9bc35e88cf2b6fc4c966542b2faaf155, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 41
-  - clip: {fileID: 8300000, guid: 5956a5bd7410c51458e42f045361f522, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 42
-  - clip: {fileID: 8300000, guid: 6502f26096779bd4299fdce38c1b44d6, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 30
-  - clip: {fileID: 8300000, guid: d6eedb1762bec954c8bfa09a2534a60c, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 47
-  - clip: {fileID: 8300000, guid: dcb0355723bbc15409749850359e74bf, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 48
-  - clip: {fileID: 8300000, guid: 35910ab3437a28140ae87f6a7ad0944c, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 49
-  - clip: {fileID: 8300000, guid: 131aac10851e030478d27557d304046c, type: 3}
-    volume: 0.537
-    pitch: 1
-    loop: 0
-    audioSource: {fileID: 0}
-    name: 54
   musics:
   - clip: {fileID: 8300000, guid: 930c875c371f9d74ea5ecd1868808c8f, type: 3}
     volume: 0.619
@@ -793,7 +603,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 43ef9cd957d06814e9159f1863867fc8, type: 3}
   - {fileID: 8300000, guid: 6ce7aaf06446e4646bc4796fb59fb6d4, type: 3}
   getHit:
-  - {fileID: 8300000, guid: ca8bc29180616d04d9c146917b03ef6c, type: 3}
+  - {fileID: 8300000, guid: 712b5c41d3cac4149885af8b01fc5acb, type: 3}
   bossGetHit:
   - {fileID: 8300000, guid: ffc9734ac2c87694a8119220d3d814f9, type: 3}
   - {fileID: 8300000, guid: 80e88323daf8b5f4f9b474a46d972ba2, type: 3}
@@ -878,7 +688,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d7c111ffbd9bb994bb6f1cc871d84f94, type: 3}
   - {fileID: 8300000, guid: 883d0c290811c984a8504dfa3859b402, type: 3}
   - {fileID: 8300000, guid: fef3f614ff310364ba2d210e5ad9d181, type: 3}
-  useSpeech: 0
 --- !u!4 &2094922433
 Transform:
   m_ObjectHideFlags: 0
