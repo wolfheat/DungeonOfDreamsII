@@ -124,6 +124,8 @@ public class LeaderboardTableManager : MonoBehaviour
     {
         LeaderboardScoresPage page = leaderboardScoresPages[pageIndex];
 
+        UpdateArrows(pageIndex);
+
         // Set Header
         leaderboardNameText.text = leaderboardNames[pageIndex]; 
 
@@ -144,6 +146,5 @@ public class LeaderboardTableManager : MonoBehaviour
             listEntry.SetData(leaderboardItems,i+1);
         }
 
-        UpdateArrows(pageIndex);
     }
 }

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 111
+  m_text: 999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
   m_sharedMaterial: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -605,12 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4853795090990116875}
   textfield: {fileID: 5562719225339841207}
-  systemSprites:
-  - {fileID: 553979434, guid: 7f2017e4abd85cf4f98944f2eaa6643a, type: 3}
-  - {fileID: -51057133, guid: 7f2017e4abd85cf4f98944f2eaa6643a, type: 3}
-  - {fileID: -1514994927, guid: 7f2017e4abd85cf4f98944f2eaa6643a, type: 3}
-  - {fileID: 401993882, guid: 7f2017e4abd85cf4f98944f2eaa6643a, type: 3}
-  - {fileID: 1829836375, guid: 7f2017e4abd85cf4f98944f2eaa6643a, type: 3}
+  systemID_Data: {fileID: 0}
 --- !u!1 &5775002444544550433
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3:45:59
+  m_text: 1:13:45:599
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
   m_sharedMaterial: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
@@ -892,7 +887,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
