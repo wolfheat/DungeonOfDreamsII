@@ -28,7 +28,7 @@ public class NameChanger : MonoBehaviour
     private void ValidateInput(string input)
     {
         // Only allow letters, numbers, spaces, and underscores
-        string valid = Regex.Replace(input, @"[^a-zA-Z0-9_. ]","");
+        string valid = Regex.Replace(input, @"[^a-zA-Z0-9. ]","");
         //string valid = Regex.Replace(input, @"[^a-zA-Z0-9_. ]", "");
         valid = valid.Length > 20 ? valid.Substring(0, 20) : valid;
 

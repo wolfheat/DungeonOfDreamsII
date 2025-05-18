@@ -18,12 +18,16 @@ public class LeaderboardListEntry : MonoBehaviour
         indexText.text = index.ToString();
         //Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
         playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
-        playerNameText.text = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName); 
+
+        string sanitized = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName);
+        string unSanitized = sanitized.Replace("_", " ");
+
+        playerNameText.text = unSanitized;
 
         //Debug.Log("Metadata string = "+leaderboardItems.Metadata);
 
         // Percent completed metadata handeling
-        if(leaderboardItems.Metadata == null || leaderboardItems.Metadata.Length == 0)
+        if (leaderboardItems.Metadata == null || leaderboardItems.Metadata.Length == 0)
             playerPercentText.text = "XX%";
         else {
             ScoreMetadata scoreMetadata = JsonConvert.DeserializeObject<ScoreMetadata>(leaderboardItems.Metadata);

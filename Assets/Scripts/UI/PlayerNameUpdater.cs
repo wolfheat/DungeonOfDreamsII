@@ -19,7 +19,7 @@ public class PlayerNameUpdater : MonoBehaviour
         GameSettingsData.GameSettingsUpdated -= UpdateName;
         SavingUtility.LoadingComplete -= UpdateName;
     }
-
+     
     private void UpdateName()
     {
         Debug.Log("-- Updating Player Name in Start Menu");

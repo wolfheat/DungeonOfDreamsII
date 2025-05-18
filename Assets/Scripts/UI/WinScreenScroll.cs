@@ -14,6 +14,8 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] TextMeshProUGUI winTimeText;
     [SerializeField] TextMeshProUGUI winPercentText;
     [SerializeField] TextMeshProUGUI deathsText;
+    [SerializeField] TextMeshProUGUI successText;
+
     [SerializeField] GameObject completionist;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject panelHider;
@@ -160,6 +162,7 @@ public class WinScreenScroll : MonoBehaviour
 
     internal void SetCompletePercentText(string winPercent) => winPercentText.text = winPercent;
 
+    internal void SetSuccessText(string success) => successText.text = success;
     internal void SetDeathsText(int deaths)
     {
         deathsText.transform.parent.gameObject.SetActive(deaths > 0);

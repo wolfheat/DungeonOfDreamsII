@@ -39,7 +39,9 @@ public partial class LeaderboardConnect : MonoBehaviour
     // Add player score
     public async void AddPlayerScoreAsync(string playerName, float playerScore, float percent)
     {
-        await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+        string sanitized = playerName.Replace(" ", "_");
+
+        await AuthenticationService.Instance.UpdatePlayerNameAsync(sanitized);
 
         int systemUsed = SystemIDController.Instance.SystemID.GetSystemID();
 
@@ -47,12 +49,29 @@ public partial class LeaderboardConnect : MonoBehaviour
 
         string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
 
-        try {
-            await LeaderboardsService.Instance.AddPlayerScoreAsync(percent == 100f ? leaderboardCompletionistID : leaderboardSpeedID, playerScore, new AddPlayerScoreOptions { Metadata = scoreMetadata });
-        }
-        catch (LeaderboardsException e){
 
-            Debug.Log("Could not add player score: "+e.Message);    
+        int maxRetries = 8;
+
+        for (int attempt = 0; attempt < maxRetries; attempt++) {
+
+            try {
+                await LeaderboardsService.Instance.AddPlayerScoreAsync(percent == 100f ? leaderboardCompletionistID : leaderboardSpeedID, playerScore, new AddPlayerScoreOptions { Metadata = scoreMetadata });
+                FindFirstObjectByType<WinScreenScroll>()?.SetSuccessText("Success");
+                return;
+            }
+            catch (LeaderboardsException e) {
+
+                Debug.Log("Could not add player score: " + e.Message);
+                FindFirstObjectByType<WinScreenScroll>()?.SetSuccessText("Failed\nAttempt "+attempt+" Error! " + e.Message + " trying to send score again in 1 second.");
+                if (attempt == maxRetries) {
+                    Debug.LogError("All retry attempts failed.");
+                    FindFirstObjectByType<WinScreenScroll>()?.SetSuccessText("Failed\nFinal Error: Could not save score after " + maxRetries+" attempts. Cause:" + e.Message);
+                    return;
+                }
+                else {
+                    await Task.Delay(1000); // Wait before next retry 
+                }
+            }
         }
     }
     
